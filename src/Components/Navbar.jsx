@@ -40,12 +40,12 @@ export default function Navbar() {
                                         <li><a href="department-details.html">Department Details</a></li>
                                         <li><a href="service-details.html">Service Details</a></li>
                                         <li><a href="appointment.html">Appointment</a></li>
-                                        <li><a href="testimonials.html">Testimonials</a></li>
+                                        <li><a href="/testomonials">Testimonials</a></li>
                                         <li><a href="/faq">Frequently Asked Questions</a></li>
                                         <li><a href="gallery.html">Gallery</a></li>
-                                        <li><a href="terms.html">Terms</a></li>
-                                        <li><a href="privacy.html">Privacy</a></li>
-                                        <li><a href="404.html">404</a></li>
+                                        <li><a href="/terms">Terms</a></li>
+                                        <li><a href="/privacy-policy">Privacy</a></li>
+                                        <li><a href="/404">404</a></li>
                                     </ul>
                                 </li>
                                 <li className="dropdown"><a href="#"><span>Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -65,7 +65,7 @@ export default function Navbar() {
                                         <li><a href="#">Dropdown 4</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="/contactus">Contact</a></li>
                             </ul>
                             <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
                         </nav>

@@ -30,8 +30,8 @@ export default function Navbar() {
 
                         <nav id="navmenu" className="navmenu">
                             <ul>
-                                <li><a href="index.html" className="active">Home</a></li>
-                                <li><a href="about.html">About</a></li>
+                                <li><a href="/" className="active">Home</a></li>
+                                <li><a href="/about">About</a></li>
                                 <li><a href="departments.html">Departments</a></li>
                                 <li><a href="services.html">Services</a></li>
                                 <li><a href="doctors.html">Doctors</a></li>
@@ -41,7 +41,7 @@ export default function Navbar() {
                                         <li><a href="service-details.html">Service Details</a></li>
                                         <li><a href="appointment.html">Appointment</a></li>
                                         <li><a href="testimonials.html">Testimonials</a></li>
-                                        <li><a href="faq.html">Frequently Asked Questions</a></li>
+                                        <li><a href="/faq">Frequently Asked Questions</a></li>
                                         <li><a href="gallery.html">Gallery</a></li>
                                         <li><a href="terms.html">Terms</a></li>
                                         <li><a href="privacy.html">Privacy</a></li>

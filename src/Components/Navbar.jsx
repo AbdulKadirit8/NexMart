@@ -9,8 +9,8 @@ export default function Navbar() {
                     <div className="container d-flex justify-content-center justify-content-md-between">
                         <div className="contact-info d-flex align-items-center">
                             <i className="bi bi-envelope d-flex align-items-center"><a
-                                href="mailto:contact@example.com">contact@example.com</a></i>
-                            <i className="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+                                href="abdulkadir.it8@gmail.com">abdulkadir.it8@g,ail.com</a></i>
+                            <i className="bi bi-phone d-flex align-items-center ms-4"><span>+91 87558 07621</span></i>
                         </div>
                         <div className="social-links d-none d-md-flex align-items-center">
                             <a href="#!" className="twitter"><i className="bi bi-twitter-x"></i></a>
@@ -25,7 +25,7 @@ export default function Navbar() {
                     <div className="container position-relative d-flex align-items-center justify-content-between">
                         <a href="index.html" className="logo d-flex align-items-center">
                             
-                                <h1 className="sitename">Clinic</h1>
+                                <h1 className="sitename">NexMmart</h1>
                         </a>
 
                         <nav id="navmenu" className="navmenu">

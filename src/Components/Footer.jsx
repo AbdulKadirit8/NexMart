@@ -13,7 +13,7 @@ export default function Footer() {
           <div className="col-lg-5">
             <div className="brand-section">
               <a href="index.html" className="logo d-flex align-items-center mb-4">
-                <span className="sitename">Clinic</span>
+                <span className="sitename">NexMart</span>
               </a>
               <p className="brand-description">Crafting exceptional digital experiences through thoughtful design and
                 innovative solutions that elevate your brand presence.</p>
@@ -21,15 +21,15 @@ export default function Footer() {
               <div className="contact-info mt-5">
                 <div className="contact-item">
                   <i className="bi bi-geo-alt"></i>
-                  <span>123 Creative Boulevard, Design District, NY 10012</span>
+                  <span>169 NexMart Business Hub, Muzaffarnagar, Uttar Pradesh, India - 251311</span>
                 </div>
                 <div className="contact-item">
                   <i className="bi bi-telephone"></i>
-                  <span>+1 (555) 987-6543</span>
+                  <span>+91 87558 07621</span>
                 </div>
                 <div className="contact-item">
                   <i className="bi bi-envelope"></i>
-                  <span>hello@designstudio.com</span>
+                  <span>abdulkadir.it8@gmail.com</span>
                 </div>
               </div>
             </div>
@@ -107,7 +107,7 @@ export default function Footer() {
 
             <div className="col-lg-6">
               <div className="copyright">
-                <p>© <span className="sitename">Clinic</span>. All rights reserved.</p>
+                <p>© <span className="sitename">NexMart</span>. All rights reserved.</p>
               </div>
             </div>
 

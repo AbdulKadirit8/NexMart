@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 export default function TermPage() {
     return (
         <>
-            <Breadcrum pageTitle={"Term"} pageDescription={"By using NexMart, you agree to our terms and conditions designed to ensure a safe, fair, and reliable shopping experience. Please review our policies, user responsibilities, and service guidelines carefully."} />
+            <Breadcrum pageTitle={"Term and Conditions"} pageDescription={"By using NexMart, you agree to our terms and conditions designed to ensure a safe, fair, and reliable shopping experience. Please review our policies, user responsibilities, and service guidelines carefully."} />
 
             <section id="terms-of-service" className="terms-of-service section">
 

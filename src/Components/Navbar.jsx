@@ -2,33 +2,53 @@ import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
 export default function Navbar() {
-    let [settingData, setSettingData]=useState({
-        siteName:import.meta.env.VITE_APP_SITENAME,
-        phone:import.meta.env.VITE_APP_PHONE,
-        whatsapp:import.meta.env.VITE_APP_SITENAME,
-        email:import.meta.env.VITE_APP_EMAIL
+    let [showMenu, setShowMenu]=useState(false)
+
+    let [settingData, setSettingData] = useState({
+        siteName: import.meta.env.VITE_APP_SITENAME,
+        phone: import.meta.env.VITE_APP_PHONE,
+        whatsapp: import.meta.env.VITE_APP_WHATSAPP,
+        email: import.meta.env.VITE_APP_EMAIL,
+        address: import.meta.env.VITE_APP_ADDRESS,
+        map: import.meta.env.VITE_APP_MAP
     })
     return (
         <>
-            <header id="header" className="header fixed-top">
+            <header id="header" className={`header fixed-top ${showMenu?'mobile-nav-active':''}`}>
 
                 <div className="topbar d-flex align-items-center dark-background">
-                    <div className="container d-flex justify-content-center justify-content-md-between">
+                    <div className="container d-flex justify-content-center justify-content-md-between justify-content-around">
                         <div className="contact-info d-flex align-items-center">
-                            <i className="bi bi-envelope d-flex align-items-center">
-                                <NavLink to={`mailto:${settingData.email}`} target='_blank' className="d-none d-xl-block">{settingData.email}</NavLink>
-                            </i>
-                            
-                            <i className="bi bi-telephone d-flex align-items-center ms-4"><NavLink
-                                to={`tel:${settingData.phone}`} target='_blank' className="d-none d-xl-block">{settingData.phone}</NavLink></i>
+                            <NavLink to={`http://wa.me/${settingData.whatsapp}`} target='_blank' className="text-light d-flex">
+                                <i className="bi bi-whatsapp me-2 ms-2"></i>
+                                <span className='text-light d-none d-lg-block me-2'>{settingData.whatsapp}</span>
+                            </NavLink>
+
+                            <NavLink to={settingData.map} target='_blank' className="text-light d-flex">
+                                <i className="bi bi-geo-alt-fill me-2 ms-2"></i>
+                                <span className='text-light d-none d-lg-block me-2'>{settingData.address}</span>
+                            </NavLink>
+
+                            <NavLink to={`mailto:${settingData.email}`} className="d-flex">
+                                <i className="bi bi-envelope me-2 ms-2"></i>
+                                <span className='text-light d-none d-lg-block me-2'>{settingData.email}</span>
+                            </NavLink>
+
+                            <NavLink to={`tel:${settingData.phone}`} className="d-flex">
+                                <i className="bi bi-telephone me-2 ms-2"></i>
+                                <span className='text-light d-none d-lg-block'>{settingData.phone}</span>
+                            </NavLink>
+
+
+
                         </div>
                         <div className="social-links  d-flex align-items-center">
-                            <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-geo-alt-fill"></i></NavLink>
+
                             <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-twitter"></i></NavLink>
                             <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-facebook"></i></NavLink>
                             <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-instagram"></i></NavLink>
                             <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-linkedin"></i></NavLink>
-                            <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-whatsapp"></i></NavLink>
+
                             <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-youtube"></i></NavLink>
                         </div>
                     </div>
@@ -45,23 +65,30 @@ export default function Navbar() {
                             <ul>
                                 <li><NavLink to="/" >Home</NavLink></li>
                                 <li><NavLink to="/about">About</NavLink></li>
-                                <li><NavLink to="departments.html">Departments</NavLink></li>
-                                <li><NavLink to="services.html">Services</NavLink></li>
-                                <li><NavLink to="doctors.html">Doctors</NavLink></li>
-                                <li className="dropdown"><NavLink to="#"><span>More Pages</span> <i className="bi bi-chevron-down toggle-dropdown"></i></NavLink>
+                                <li><NavLink to="/shop">Shop</NavLink></li>
+                                <li><NavLink to="/feature">Features</NavLink></li>
+                                <li><NavLink to="faq">Faq</NavLink></li>
+                                <li><NavLink to="/testomonials">Tesmonials</NavLink></li>
+                                <li><NavLink to="/contactus">ContactUs</NavLink></li>
+                                <li className="dropdown"><Link to="#"><span>Abdul Kadir</span> <i className="bi bi-chevron-down toggle-dropdown"></i></Link>
                                     <ul>
-                                        <li><NavLink to="department-details.html">Department Details</NavLink></li>
-                                        <li><NavLink to="service-details.html">Service Details</NavLink></li>
-                                        <li><NavLink to="appointment.html">Appointment</NavLink></li>
-                                        <li><NavLink to="/testomonials">Testimonials</NavLink></li>
-                                        <li><NavLink to="/faq">Frequently Asked Questions</NavLink></li>
-                                        <li><NavLink to="gallery.html">Gallery</NavLink></li>
-                                        <li><NavLink to="/terms">Terms</NavLink></li>
-                                        <li><NavLink to="/privacy-policy">Privacy</NavLink></li>
+                                        <li><Link to="profile?option=Profile">Profile</Link></li>
+                                        <li><Link to="profile?option=Wishlist">Wishlist</Link></li>
+                                        <li><Link to="profile?option=Orders">Orders</Link></li>
+                                        <li><Link to="profile?option=Address">Address</Link></li>
+                                        <li><Link to="/cart">Cart</Link></li>
+                                        <li><Link to="/checkout">Checkout</Link></li>
+                                        <li><Link to="/terms">Terms</Link></li>
+                                        <li><Link to="/privacy-policy">Privacy</Link></li>
+
+                                        <li><i className='bi bi-power ms-3 text-danger'></i><button className='btn text-danger'>Logout</button></li>
+                                        
                                         {/* <li><NavLink to="/404">404</NavLink></li> */}
                                     </ul>
                                 </li>
-                                <li className="dropdown"><NavLink to="#"><span>Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></NavLink>
+
+                                {/* nested dropsown */}
+                                {/* <li className="dropdown"><Link to="#"><span>Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></Link>
                                     <ul>
                                         <li><NavLink to="#">Dropdown 1</NavLink></li>
                                         <li className="dropdown"><NavLink to="#"><span>Deep Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></NavLink>
@@ -77,10 +104,10 @@ export default function Navbar() {
                                         <li><Link to="#">Dropdown 3</Link></li>
                                         <li><Link to="#">Dropdown 4</Link></li>
                                     </ul>
-                                </li>
-                                <li><NavLink to="/contactus">Contact</NavLink></li>
+                                </li> */}
+                                
                             </ul>
-                            <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                            <i className={`mobile-nav-toggle d-xl-none bi ${showMenu?'bi-x-square':'bi-view-list'}`} onClick={()=>setShowMenu(!showMenu)}></i>
                         </nav>
 
                     </div>

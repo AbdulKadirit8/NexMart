@@ -17,9 +17,10 @@ import ScrollToTop from "./Components/ScrollToTop";
 export default function App() {
   return (
     <>
-      <Navbar></Navbar>
+      
 
       <BrowserRouter>
+      <Navbar></Navbar>
       <ScrollToTop />
         <Routes>
           <Route path='' element={<Home />}></Route>

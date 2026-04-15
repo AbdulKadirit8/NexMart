@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
 export default function Navbar() {
+    let [settingData, setSettingData]=useState({
+        siteName:import.meta.env.VITE_APP_SITENAME,
+        phone:import.meta.env.VITE_APP_PHONE,
+        whatsapp:import.meta.env.VITE_APP_SITENAME,
+        email:import.meta.env.VITE_APP_EMAIL
+    })
     return (
         <>
             <header id="header" className="header fixed-top">
@@ -8,64 +15,70 @@ export default function Navbar() {
                 <div className="topbar d-flex align-items-center dark-background">
                     <div className="container d-flex justify-content-center justify-content-md-between">
                         <div className="contact-info d-flex align-items-center">
-                            <i className="bi bi-envelope d-flex align-items-center"><a
-                                href="abdulkadir.it8@gmail.com">abdulkadir.it8@g,ail.com</a></i>
-                            <i className="bi bi-phone d-flex align-items-center ms-4"><span>+91 87558 07621</span></i>
+                            <i className="bi bi-envelope d-flex align-items-center">
+                                <NavLink to={`mailto:${settingData.email}`} target='_blank'>{settingData.email}</NavLink>
+                            </i>
+                            
+                            <i className="bi bi-telephone d-flex align-items-center ms-4"><NavLink
+                                to={`tel:${settingData.phone}`} target='_blank'>{settingData.phone}</NavLink></i>
                         </div>
                         <div className="social-links d-none d-md-flex align-items-center">
-                            <a href="#!" className="twitter"><i className="bi bi-twitter-x"></i></a>
-                            <a href="#!" className="facebook"><i className="bi bi-facebook"></i></a>
-                            <a href="#!" className="instagram"><i className="bi bi-instagram"></i></a>
-                            <a href="#!" className="linkedin"><i className="bi bi-linkedin"></i></a>
+                            <NavLink to={settingData.email} target='_blank' className="linkedin"><i className="bi bi-geo-alt-fill"></i></NavLink>
+                            <NavLink to={settingData.email} target='_blank' className="twitter"><i className="bi bi-twitter-x"></i></NavLink>
+                            <NavLink to={settingData.email} target='_blank' className="facebook"><i className="bi bi-facebook"></i></NavLink>
+                            <NavLink to={settingData.email} target='_blank' className="instagram"><i className="bi bi-instagram"></i></NavLink>
+                            <NavLink to={settingData.email} target='_blank' className="linkedin"><i className="bi bi-linkedin"></i></NavLink>
+                            <NavLink to={settingData.email} target='_blank' className="linkedin"><i className="bi bi-whatsapp"></i></NavLink>
+                            <NavLink to={settingData.email} target='_blank' className="linkedin"><i className="bi bi-youtube"></i></NavLink>
                         </div>
                     </div>
                 </div>
                 <div className="branding d-flex align-items-cente">
 
                     <div className="container position-relative d-flex align-items-center justify-content-between">
-                        <a href="index.html" className="logo d-flex align-items-center">
+                        <NavLink to="index.html" className="logo d-flex align-items-center">
                             
                                 <h1 className="sitename">NexMmart</h1>
-                        </a>
+                        </NavLink>
 
                         <nav id="navmenu" className="navmenu">
                             <ul>
-                                <li><a href="/" className="active">Home</a></li>
-                                <li><a href="/about">About</a></li>
-                                <li><a href="departments.html">Departments</a></li>
-                                <li><a href="services.html">Services</a></li>
-                                <li><a href="doctors.html">Doctors</a></li>
-                                <li className="dropdown"><a href="#"><span>More Pages</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <li><NavLink to="/" className="active">Home</NavLink></li>
+                                <li><NavLink to="/about">About</NavLink></li>
+                                <li><NavLink to="departments.html">Departments</NavLink></li>
+                                <li><NavLink to="services.html">Services</NavLink></li>
+                                <li><NavLink to="doctors.html">Doctors</NavLink></li>
+                                <li className="dropdown"><NavLink to="#"><span>More Pages</span> <i className="bi bi-chevron-down toggle-dropdown"></i></NavLink>
                                     <ul>
-                                        <li><a href="department-details.html">Department Details</a></li>
-                                        <li><a href="service-details.html">Service Details</a></li>
-                                        <li><a href="appointment.html">Appointment</a></li>
-                                        <li><a href="/testomonials">Testimonials</a></li>
-                                        <li><a href="/faq">Frequently Asked Questions</a></li>
-                                        <li><a href="gallery.html">Gallery</a></li>
-                                        <li><a href="/terms">Terms</a></li>
-                                        <li><a href="/privacy-policy">Privacy</a></li>
-                                        <li><a href="/404">404</a></li>
+                                        <li><NavLink to="department-details.html">Department Details</NavLink></li>
+                                        <li><NavLink to="service-details.html">Service Details</NavLink></li>
+                                        <li><NavLink to="appointment.html">Appointment</NavLink></li>
+                                        <li><NavLink to="/testomonials">Testimonials</NavLink></li>
+                                        <li><NavLink to="/faq">Frequently Asked Questions</NavLink></li>
+                                        <li><NavLink to="gallery.html">Gallery</NavLink></li>
+                                        <li><NavLink to="/terms">Terms</NavLink></li>
+                                        <li><NavLink to="/privacy-policy">Privacy</NavLink></li>
+                                        <li><NavLink to="/404">404</NavLink></li>
                                     </ul>
                                 </li>
-                                <li className="dropdown"><a href="#"><span>Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <li className="dropdown"><NavLink to="#"><span>Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></NavLink>
                                     <ul>
-                                        <li><a href="#">Dropdown 1</a></li>
-                                        <li className="dropdown"><a href="#"><span>Deep Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></a>
+                                        <li><NavLink to="#">Dropdown 1</NavLink></li>
+                                        <li className="dropdown"><NavLink to="#"><span>Deep Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></NavLink>
                                             <ul>
-                                                <li><a href="#">Deep Dropdown 1</a></li>
-                                                <li><a href="#">Deep Dropdown 2</a></li>
-                                                <li><a href="#">Deep Dropdown 3</a></li>
-                                                <li><a href="#">Deep Dropdown 4</a></li>
-                                                <li><a href="#">Deep Dropdown 5</a></li>
+                                                <li><NavLink to="#">Deep Dropdown 1</NavLink></li>
+                                                <li><NavLink to="#">Deep Dropdown 2</NavLink></li>
+                                                <li><NavLink to="#">Deep Dropdown 3</NavLink></li>
+                                                <li><NavLink to="#">Deep Dropdown 4</NavLink></li>
+                                                <li><NavLink to="#">Deep Dropdown 5</NavLink></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">Dropdown 2</a></li>
-                                        <li><a href="#">Dropdown 3</a></li>
-                                        <li><a href="#">Dropdown 4</a></li>
+                                        <li><NavLink to="#">Dropdown 2</NavLink></li>
+                                        <li><NavLink to="#">Dropdown 3</NavLink></li>
+                                        <li><NavLink to="#">Dropdown 4</NavLink></li>
                                     </ul>
                                 </li>
-                                <li><a href="/contactus">Contact</a></li>
+                                <li><NavLink to="/contactus">Contact</NavLink></li>
                             </ul>
                             <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
                         </nav>

@@ -17,7 +17,7 @@ export default function CUstumerSupport() {
                             <div className="col-lg-4 text-lg-end">
                                 <a href="tel:+15551234567" className="emergency-btn">
                                     <i className="bi bi-telephone-fill"></i>
-                                    Call Emergency: (555) 123-4567
+                                    Call Emergency: (875) 580-7621
                                 </a>
                             </div>
                         </div>

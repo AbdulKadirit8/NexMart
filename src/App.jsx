@@ -12,6 +12,7 @@ import PrivacyPage from "./Pages/PrivacyPage";
 import TermPage from "./Pages/TermPage";
 import Testimonial from "./Components/Testimonial";
 import TestimonialPage from "./Pages/TestimonialPage";
+import ScrollToTop from "./Components/ScrollToTop";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
       <Navbar></Navbar>
 
       <BrowserRouter>
+      <ScrollToTop />
         <Routes>
           <Route path='' element={<Home />}></Route>
           <Route path='/about' element={<AboutPage />}></Route>

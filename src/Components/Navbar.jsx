@@ -16,34 +16,34 @@ export default function Navbar() {
                     <div className="container d-flex justify-content-center justify-content-md-between">
                         <div className="contact-info d-flex align-items-center">
                             <i className="bi bi-envelope d-flex align-items-center">
-                                <NavLink to={`mailto:${settingData.email}`} target='_blank'>{settingData.email}</NavLink>
+                                <NavLink to={`mailto:${settingData.email}`} target='_blank' className="d-none d-xl-block">{settingData.email}</NavLink>
                             </i>
                             
                             <i className="bi bi-telephone d-flex align-items-center ms-4"><NavLink
-                                to={`tel:${settingData.phone}`} target='_blank'>{settingData.phone}</NavLink></i>
+                                to={`tel:${settingData.phone}`} target='_blank' className="d-none d-xl-block">{settingData.phone}</NavLink></i>
                         </div>
-                        <div className="social-links d-none d-md-flex align-items-center">
-                            <NavLink to={settingData.email} target='_blank' className="linkedin"><i className="bi bi-geo-alt-fill"></i></NavLink>
-                            <NavLink to={settingData.email} target='_blank' className="twitter"><i className="bi bi-twitter-x"></i></NavLink>
-                            <NavLink to={settingData.email} target='_blank' className="facebook"><i className="bi bi-facebook"></i></NavLink>
-                            <NavLink to={settingData.email} target='_blank' className="instagram"><i className="bi bi-instagram"></i></NavLink>
-                            <NavLink to={settingData.email} target='_blank' className="linkedin"><i className="bi bi-linkedin"></i></NavLink>
-                            <NavLink to={settingData.email} target='_blank' className="linkedin"><i className="bi bi-whatsapp"></i></NavLink>
-                            <NavLink to={settingData.email} target='_blank' className="linkedin"><i className="bi bi-youtube"></i></NavLink>
+                        <div className="social-links  d-flex align-items-center">
+                            <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-geo-alt-fill"></i></NavLink>
+                            <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-twitter"></i></NavLink>
+                            <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-facebook"></i></NavLink>
+                            <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-instagram"></i></NavLink>
+                            <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-linkedin"></i></NavLink>
+                            <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-whatsapp"></i></NavLink>
+                            <NavLink to={settingData.email} target='_blank' className="text-light"><i className="bi bi-youtube"></i></NavLink>
                         </div>
                     </div>
                 </div>
                 <div className="branding d-flex align-items-cente">
 
                     <div className="container position-relative d-flex align-items-center justify-content-between">
-                        <NavLink to="index.html" className="logo d-flex align-items-center">
-                            
-                                <h1 className="sitename">NexMmart</h1>
+                        <NavLink to="/" className="logo d-flex align-items-center">
+                            <img src="assets/img/nexmartlogo2.png" alt="" style={{ maxHeight: "50px", width: "auto" }}></img>
+                            {/* <h1 className="sitename">NexMmart</h1> */}
                         </NavLink>
 
                         <nav id="navmenu" className="navmenu">
                             <ul>
-                                <li><NavLink to="/" className="active">Home</NavLink></li>
+                                <li><NavLink to="/" >Home</NavLink></li>
                                 <li><NavLink to="/about">About</NavLink></li>
                                 <li><NavLink to="departments.html">Departments</NavLink></li>
                                 <li><NavLink to="services.html">Services</NavLink></li>
@@ -58,7 +58,7 @@ export default function Navbar() {
                                         <li><NavLink to="gallery.html">Gallery</NavLink></li>
                                         <li><NavLink to="/terms">Terms</NavLink></li>
                                         <li><NavLink to="/privacy-policy">Privacy</NavLink></li>
-                                        <li><NavLink to="/404">404</NavLink></li>
+                                        {/* <li><NavLink to="/404">404</NavLink></li> */}
                                     </ul>
                                 </li>
                                 <li className="dropdown"><NavLink to="#"><span>Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></NavLink>
@@ -66,16 +66,16 @@ export default function Navbar() {
                                         <li><NavLink to="#">Dropdown 1</NavLink></li>
                                         <li className="dropdown"><NavLink to="#"><span>Deep Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i></NavLink>
                                             <ul>
-                                                <li><NavLink to="#">Deep Dropdown 1</NavLink></li>
-                                                <li><NavLink to="#">Deep Dropdown 2</NavLink></li>
-                                                <li><NavLink to="#">Deep Dropdown 3</NavLink></li>
-                                                <li><NavLink to="#">Deep Dropdown 4</NavLink></li>
-                                                <li><NavLink to="#">Deep Dropdown 5</NavLink></li>
+                                                <li><Link to="#">Deep Dropdown 1</Link></li>
+                                                <li><Link to="#">Deep Dropdown 2</Link></li>
+                                                <li><Link to="#">Deep Dropdown 3</Link></li>
+                                                <li><Link to="#">Deep Dropdown 4</Link></li>
+                                                <li><Link to="#">Deep Dropdown 5</Link></li>
                                             </ul>
                                         </li>
-                                        <li><NavLink to="#">Dropdown 2</NavLink></li>
-                                        <li><NavLink to="#">Dropdown 3</NavLink></li>
-                                        <li><NavLink to="#">Dropdown 4</NavLink></li>
+                                        <li><Link to="#">Dropdown 2</Link></li>
+                                        <li><Link to="#">Dropdown 3</Link></li>
+                                        <li><Link to="#">Dropdown 4</Link></li>
                                     </ul>
                                 </li>
                                 <li><NavLink to="/contactus">Contact</NavLink></li>

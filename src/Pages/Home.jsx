@@ -73,7 +73,7 @@ export default function Home() {
                   </div>
                   <div className="emergency-info">
                     <small>Emergency Hotline</small>
-                    <strong>+1 (555) 911-2468</strong>
+                    <strong>+91 (875) 580-7621</strong>
                   </div>
                 </div>
               </div>

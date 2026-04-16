@@ -3,7 +3,7 @@ import React from 'react'
 export default function CUstumerSupport() {
     return (
         <>
-            <section id="featured-departments" className="featured-departments section">
+            <section id="featured-departments" className="featured-departments section pt-0 pb-0">
                 <div className="container" >
                     <div className="emergency-banner" data-aos="fade-up" data-aos-delay="400">
                         <div className="row align-items-center">

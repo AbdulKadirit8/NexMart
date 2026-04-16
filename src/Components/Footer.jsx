@@ -65,7 +65,7 @@ export default function Footer() {
                 <div className="footer-nav-wrapper">
                   <div className="row">
 
-                    <div className="col-md-3 col-12">
+                    <div className="col-md-3 col-6">
                       <div className="nav-column">
                         <h6 className="text-light">Quick Link</h6>
                         <nav className="footer-nav">
@@ -79,9 +79,9 @@ export default function Footer() {
                       </div>
                     </div>
 
-                    <div className="col-md-3 col-12">
+                    <div className="col-md-3 col-6">
                       <div className="nav-column">
-                        <h6 className="text-light">Quick Link</h6>
+                        <h6 className="text-light">Important Link</h6>
                         <nav className="footer-nav">
                           <Link to="faq">Faq</Link>
                           <Link to="/testomonials">Tesmonials</Link>
@@ -105,7 +105,7 @@ export default function Footer() {
                         </div>
 
                         <div className="mt-4">
-                          <div className="social-links  d-flex align-items-center">
+                          <div className="social-links  d-flex align-items-center justify-content-center">
 
                             <NavLink to={settingData.email} target='_blank' className="text-light ms-4"><i className="social-icon twitter bi bi-twitter"></i></NavLink>
                             <NavLink to={settingData.email} target='_blank' className="text-light ms-4"><i className="social-icon facebook bi bi-facebook"></i></NavLink>

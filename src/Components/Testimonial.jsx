@@ -2,7 +2,7 @@
 export default function Testimonial() {
     return (
         <>
-            <section id="featured-testimonials" className="featured-testimonials section">
+            <section id="featured-testimonials" className="featured-testimonials section pt-0">
                 <div className="container" data-aos="fade-up" data-aos-delay="100">
                     <div className="testimonials-14 swiper init-swiper">
                         <div className="swiper-wrapper">

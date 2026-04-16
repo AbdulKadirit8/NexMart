@@ -3,7 +3,7 @@ import React from 'react'
 export default function Feature() {
     return (
         <>
-            <section id="featured-departments" className="featured-departments section">
+            <section id="featured-departments" className="featured-departments section pb-0">
 
                 {/*  Section Title  */}
                 <div className="container section-title" data-aos="fade-up">

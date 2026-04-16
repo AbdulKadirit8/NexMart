@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 
-export default function Breadcrum({pageTitle, pageDescription}) {
+export default function Breadcrum({ pageTitle, pageDescription }) {
     return (
         <>
             <div className="page-title">

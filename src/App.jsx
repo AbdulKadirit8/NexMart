@@ -10,9 +10,11 @@ import ContactUsPage from "./Pages/ContactUsPage";
 import ErrorPage from "./Pages/ErrorPage";
 import PrivacyPage from "./Pages/PrivacyPage";
 import TermPage from "./Pages/TermPage";
-import Testimonial from "./Components/Testimonial";
 import TestimonialPage from "./Pages/TestimonialPage";
 import ScrollToTop from "./Components/ScrollToTop";
+import AdminHomePage from "./Pages/Admin/AdminHomePage";
+
+
 
 export default function App() {
   return (
@@ -32,6 +34,11 @@ export default function App() {
           <Route path='/privacy-policy' element={<PrivacyPage />}></Route>
           <Route path='/terms' element={<TermPage />}></Route>
           <Route path='/testomonials' element={<TestimonialPage />}></Route>
+
+
+          {/* Admin Routes */}
+          <Route path='/admin' element={<AdminHomePage />}></Route>
+
 
 
           <Route path='/*' element={<ErrorPage></ErrorPage>}></Route>

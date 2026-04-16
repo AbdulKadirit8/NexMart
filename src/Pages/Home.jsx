@@ -119,16 +119,7 @@ export default function Home() {
               <div className="hero-visual" data-aos="fade-left" data-aos-delay="400">
                 <div className="main-image">
                   <img src="assets/images/mixeproductmain.png" alt="Modern Healthcare Facility" className="img-fluid" />
-                  <div className="floating-card appointment-card">
-                    <div className="card-icon">
-                      <i className="bi bi-truck"></i>
-                    </div>
-                    <div className="card-content">
-                      <h6>Fast Delivery</h6>
-                      <p>Today Delivery</p>
-                      <small>Within 24 Hours</small>
-                    </div>
-                  </div>
+                  
                   <div className="floating-card rating-card">
                     <div className="card-content">
                       <div className="rating-stars">

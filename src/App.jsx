@@ -13,6 +13,8 @@ import TermPage from "./Pages/TermPage";
 import TestimonialPage from "./Pages/TestimonialPage";
 import ScrollToTop from "./Components/ScrollToTop";
 import AdminHomePage from "./Pages/Admin/AdminHomePage";
+import AdminMainCategoryagePage from "./Pages/Maincategory/AdminMainCategoryagePage";
+import AdminCreateMainCategoryagePage from "./Pages/Maincategory/AdminCreateMainCategoryagePage";
 
 
 
@@ -38,6 +40,9 @@ export default function App() {
 
           {/* Admin Routes */}
           <Route path='/admin' element={<AdminHomePage />}></Route>
+          <Route path='/admin/maincategory' element={<AdminMainCategoryagePage />}></Route>
+          <Route path='/admin/maincategory/create' element={<AdminCreateMainCategoryagePage />}></Route>
+          
 
 
 

@@ -6,19 +6,19 @@ export default function AdminHomePage() {
         <>
             <section id="hero" className="hero section pb-0">
 
-                <div className="container my-3 admin" data-aos="fade-up" data-aos-delay="100">
-                    
-                        <div className="row ">
-                            
-                            <div className="col-md-3">
-                                <div data-aos="fade-right" data-aos-delay="300">
-                                    <AdminSlider />
-                                </div>
-                                
+                <div className="container my-3 admin">
+
+                    <div className="row ">
+
+                        <div className="col-md-3">
+                            <div data-aos="fade-right" data-aos-delay="100">
+                                <AdminSlider />
                             </div>
-                            <div className="col-md-9">
-                                <div data-aos="fade-left" data-aos-delay="300">
-                                    <h4 className='bg-primary text-light text-center p-1'>Your Profile</h4>
+
+                        </div>
+                        <div className="col-md-9">
+                            <div data-aos="fade-left" data-aos-delay="100">
+                                <h4 className='bg-primary text-light text-center p-1'>Your Profile</h4>
                                 <table className='table table-bordered'>
                                     <tbody>
                                         <tr>
@@ -43,9 +43,9 @@ export default function AdminHomePage() {
                                         </tr>
                                     </tbody>
                                 </table>
-                                </div>
-                                
                             </div>
+
+                        </div>
                     </div>
                 </div>
 

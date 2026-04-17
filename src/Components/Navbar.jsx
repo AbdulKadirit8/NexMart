@@ -64,7 +64,7 @@ export default function Navbar() {
                         <nav id="navmenu" className="navmenu">
                             <ul>
                                 <li><NavLink to="/" >Home</NavLink></li>
-                                <li><NavLink to="/admin" >admin</NavLink></li>
+                                <li><NavLink to="/admin" >Admin</NavLink></li>
                                 <li><NavLink to="/about">About</NavLink></li>
                                 <li><NavLink to="/shop">Shop</NavLink></li>
                                 <li><NavLink to="/feature">Features</NavLink></li>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AdminSlider from '../../Components/Admin/AdminSlider'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import TextValidater from '../../FormValidaters/TEXTvalidater'
 
 export default function AdminCreateMainCategoryagePage() {
@@ -15,29 +15,73 @@ export default function AdminCreateMainCategoryagePage() {
         pic: 'Pic field is Mendatory'
     })
     let [showError, setShowError] = useState(false)
+    let navigate = useNavigate()
+
+    let [mainCategoryStateData, setMainCategoryStateData] = useState([])
 
     function getInputData(e) {
         let name = e.target.name
-        let value = name === "pic" ? e.target.files[0].name : e.target.value
+
+        // Demmy Backend
+        let value = name === "pic" ? "maincategory/" + e.target.files[0].name : e.target.value
+
+        // Rael Backend
+        // let value = name === "pic" ? e.target.files[0].name : e.target.value
 
         setData({ ...data, [name]: name === "status" ? (value === "1" ? true : false) : value })
         setErrorMessage({ ...errorMessage, [name]: TextValidater(e) })
     }
-    function postData(e) {
+    async function postData(e) {
         e.preventDefault()
 
         let error = Object.values(errorMessage).find(x => x !== "")
-        if(error)
+        if (error)
             setShowError(true)
-        else{
-            alert(`
-                Name : ${data.name}
-                Pic : ${data.pic}
-                Status : ${data.status}
+        else {
+            let item = mainCategoryStateData.find(x => x.name?.toLocaleLowerCase() === data.name?.toLocaleLowerCase())
+            if(item){
+                setShowError(true)
+                setErrorMessage({...errorMessage, 'name':"Maincategory with this name id already Exist"})
+                return
+            }
+            let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory`, {
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({ ...data })
+            })
+            response = await response.json()
+            if (response) {
+                navigate("/admin/maincategory")
 
-            `)
+            }
+            else {
+                alert("Something went wrong")
+            }
+
+            // alert(`
+            //     Name : ${data.name}
+            //     Pic : ${data.pic}
+            //     Status : ${data.status}
+
+            // `)
         }
     }
+
+    useEffect(() => {
+        (async () => {
+            let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory`, {
+                method: "GET",
+                headers: {
+                    'content-type': 'application/json'
+                },
+
+            })
+            response = await response.json()
+            setMainCategoryStateData(response)
+        })()
+    })
     return (
         <>
             <section id="hero" className="hero section pb-0">
@@ -66,10 +110,10 @@ export default function AdminCreateMainCategoryagePage() {
                                             {showError && errorMessage.name ? <p className='text-danger'>{errorMessage.name}</p> : null}
                                         </div>
                                         <div className="col-md-6 mb-3">
-                                    <label>Pic<span className='text-danger'>*</span></label>
-                                    <input type="file" name="pic" onChange={getInputData} className={`form-control ${showError && errorMessage.pic ? 'border-danger' : 'border-primary'}`} />
-                                    {showError && errorMessage.pic ? <p className='text-danger'>{errorMessage.name}</p> : null}
-                                </div>
+                                            <label>Pic<span className='text-danger'>*</span></label>
+                                            <input type="file" name="pic" onChange={getInputData} className={`form-control ${showError && errorMessage.pic ? 'border-danger' : 'border-primary'}`} />
+                                            {showError && errorMessage.pic ? <p className='text-danger'>{errorMessage.name}</p> : null}
+                                        </div>
                                         <div className="col-6 mb-3">
                                             <label>Status<span className='text-danger'>*</span></label>
                                             <select name="status" onChange={getInputData} className='form-select'>

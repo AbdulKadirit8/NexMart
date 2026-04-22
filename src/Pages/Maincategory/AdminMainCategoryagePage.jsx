@@ -5,6 +5,21 @@ import { useEffect, useState } from 'react'
 
 export default function AdminMainCategoryagePage() {
     let [mainCategoryStateData, setMainCategoryStateData] = useState([])
+
+    // Delete function
+    async function deleteRecord(id){
+        if(window.confirm("Are you sure to Delete this record")){
+            let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory/${id}`, {
+                method: "DELETE",
+                headers: {
+                    'content-type': 'application/json'
+                },
+
+            })
+            response = await response.json()
+            setMainCategoryStateData(mainCategoryStateData.filter(x=> x.id!==id))
+        }
+    }
     useEffect(() => {
         (async () => {
             let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory`, {
@@ -17,7 +32,7 @@ export default function AdminMainCategoryagePage() {
             response = await response.json()
             setMainCategoryStateData(response)
         })()
-    })
+    }, [])
     return (
         <>
             <section id="hero" className="hero section pb-0">
@@ -36,7 +51,7 @@ export default function AdminMainCategoryagePage() {
                             <div data-aos="fade-left" data-aos-delay="100">
                                 <h4 className='bg-primary text-light text-center p-1'>Maincategory <Link to='/admin/maincategory/create' title='Create'><i className='bi bi-plus text-light float-end'></i></Link></h4>
                                 <div className="table-responsive">
-                                    <table className='table'>
+                                    <table className='table table-bordered'>
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -57,7 +72,7 @@ export default function AdminMainCategoryagePage() {
                                                     </Link></td>
                                                     <td>{item.status?"Active":"Inactive"}</td>
                                                     <td><Link to={`/admin/maincategory/update/${item.id}`}><i className='bi bi-pencil btn btn-primary'></i></Link></td>
-                                                    <td><Link to={`/admin/maincategory/create${item.id}`}><i className='bi bi-trash btn btn-danger'></i></Link></td>
+                                                    <td><button onClick={()=>deleteRecord(item.id)} className='btn btn-danger'><i className='bi bi-trash'></i></button></td>
                                                     
                                                 </tr>
                                             })}

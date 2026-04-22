@@ -106,13 +106,13 @@ export default function AdminCreateMainCategoryagePage() {
                                     <div className="row">
                                         <div className="col-12 mb-3">
                                             <label>Name<span className='text-danger'>*</span></label>
-                                            <input type="text" name="name" onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.name ? 'border-danger' : 'border-primary'}`} placeholder='Product Name' />
+                                            <input type="text" name="name" value={data.name} onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.name ? 'border-danger' : 'border-primary'}`} placeholder='Product Name' />
                                             {showError && errorMessage.name ? <p className='text-danger'>{errorMessage.name}</p> : null}
                                         </div>
                                         <div className="col-md-6 mb-3">
                                             <label>Pic<span className='text-danger'>*</span></label>
                                             <input type="file" name="pic" onChange={getInputData} className={`form-control ${showError && errorMessage.pic ? 'border-danger' : 'border-primary'}`} />
-                                            {showError && errorMessage.pic ? <p className='text-danger'>{errorMessage.name}</p> : null}
+                                            {showError && errorMessage.pic ? <p className='text-danger'>{errorMessage.pic}</p> : null}
                                         </div>
                                         <div className="col-6 mb-3">
                                             <label>Status<span className='text-danger'>*</span></label>

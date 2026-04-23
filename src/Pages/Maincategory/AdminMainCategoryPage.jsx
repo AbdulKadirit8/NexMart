@@ -11,7 +11,7 @@ import 'datatables.net-dt/css/dataTables.dataTables.min.css'
 
 
 
-export default function AdminMainCategoryagePage() {
+export default function AdminMainCategoryPage() {
     let [mainCategoryStateData, setMainCategoryStateData] = useState([])
 
     // Delete function

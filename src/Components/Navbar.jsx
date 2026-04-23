@@ -63,14 +63,14 @@ export default function Navbar() {
 
                         <nav id="navmenu" className="navmenu">
                             <ul>
-                                <li><NavLink to="/" >Home</NavLink></li>
-                                <li><NavLink to="/admin" >Admin</NavLink></li>
-                                <li><NavLink to="/about">About</NavLink></li>
-                                <li><NavLink to="/shop">Shop</NavLink></li>
-                                <li><NavLink to="/feature">Features</NavLink></li>
-                                <li><NavLink to="faq">Faq</NavLink></li>
-                                <li><NavLink to="/testomonials">Tesmonials</NavLink></li>
-                                <li><NavLink to="/contactus">ContactUs</NavLink></li>
+                                <li><NavLink to="/" onClick={()=>setShowMenu(!showMenu)}>Home</NavLink></li>
+                                <li><NavLink to="/admin" onClick={()=>setShowMenu(!showMenu)}>Admin</NavLink></li>
+                                <li><NavLink to="/about" onClick={()=>setShowMenu(!showMenu)}>About</NavLink></li>
+                                <li><NavLink to="/shop" onClick={()=>setShowMenu(!showMenu)}>Shop</NavLink></li>
+                                <li><NavLink to="/feature" onClick={()=>setShowMenu(!showMenu)}>Features</NavLink></li>
+                                <li><NavLink to="faq" onClick={()=>setShowMenu(!showMenu)}>Faq</NavLink></li>
+                                <li><NavLink to="/testomonials" onClick={()=>setShowMenu(!showMenu)}>Tesmonials</NavLink></li>
+                                <li><NavLink to="/contactus" onClick={()=>setShowMenu(!showMenu)}>ContactUs</NavLink></li>
                                 <li className="dropdown"><Link to="#"><span>Abdul Kadir</span> <i className="bi bi-chevron-down toggle-dropdown"></i></Link>
                                     <ul>
                                         <li><Link to="profile?option=Profile">Profile</Link></li>

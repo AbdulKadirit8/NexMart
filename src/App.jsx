@@ -13,9 +13,9 @@ import TermPage from "./Pages/TermPage";
 import TestimonialPage from "./Pages/TestimonialPage";
 import ScrollToTop from "./Components/ScrollToTop";
 import AdminHomePage from "./Pages/Admin/AdminHomePage";
-import AdminMainCategoryagePage from "./Pages/Maincategory/AdminMainCategoryagePage";
-import AdminCreateMainCategoryagePage from "./Pages/Maincategory/AdminCreateMainCategoryagePage";
-import AdminUpdateMainCategoryagePage from "./Pages/Maincategory/AdminUpdateMainCategoryagePage";
+import AdminMainCategoryagePage from "./Pages/Maincategory/AdminMainCategoryPage";
+import AdminCreateMainCategoryPage from "./Pages/Maincategory/AdminCreateMainCategoryPage";
+import AdminUpdateMainCategoryagePage from "./Pages/Maincategory/AdminUpdateMainCategoryPage";
 
 
 
@@ -42,7 +42,7 @@ export default function App() {
           {/* Admin Routes */}
           <Route path='/admin' element={<AdminHomePage />}></Route>
           <Route path='/admin/maincategory' element={<AdminMainCategoryagePage />}></Route>
-          <Route path='/admin/maincategory/create' element={<AdminCreateMainCategoryagePage />}></Route>
+          <Route path='/admin/maincategory/create' element={<AdminCreateMainCategoryPage />}></Route>
           <Route path='/admin/maincategory/update/:id' element={<AdminUpdateMainCategoryagePage />}></Route>
           
 

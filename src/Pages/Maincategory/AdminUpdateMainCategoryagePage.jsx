@@ -33,7 +33,7 @@ export default function AdminUpdateMainCategoryagePage() {
         // let value = name === "pic" ? e.target.files[0].name : e.target.value
 
         setData({ ...data, [name]: name === "status" ? (value === "1" ? true : false) : value })
-        setErrorMessage({ ...errorMessage, [name]: TextValidater(e) })
+        setErrorMessage({ ...errorMessage, [name]:  name=="pic"?PicValidater(e): TextValidater(e) })
     }
     async function postData(e) {
         e.preventDefault()

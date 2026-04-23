@@ -3,6 +3,14 @@ import AdminSlider from '../../Components/Admin/AdminSlider'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
+// Data table library
+import DataTable from 'datatables.net-dt'
+
+// Data Tables css 
+import 'datatables.net-dt/css/dataTables.dataTables.min.css'
+
+
+
 export default function AdminMainCategoryagePage() {
     let [mainCategoryStateData, setMainCategoryStateData] = useState([])
 
@@ -21,7 +29,7 @@ export default function AdminMainCategoryagePage() {
         }
     }
     useEffect(() => {
-        (async () => {
+        let time=(async () => {
             let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory`, {
                 method: "GET",
                 headers: {
@@ -31,7 +39,12 @@ export default function AdminMainCategoryagePage() {
             })
             response = await response.json()
             setMainCategoryStateData(response)
+            let time=setTimeout(()=>{
+               new DataTable('#myTable');
+            }, 500)
+            return time
         })()
+        return ()=> clearTimeout(time)
     }, [])
     return (
         <>
@@ -51,7 +64,7 @@ export default function AdminMainCategoryagePage() {
                             <div data-aos="fade-left" data-aos-delay="100">
                                 <h4 className='bg-primary text-light text-center p-1'>Maincategory <Link to='/admin/maincategory/create' title='Create'><i className='bi bi-plus text-light float-end'></i></Link></h4>
                                 <div className="table-responsive">
-                                    <table className='table table-bordered'>
+                                    <table className='table table-bordered' id='myTable'>
                                         <thead>
                                             <tr>
                                                 <th>ID</th>

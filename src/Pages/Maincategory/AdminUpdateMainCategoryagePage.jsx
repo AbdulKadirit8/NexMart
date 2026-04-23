@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import AdminSlider from '../../Components/Admin/AdminSlider'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import TextValidater from '../../FormValidaters/TEXTvalidater'
+import TextValidater from '../../FormValidaters/TextValidater'
+import PicValidater from '../../FormValidaters/PicValidater'
 
 export default function AdminUpdateMainCategoryagePage() {
 
@@ -41,14 +42,14 @@ export default function AdminUpdateMainCategoryagePage() {
         if (error)
             setShowError(true)
         else {
-            let item = mainCategoryStateData.find(x => x.name?.toLocaleLowerCase() === data.name?.toLocaleLowerCase())
+            let item = mainCategoryStateData.find(x => x.id!==id && x.name?.toLocaleLowerCase() === data.name?.toLocaleLowerCase())
             if(item){
                 setShowError(true)
                 setErrorMessage({...errorMessage, 'name':"Maincategory with this name id already Exist"})
                 return
             }
-            let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory`, {
-                method: "POST",
+            let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory/${id}`, {
+                method: "PUT",
                 headers: {
                     'content-type': 'application/json'
                 },

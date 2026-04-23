@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AdminSlider from '../../Components/Admin/AdminSlider'
 import { Link, useNavigate } from 'react-router-dom'
 import TextValidater from '../../FormValidaters/TEXTvalidater'
+import PicValidater from '../../FormValidaters/PicValidater'
 
 export default function AdminCreateMainCategoryagePage() {
     let [data, setData] = useState({
@@ -29,7 +30,7 @@ export default function AdminCreateMainCategoryagePage() {
         // let value = name === "pic" ? e.target.files[0].name : e.target.value
 
         setData({ ...data, [name]: name === "status" ? (value === "1" ? true : false) : value })
-        setErrorMessage({ ...errorMessage, [name]: TextValidater(e) })
+        setErrorMessage({ ...errorMessage, [name]: name=="pic"?PicValidater(e): TextValidater(e) })
     }
     async function postData(e) {
         e.preventDefault()

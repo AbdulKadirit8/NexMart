@@ -1,12 +1,14 @@
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import AdminSlider from '../../Components/Admin/AdminSlider'
-import { Link, useNavigate, useParams } from 'react-router-dom'
 import TextValidater from '../../FormValidaters/TextValidater'
 import PicValidater from '../../FormValidaters/PicValidater'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMaincategory, updateMaincategory } from '../../Redux/ActionCreaters/MaincategoryActionCreaters'
 
 export default function AdminUpdateMainCategoryPage() {
 
-    let {id}=useParams()
+    let { id } = useParams()
 
     let [data, setData] = useState({
         name: '',
@@ -21,7 +23,9 @@ export default function AdminUpdateMainCategoryPage() {
     let [showError, setShowError] = useState(false)
     let navigate = useNavigate()
 
-    let [mainCategoryStateData, setMainCategoryStateData] = useState([])
+    let maincategoryStateData = useSelector(state => state.maincategoryStateData)
+    let dispatch = useDispatch()
+
 
     function getInputData(e) {
         let name = e.target.name
@@ -33,7 +37,7 @@ export default function AdminUpdateMainCategoryPage() {
         // let value = name === "pic" ? e.target.files[0].name : e.target.value
 
         setData({ ...data, [name]: name === "status" ? (value === "1" ? true : false) : value })
-        setErrorMessage({ ...errorMessage, [name]:  name=="pic"?PicValidater(e): TextValidater(e) })
+        setErrorMessage({ ...errorMessage, [name]: name == "pic" ? PicValidater(e) : TextValidater(e) })
     }
     async function postData(e) {
         e.preventDefault()
@@ -42,59 +46,43 @@ export default function AdminUpdateMainCategoryPage() {
         if (error)
             setShowError(true)
         else {
-            let item = mainCategoryStateData.find(x => x.id!==id && x.name?.toLocaleLowerCase() === data.name?.toLocaleLowerCase())
-            if(item){
+            let item = maincategoryStateData.find(x => x.id !== id && x.name?.toLocaleLowerCase() === data.name?.toLocaleLowerCase())
+            if (item) {
                 setShowError(true)
-                setErrorMessage({...errorMessage, 'name':"Maincategory with this name id already Exist"})
+                setErrorMessage({ ...errorMessage, 'name': "Maincategory with this name id already Exist" })
                 return
             }
-            let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory/${id}`, {
-                method: "PUT",
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({ ...data })
-            })
-            response = await response.json()
-            if (response) {
-                navigate("/admin/maincategory")
+            //Domy Backend
+            dispatch(updateMaincategory({ ...data }))
 
-            }
-            else {
-                alert("Something went wrong")
-            }
+            //Real backend
+            // let formData=new FormData()
+            // formData.append('id', data.id)
+            // formData.append('name', data.name)
+            // formData.append('pic', data.pic)
+            // formData.append('status', data.status)
+            // dispatch(updateMaincategory(formData))
 
-            // alert(`
-            //     Name : ${data.name}
-            //     Pic : ${data.pic}
-            //     Status : ${data.status}
+            navigate("/admin/maincategory")
 
-            // `)
+
         }
     }
 
     useEffect(() => {
-        (async () => {
-            let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory`, {
-                method: "GET",
-                headers: {
-                    'content-type': 'application/json'
-                },
-
-            })
-
-            response = await response.json()
-            let item=response.find(x=>x.id===id)
-            if(item){
-                setData({...data, ...item})
-                setMainCategoryStateData(response)
+        (() => {
+            dispatch(getMaincategory())
+            if (maincategoryStateData.length) {
+                let item = maincategoryStateData.find(x => x.id == id)
+                if (item) {
+                    setData({ ...data, ...item })
+                }
+                else {
+                    navigate('/admin/maincategory')
+                }
             }
-            else{
-                navigate("/admin/maincategory")
-            }
-            
         })()
-    }, [])
+    }, [maincategoryStateData.length])
     return (
         <>
             <section id="hero" className="hero section pb-0">
@@ -129,7 +117,7 @@ export default function AdminUpdateMainCategoryPage() {
                                         </div>
                                         <div className="col-6 mb-3">
                                             <label>Status<span className='text-danger'>*</span></label>
-                                            <select name="status" value={data.status?"1":"0"} onChange={getInputData} className='form-select'>
+                                            <select name="status" value={data.status ? "1" : "0"} onChange={getInputData} className='form-select'>
                                                 <option value="1">Active</option>
                                                 <option value="0">Inactive</option>
                                             </select>

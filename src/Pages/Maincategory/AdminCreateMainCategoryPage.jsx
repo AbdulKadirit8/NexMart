@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import AdminSlider from '../../Components/Admin/AdminSlider'
-import { Link, useNavigate } from 'react-router-dom'
 import TextValidater from '../../FormValidaters/TEXTvalidater'
 import PicValidater from '../../FormValidaters/PicValidater'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { createMaincategory, getMaincategory } from '../../Redux/ActionCreaters/MaincategoryActionCreaters'
 
 export default function AdminCreateMainCategoryPage() {
     let [data, setData] = useState({
@@ -18,7 +20,8 @@ export default function AdminCreateMainCategoryPage() {
     let [showError, setShowError] = useState(false)
     let navigate = useNavigate()
 
-    let [mainCategoryStateData, setMainCategoryStateData] = useState([])
+    let maincategoryStateData = useSelector(state => state.maincategoryStateData)
+    let dispatch = useDispatch()
 
     function getInputData(e) {
         let name = e.target.name
@@ -30,59 +33,38 @@ export default function AdminCreateMainCategoryPage() {
         // let value = name === "pic" ? e.target.files[0].name : e.target.value
 
         setData({ ...data, [name]: name === "status" ? (value === "1" ? true : false) : value })
-        setErrorMessage({ ...errorMessage, [name]: name=="pic"?PicValidater(e): TextValidater(e) })
+        setErrorMessage({ ...errorMessage, [name]: name == "pic" ? PicValidater(e) : TextValidater(e) })
     }
-    async function postData(e) {
+    function postData(e) {
         e.preventDefault()
 
         let error = Object.values(errorMessage).find(x => x !== "")
         if (error)
             setShowError(true)
         else {
-            let item = mainCategoryStateData.find(x => x.name?.toLocaleLowerCase() === data.name?.toLocaleLowerCase())
-            if(item){
+            let item = maincategoryStateData.find(x => x.name?.toLocaleLowerCase() === data.name?.toLocaleLowerCase())
+            if (item) {
                 setShowError(true)
-                setErrorMessage({...errorMessage, 'name':"Maincategory with this name id already Exist"})
+                setErrorMessage({ ...errorMessage, 'name': "Maincategory with this name id already Exist" })
                 return
             }
-            let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory`, {
-                method: "POST",
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({ ...data })
-            })
-            response = await response.json()
-            if (response) {
-                navigate("/admin/maincategory")
+            //Domy Backend
+            dispatch(createMaincategory({ ...data }))
 
-            }
-            else {
-                alert("Something went wrong")
-            }
+            //Real backend
+            // let formData=new FormData()
+            // formData.append('name', data.name)
+            // formData.append('pic', data.pic)
+            // formData.append('status', data.status)
+            // dispatch(createMaincategory(formData))
 
-            // alert(`
-            //     Name : ${data.name}
-            //     Pic : ${data.pic}
-            //     Status : ${data.status}
-
-            // `)
+            navigate("/admin/maincategory")
         }
     }
-
     useEffect(() => {
-        (async () => {
-            let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory`, {
-                method: "GET",
-                headers: {
-                    'content-type': 'application/json'
-                },
-
-            })
-            response = await response.json()
-            setMainCategoryStateData(response)
-        })()
-    }, [])
+            (() => dispatch(getMaincategory()))()
+        }, [maincategoryStateData.length])
+    
     return (
         <>
             <section id="hero" className="hero section pb-0">

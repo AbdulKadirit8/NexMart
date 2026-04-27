@@ -12,10 +12,19 @@ import PrivacyPage from "./Pages/PrivacyPage";
 import TermPage from "./Pages/TermPage";
 import TestimonialPage from "./Pages/TestimonialPage";
 import ScrollToTop from "./Components/ScrollToTop";
+
+//Admin home page
 import AdminHomePage from "./Pages/Admin/AdminHomePage";
-import AdminMainCategoryagePage from "./Pages/Maincategory/AdminMainCategoryPage";
+
+//Admin Maincategory
+import AdminMainCategoryPage from "./Pages/Maincategory/AdminMainCategoryPage";
 import AdminCreateMainCategoryPage from "./Pages/Maincategory/AdminCreateMainCategoryPage";
-import AdminUpdateMainCategoryagePage from "./Pages/Maincategory/AdminUpdateMainCategoryPage";
+import AdminUpdateMainCategoryPage from "./Pages/Maincategory/AdminUpdateMainCategoryPage";
+
+//Admin Subcategory
+import AdminSubCategoryPage from "./Pages/Subcategory/AdminSubCategoryPage";
+import AdminCreateSubCategoryPage from "./Pages/Subcategory/AdminCreateSubCategoryPage";
+import AdminUpdateSubCategoryPage from "./Pages/Subcategory/AdminUpdateSubCategoryPage";
 
 
 
@@ -41,9 +50,16 @@ export default function App() {
 
           {/* Admin Routes */}
           <Route path='/admin' element={<AdminHomePage />}></Route>
-          <Route path='/admin/maincategory' element={<AdminMainCategoryagePage />}></Route>
+
+          {/* Admin Maincategory */}
+          <Route path='/admin/maincategory' element={<AdminMainCategoryPage />}></Route>
           <Route path='/admin/maincategory/create' element={<AdminCreateMainCategoryPage />}></Route>
-          <Route path='/admin/maincategory/update/:id' element={<AdminUpdateMainCategoryagePage />}></Route>
+          <Route path='/admin/maincategory/update/:id' element={<AdminUpdateMainCategoryPage />}></Route>
+
+          {/* Admin Subcategory */}
+          <Route path='/admin/subcategory' element={<AdminSubCategoryPage />}></Route>
+          <Route path='/admin/subcategory/create' element={<AdminCreateSubCategoryPage />}></Route>
+          <Route path='/admin/subcategory/update/:id' element={<AdminUpdateSubCategoryPage />}></Route>
           
 
 

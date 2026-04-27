@@ -8,44 +8,50 @@ import DataTable from 'datatables.net-dt'
 
 // Data Tables css 
 import 'datatables.net-dt/css/dataTables.dataTables.min.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteMaincategory, getMaincategory } from '../../Redux/ActionCreaters/MaincategoryActionCreaters'
 
 
 
 export default function AdminMainCategoryPage() {
-    let [mainCategoryStateData, setMainCategoryStateData] = useState([])
+    // let [mainCategoryStateData, setMainCategoryStateData] = useState([])
+    let [data, setData] = useState([])
+    let maincategoryStateData = useSelector(state => state.maincategoryStateData)
+    let dispatch = useDispatch()
 
     // Delete function
-    async function deleteRecord(id){
-        if(window.confirm("Are you sure to Delete this record")){
-            let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory/${id}`, {
-                method: "DELETE",
-                headers: {
-                    'content-type': 'application/json'
-                },
-
-            })
-            response = await response.json()
-            setMainCategoryStateData(mainCategoryStateData.filter(x=> x.id!==id))
+    function deleteRecord(id) {
+        if (window.confirm("Are you sure to Delete this record")) {
+            //with redux
+            dispatch(deleteMaincategory({ id: id }))
+            setData(data.filter(x => x.id !== id))
         }
     }
     useEffect(() => {
-        let time=(async () => {
-            let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory`, {
-                method: "GET",
-                headers: {
-                    'content-type': 'application/json'
-                },
+        let time = (() => {
+            //without redux
+            // let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory`, {
+            //     method: "GET",
+            //     headers: {
+            //         'content-type': 'application/json'
+            //     },
 
-            })
-            response = await response.json()
-            setMainCategoryStateData(response)
-            let time=setTimeout(()=>{
-               new DataTable('#myTable');
+            // })
+            // response = await response.json()
+            // setMainCategoryStateData(response)
+
+            //Using Redux
+            dispatch(getMaincategory())
+            if (maincategoryStateData.length) {
+                setData(maincategoryStateData)
+            }
+            let time = setTimeout(() => {
+                new DataTable('#myTable');
             }, 500)
             return time
         })()
-        return ()=> clearTimeout(time)
-    }, [])
+        return () => clearTimeout(time)
+    }, [maincategoryStateData.length])
     return (
         <>
             <section id="hero" className="hero section pb-0">
@@ -76,17 +82,17 @@ export default function AdminMainCategoryPage() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {mainCategoryStateData.map((item) => {
+                                            {data.map((item) => {
                                                 return <tr key={item.id}>
                                                     <td>{item.id}</td>
                                                     <td>{item.name}</td>
                                                     <td><Link to={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.pic}`} target='_blank'>
                                                         <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.pic}`} height={60} width={80} alt="" />
                                                     </Link></td>
-                                                    <td>{item.status?"Active":"Inactive"}</td>
+                                                    <td>{item.status ? "Active" : "Inactive"}</td>
                                                     <td><Link to={`/admin/maincategory/update/${item.id}`}><i className='bi bi-pencil btn btn-primary'></i></Link></td>
-                                                    <td><button onClick={()=>deleteRecord(item.id)} className='btn btn-danger'><i className='bi bi-trash'></i></button></td>
-                                                    
+                                                    <td><button onClick={() => deleteRecord(item.id)} className='btn btn-danger'><i className='bi bi-trash'></i></button></td>
+
                                                 </tr>
                                             })}
 

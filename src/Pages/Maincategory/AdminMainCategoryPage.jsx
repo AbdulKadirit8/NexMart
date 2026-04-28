@@ -1,15 +1,16 @@
+import { Link } from 'react-router-dom'
+
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteMaincategory, getMaincategory } from '../../Redux/ActionCreaters/MaincategoryActionCreaters'
 import React from 'react'
 import AdminSlider from '../../Components/Admin/AdminSlider'
-import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 
 // Data table library
 import DataTable from 'datatables.net-dt'
 
 // Data Tables css 
 import 'datatables.net-dt/css/dataTables.dataTables.min.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { deleteMaincategory, getMaincategory } from '../../Redux/ActionCreaters/MaincategoryActionCreaters'
 
 
 
@@ -27,6 +28,7 @@ export default function AdminMainCategoryPage() {
             setData(data.filter(x => x.id !== id))
         }
     }
+   
     useEffect(() => {
         let time = (() => {
             //without redux
@@ -84,15 +86,14 @@ export default function AdminMainCategoryPage() {
                                         <tbody>
                                             {data.map((item) => {
                                                 return <tr key={item.id}>
-                                                    <td>{item.id}</td>
-                                                    <td>{item.name}</td>
+                                                    <td className="align-middle">{item.id}</td>
+                                                    <td className="align-middle">{item.name}</td>
                                                     <td><Link to={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.pic}`} target='_blank'>
-                                                        <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.pic}`} height={60} width={80} alt="" />
+                                                        <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.pic}`} width={80} alt="" />
                                                     </Link></td>
-                                                    <td>{item.status ? "Active" : "Inactive"}</td>
-                                                    <td><Link to={`/admin/maincategory/update/${item.id}`}><i className='bi bi-pencil btn btn-primary'></i></Link></td>
-                                                    <td><button onClick={() => deleteRecord(item.id)} className='btn btn-danger'><i className='bi bi-trash'></i></button></td>
-
+                                                    <td className="align-middle">{item.status ? "Active" : "Inactive"}</td>
+                                                    <td className="text-center align-middle"><Link to={`/admin/subcategory/update/${item.id}`}><i className='bi bi-pencil btn btn-primary'></i></Link></td>
+                                                    <td className="text-center align-middle"><button onClick={() => deleteRecord(item.id)} className='btn btn-danger'><i className='bi bi-trash'></i></button></td>
                                                 </tr>
                                             })}
 

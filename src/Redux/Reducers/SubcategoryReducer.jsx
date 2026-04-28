@@ -1,7 +1,7 @@
 import React from 'react'
 import { CREATE_SUBCATEGORY, CREATE_SUBCATEGORY_RED, DELETE_SUBCATEGORY_RED, GET_SUBCATEGORY_RED, UPDATE_SUBCATEGORY_RED } from '../Constant';
 
-export default function MaincategoryReducer(state = [], action) {
+export default function SubcategoryReducer(state = [], action) {
     let index
     switch (action.type) {
         case CREATE_SUBCATEGORY_RED:

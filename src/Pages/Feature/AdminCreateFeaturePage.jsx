@@ -1,39 +1,34 @@
 import React, { useEffect, useState } from 'react'
-import AdminSlider from '../../Components/Admin/AdminSlider'
-import TextValidater from '../../FormValidaters/TEXTvalidater'
-import PicValidater from '../../FormValidaters/PicValidater'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { createSubcategory, getSubcategory } from '../../Redux/ActionCreaters/SubcategoryActionCreaters'
+import { createFeature, getFeature } from '../../Redux/ActionCreaters/FeatureActionCreaters'
+import AdminSlider from '../../Components/Admin/AdminSlider'
+import TextValidater from '../../FormValidaters/Textvalidater'
 
-export default function AdminCreateSubCategoryPage() {
+export default function AdminCreateFeaturePage() {
     let [data, setData] = useState({
         name: '',
-        pic: '',
+        description: '',
+        icon: '',
         status: true
     })
 
     let [errorMessage, setErrorMessage] = useState({
         name: 'Name field is Mendatory',
-        pic: 'Pic field is Mendatory'
+        description: 'Description field is Mendatory',
+        icon: 'Icon field is Mendatory'
     })
     let [showError, setShowError] = useState(false)
     let navigate = useNavigate()
 
-    let subcategoryStateData = useSelector(state => state.subcategoryStateData)
+    let featureStateData = useSelector(state => state.featureStateData)
     let dispatch = useDispatch()
 
     function getInputData(e) {
-        let name = e.target.name
-
-        // Demmy Backend
-        let value = name === "pic" ? "subcategory/" + e.target.files[0].name : e.target.value
-
-        // Rael Backend
-        // let value = name === "pic" ? e.target.files[0].name : e.target.value
+        let { name, value } = e.target
 
         setData({ ...data, [name]: name === "status" ? (value === "1" ? true : false) : value })
-        setErrorMessage({ ...errorMessage, [name]: name == "pic" ? PicValidater(e) : TextValidater(e) })
+        setErrorMessage({ ...errorMessage, [name]: TextValidater(e) })
     }
     function postData(e) {
         e.preventDefault()
@@ -42,29 +37,23 @@ export default function AdminCreateSubCategoryPage() {
         if (error)
             setShowError(true)
         else {
-            let item = subcategoryStateData.find(x => x.name?.toLocaleLowerCase() === data.name?.toLocaleLowerCase())
+            let item = featureStateData.find(x => x.name?.toLocaleLowerCase() === data.name?.toLocaleLowerCase())
             if (item) {
                 setShowError(true)
-                setErrorMessage({ ...errorMessage, 'name': "Subcategory with this name id already Exist" })
+                setErrorMessage({ ...errorMessage, 'name': "Feature with this name is already Exist" })
                 return
             }
             //Domy Backend
-            dispatch(createSubcategory({ ...data }))
+            dispatch(createFeature({ ...data }))
 
-            //Real backend
-            // let formData=new FormData()
-            // formData.append('name', data.name)
-            // formData.append('pic', data.pic)
-            // formData.append('status', data.status)
-            // dispatch(createSubcategory(formData))
 
-            navigate("/admin/subcategory")
+            navigate("/admin/feature")
         }
     }
     useEffect(() => {
-            (() => dispatch(getSubcategory()))()
-        }, [subcategoryStateData.length])
-    
+        (() => dispatch(getFeature()))()
+    }, [featureStateData.length])
+
     return (
         <>
             <section id="hero" className="hero section pb-0">
@@ -81,20 +70,30 @@ export default function AdminCreateSubCategoryPage() {
                         </div>
                         <div className="col-md-9">
                             <div data-aos="fade-left" data-aos-delay="100">
-                                <h4 className='bg-primary text-light text-center p-2 rounded'>Create Subcategory <Link to='/admin/subcategory' title='Back'><i className='bi bi-arrow-left text-light float-end'></i></Link></h4>
+                                <h4 className='bg-primary text-light text-center p-2 rounded'>Create Feature <Link to='/admin/feature' title='Back'><i className='bi bi-arrow-left text-light float-end'></i></Link></h4>
+
+
 
                                 <form onSubmit={postData}>
                                     <div className="row">
                                         <div className="col-12 mb-3">
                                             <label>Name<span className='text-danger'>*</span></label>
-                                            <input type="text" name="name" value={data.name} onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.name ? 'border-danger' : 'border-primary'}`} placeholder='Subcategory Name' />
+                                            <input type="text" name="name" onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.name ? 'border-danger' : 'border-primary'}`} placeholder='Feature' />
                                             {showError && errorMessage.name ? <p className='text-danger'>{errorMessage.name}</p> : null}
                                         </div>
-                                        <div className="col-md-6 mb-3">
-                                            <label>Pic<span className='text-danger'>*</span></label>
-                                            <input type="file" name="pic" onChange={getInputData} className={`form-control ${showError && errorMessage.pic ? 'border-danger' : 'border-primary'}`} />
-                                            {showError && errorMessage.pic ? <p className='text-danger'>{errorMessage.pic}</p> : null}
+
+                                        <div className="col-12 mb-3">
+                                            <label>Description<span className='text-danger'>*</span></label>
+                                            <textarea name="description" rows={3} onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.description ? 'border-danger' : 'border-primary'}`} placeholder='Description' ></textarea>
+                                            {showError && errorMessage.description ? <p className='text-danger'>{errorMessage.description}</p> : null}
                                         </div>
+
+                                        <div className="col-md-6 mb-3">
+                                            <label>Icon<span className='text-danger'>*</span></label>
+                                            <input type="text" name="icon" onChange={getInputData} className={`form-control ${showError && errorMessage.icon ? 'border-danger' : 'border-primary'}`} placeholder="Bootstrap Icon Tag eg. <i className='bi bi-list'></i>" />
+                                            {showError && errorMessage.icon ? <p className='text-danger'>{errorMessage.icon}</p> : null}
+                                        </div>
+
                                         <div className="col-6 mb-3">
                                             <label>Status<span className='text-danger'>*</span></label>
                                             <select name="status" onChange={getInputData} className='form-select'>

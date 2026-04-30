@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteMaincategory, getMaincategory } from '../../Redux/ActionCreaters/MaincategoryActionCreaters'
+import { deleteBrand, getBrand } from '../../Redux/ActionCreaters/BrandActionCreaters'
 import React from 'react'
 import AdminSlider from '../../Components/Admin/AdminSlider'
 
@@ -14,17 +14,17 @@ import 'datatables.net-dt/css/dataTables.dataTables.min.css'
 
 
 
-export default function AdminMainCategoryPage() {
-    // let [mainCategoryStateData, setMainCategoryStateData] = useState([])
+export default function AdminBrandPage() {
+  
     let [data, setData] = useState([])
-    let maincategoryStateData = useSelector(state => state.maincategoryStateData)
+    let brandStateData = useSelector(state => state.brandStateData)
     let dispatch = useDispatch()
 
     // Delete function
     function deleteRecord(id) {
         if (window.confirm("Are you sure to Delete this record")) {
             //with redux
-            dispatch(deleteMaincategory({ id: id }))
+            dispatch(deleteBrand({ id: id }))
             setData(data.filter(x => x.id !== id))
         }
     }
@@ -32,7 +32,7 @@ export default function AdminMainCategoryPage() {
     useEffect(() => {
         let time = (() => {
             //without redux
-            // let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory`, {
+            // let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/brand`, {
             //     method: "GET",
             //     headers: {
             //         'content-type': 'application/json'
@@ -40,12 +40,12 @@ export default function AdminMainCategoryPage() {
 
             // })
             // response = await response.json()
-            // setMainCategoryStateData(response)
+            // setBrandStateData(response)
 
             //Using Redux
-            dispatch(getMaincategory())
-            if (maincategoryStateData.length) {
-                setData(maincategoryStateData)
+            dispatch(getBrand())
+            if (brandStateData.length) {
+                setData(brandStateData)
             }
             let time = setTimeout(() => {
                 new DataTable('#myTable');
@@ -53,7 +53,7 @@ export default function AdminMainCategoryPage() {
             return time
         })()
         return () => clearTimeout(time)
-    }, [maincategoryStateData.length])
+    }, [brandStateData.length])
     return (
         <>
             <section id="hero" className="hero section pb-0">
@@ -70,7 +70,7 @@ export default function AdminMainCategoryPage() {
                         </div>
                         <div className="col-md-9">
                             <div data-aos="fade-left" data-aos-delay="100">
-                                <h4 className='bg-primary text-light text-center p-1'>Maincategory <Link to='/admin/maincategory/create' title='Create'><i className='bi bi-plus text-light float-end'></i></Link></h4>
+                                <h4 className='bg-primary text-light text-center p-1'>Brand <Link to='/admin/brand/create' title='Create'><i className='bi bi-plus text-light float-end'></i></Link></h4>
                                 <div className="table-responsive">
                                     <table className='table table-bordered' id='myTable'>
                                         <thead>
@@ -92,7 +92,7 @@ export default function AdminMainCategoryPage() {
                                                         <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.pic}`} width={80} alt="" />
                                                     </Link></td>
                                                     <td className="align-middle">{item.status ? "Active" : "Inactive"}</td>
-                                                    <td className="text-center align-middle"><Link to={`/admin/maincategory/update/${item.id}`}><i className='bi bi-pencil btn btn-primary'></i></Link></td>
+                                                    <td className="text-center align-middle"><Link to={`/admin/brand/update/${item.id}`}><i className='bi bi-pencil btn btn-primary'></i></Link></td>
                                                     <td className="text-center align-middle"><button onClick={() => deleteRecord(item.id)} className='btn btn-danger'><i className='bi bi-trash'></i></button></td>
                                                 </tr>
                                             })}

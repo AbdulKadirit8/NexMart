@@ -1,21 +1,21 @@
 import React from 'react'
-import { CREATE_SUBCATEGORY_RED, DELETE_SUBCATEGORY_RED, GET_SUBCATEGORY_RED, UPDATE_SUBCATEGORY_RED } from '../Constant';
+import { CREATE_FEATURE_RED, DELETE_FEATURE_RED, GET_FEATURE_RED, UPDATE_FEATURE_RED } from '../Constant';
 
-export default function SubcategoryReducer(state = [], action) {
+export default function FeatureReducer(state = [], action) {
     let index
     switch (action.type) {
-        case CREATE_SUBCATEGORY_RED:
+        case CREATE_FEATURE_RED:
             return [...state, action.payload]
 
-        case GET_SUBCATEGORY_RED:
+        case GET_FEATURE_RED:
             return action.payload
 
-        case UPDATE_SUBCATEGORY_RED:
+        case UPDATE_FEATURE_RED:
             index = state.findIndex(x => x.id === action.payload)
             state[index] = { ...action.payload }
             return state
 
-        case DELETE_SUBCATEGORY_RED:
+        case DELETE_FEATURE_RED:
             return state.filter(x => x.id !== action.payload.id)
 
         default:

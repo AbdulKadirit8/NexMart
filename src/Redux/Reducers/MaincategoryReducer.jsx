@@ -1,5 +1,5 @@
 import React from 'react'
-import { CREATE_MAINCATEGORY, CREATE_MAINCATEGORY_RED, DELETE_MAINCATEGORY_RED, GET_MAINCATEGORY_RED, UPDATE_MAINCATEGORY_RED } from '../Constant';
+import { CREATE_MAINCATEGORY_RED, DELETE_MAINCATEGORY_RED, GET_MAINCATEGORY_RED, UPDATE_MAINCATEGORY_RED } from '../Constant';
 
 export default function MaincategoryReducer(state = [], action) {
     let index

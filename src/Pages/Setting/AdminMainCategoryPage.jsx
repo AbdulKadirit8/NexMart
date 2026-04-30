@@ -92,7 +92,7 @@ export default function AdminMainCategoryPage() {
                                                         <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.pic}`} width={80} alt="" />
                                                     </Link></td>
                                                     <td className="align-middle">{item.status ? "Active" : "Inactive"}</td>
-                                                    <td className="text-center align-middle"><Link to={`/admin/maincategory/update/${item.id}`}><i className='bi bi-pencil btn btn-primary'></i></Link></td>
+                                                    <td className="text-center align-middle"><Link to={`/admin/subcategory/update/${item.id}`}><i className='bi bi-pencil btn btn-primary'></i></Link></td>
                                                     <td className="text-center align-middle"><button onClick={() => deleteRecord(item.id)} className='btn btn-danger'><i className='bi bi-trash'></i></button></td>
                                                 </tr>
                                             })}

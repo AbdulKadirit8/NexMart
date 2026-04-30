@@ -1,6 +1,12 @@
+// React Libraries
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+// Component
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
+import ScrollToTop from "./Components/ScrollToTop";
+
+// Pages
 import Home from "./Pages/Home";
 import AboutPage from "./Pages/AboutPage";
 import ShopPage from "./Pages/ShopPage";
@@ -11,7 +17,6 @@ import ErrorPage from "./Pages/ErrorPage";
 import PrivacyPage from "./Pages/PrivacyPage";
 import TermPage from "./Pages/TermPage";
 import TestimonialPage from "./Pages/TestimonialPage";
-import ScrollToTop from "./Components/ScrollToTop";
 
 //Admin home page
 import AdminHomePage from "./Pages/Admin/AdminHomePage";
@@ -25,6 +30,23 @@ import AdminUpdateMainCategoryPage from "./Pages/Maincategory/AdminUpdateMainCat
 import AdminSubCategoryPage from "./Pages/Subcategory/AdminSubCategoryPage";
 import AdminCreateSubCategoryPage from "./Pages/Subcategory/AdminCreateSubCategoryPage";
 import AdminUpdateSubCategoryPage from "./Pages/Subcategory/AdminUpdateSubCategoryPage";
+
+//Admin Brand
+import AdminBrandPage from "./Pages/Brand/AdminBrandPage";
+import AdminCreateBrandPage from "./Pages/Brand/AdminCreateBrandPage";
+import AdminUpdateBrandPage from "./Pages/Brand/AdminUpdateBrandPage";
+
+//Admin Feature
+import AdminFeaturePage from "./Pages/Feature/AdminFeaturePage";
+import AdminCreateFeaturePage from "./Pages/Feature/AdminCreateFeaturePage";
+import AdminUpdateFeaturePage from "./Pages/Feature/AdminUpdateFeaturePage";
+
+//Admin Faq
+import AdminFaqPage from "./Pages/Faq/AdminFaqPage";
+import AdminCreateFaqPage from "./Pages/Faq/AdminCreateFaqPage";
+import AdminUpdateFaqPage from "./Pages/Faq/AdminUpdateFaqPage";
+
+
 
 
 
@@ -61,8 +83,21 @@ export default function App() {
           <Route path='/admin/subcategory/create' element={<AdminCreateSubCategoryPage />}></Route>
           <Route path='/admin/subcategory/update/:id' element={<AdminUpdateSubCategoryPage />}></Route>
           
-
-
+          {/* Admin Brand */}
+          <Route path='/admin/brand' element={<AdminBrandPage />}></Route>
+          <Route path='/admin/brand/create' element={<AdminCreateBrandPage />}></Route>
+          <Route path='/admin/brand/update/:id' element={<AdminUpdateBrandPage />}></Route>
+          
+          {/* Admin Feature */}
+          <Route path='/admin/feature' element={<AdminFeaturePage />}></Route>
+          <Route path='/admin/feature/create' element={<AdminCreateFeaturePage />}></Route>
+          <Route path='/admin/feature/update/:id' element={<AdminUpdateFeaturePage />}></Route>
+          
+          {/* Admin Faq */}
+          <Route path='/admin/faq' element={<AdminFaqPage />}></Route>
+          <Route path='/admin/faq/create' element={<AdminCreateFaqPage />}></Route>
+          <Route path='/admin/faq/update/:id' element={<AdminUpdateFaqPage />}></Route>
+          
 
           <Route path='/*' element={<ErrorPage></ErrorPage>}></Route>
         </Routes>

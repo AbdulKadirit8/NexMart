@@ -61,7 +61,7 @@ export default function AdminFaqPage() {
                         </div>
                         <div className="col-md-9">
                             <div data-aos="fade-left" data-aos-delay="100">
-                                <h4 className='bg-primary text-light text-center p-1'>Faq <Link to='/admin/faq/create' title='Create'><i className='bi bi-plus text-light float-end'></i></Link></h4>
+                                <h4 className='bg-primary text-light text-center p-2 rounded'>Faq <Link to='/admin/faq/create' title='Create'><i className='bi bi-plus text-light float-end'></i></Link></h4>
                                 <div className="table-responsive">
                                     <table className='table table-bordered' id='myTable'>
                                         <thead>

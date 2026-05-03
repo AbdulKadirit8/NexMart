@@ -1,8 +1,8 @@
 #footer a,
 #footer div,
 #footer span,
-#footer p{
-    color: white;
+#footer p {
+  color: white;
 }
 
 /* icons */
@@ -17,48 +17,68 @@
   animation: floatIcon 2.5s ease-in-out infinite;
 }
 
-
-
 /* Floating Animation */
 @keyframes floatIcon {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-3px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 /* Twitter */
 .twitter:hover {
   color: #1da1f2;
-  text-shadow: 0 0 8px #1da1f2, 0 0 18px #1da1f2;
-  
+  text-shadow:
+    0 0 8px #1da1f2,
+    0 0 18px #1da1f2;
 }
 
 /* Facebook */
 .facebook:hover {
   color: #1877f2;
-  text-shadow: 0 0 8px #1877f2, 0 0 18px #1877f2;
+  text-shadow:
+    0 0 8px #1877f2,
+    0 0 18px #1877f2;
 }
 
 /* Instagram */
 .instagram:hover {
   color: #fa3979;
-  text-shadow: 0 0 8px #e1306c, 0 0 18px #ff5e62;
-  
+  text-shadow:
+    0 0 8px #e1306c,
+    0 0 18px #ff5e62;
 }
 
 /* LinkedIn */
 .linkedin:hover {
   color: #0c71d6;
-  text-shadow: 0 0 8px #0a66c2, 0 0 18px #0a66c2;
+  text-shadow:
+    0 0 8px #0a66c2,
+    0 0 18px #0a66c2;
 }
 
 /* YouTube */
 .youtube:hover {
   color: #ff2727;
-  text-shadow: 0 0 8px #ff0000, 0 0 18px #ff0000;
+  text-shadow:
+    0 0 8px #ff0000,
+    0 0 18px #ff0000;
 }
 
-.admin{
-  padding-top: 100px;
+.admin {
+  padding-top: 70px;
+}
+
+.sitename {
+  
+  background: linear-gradient(145deg, #1A237E, #00D1C1, #1A237E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* letter-spacing: 3px; */
   
 }

@@ -18,7 +18,7 @@ import PrivacyPage from "./Pages/PrivacyPage";
 import TermPage from "./Pages/TermPage";
 import TestimonialPage from "./Pages/TestimonialPage";
 
-//Admin home page
+//Admin Home page
 import AdminHomePage from "./Pages/Admin/AdminHomePage";
 
 //Admin Maincategory
@@ -36,6 +36,11 @@ import AdminBrandPage from "./Pages/Brand/AdminBrandPage";
 import AdminCreateBrandPage from "./Pages/Brand/AdminCreateBrandPage";
 import AdminUpdateBrandPage from "./Pages/Brand/AdminUpdateBrandPage";
 
+//Admin Product
+import AdminProductPage from "./Pages/Product/AdminProductPage";
+import AdminCreateProductPage from "./Pages/Product/AdminCreateProductPage";
+import AdminUpdateProductPage from "./Pages/Product/AdminUpdateProductPage";
+
 //Admin Feature
 import AdminFeaturePage from "./Pages/Feature/AdminFeaturePage";
 import AdminCreateFeaturePage from "./Pages/Feature/AdminCreateFeaturePage";
@@ -48,7 +53,6 @@ import AdminUpdateFaqPage from "./Pages/Faq/AdminUpdateFaqPage";
 
 //Admin Setting
 import AdminSettingPage from "./Pages/Setting/AdminSettingPage";
-
 
 
 export default function App() {
@@ -89,6 +93,11 @@ export default function App() {
           <Route path='/admin/brand/create' element={<AdminCreateBrandPage />}></Route>
           <Route path='/admin/brand/update/:id' element={<AdminUpdateBrandPage />}></Route>
           
+          {/* Admin Product */}
+          <Route path='/admin/product' element={<AdminProductPage />}></Route>
+          <Route path='/admin/product/create' element={<AdminCreateProductPage />}></Route>
+          <Route path='/admin/product/update/:id' element={<AdminUpdateProductPage />}></Route>
+
           {/* Admin Feature */}
           <Route path='/admin/feature' element={<AdminFeaturePage />}></Route>
           <Route path='/admin/feature/create' element={<AdminCreateFeaturePage />}></Route>
@@ -102,6 +111,7 @@ export default function App() {
           {/* Admin Setting */}
           <Route path='/admin/setting' element={<AdminSettingPage />}></Route>
 
+          {/* Error page */}
           <Route path='/*' element={<ErrorPage></ErrorPage>}></Route>
         </Routes>
         <Footer></Footer>

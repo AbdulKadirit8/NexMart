@@ -20,7 +20,7 @@ export default function Home() {
 
           <div className="row align-items-center">
             <div className="col-lg-6">
-              <div className="hero-content">
+              <div className="hero-content mt-3">
                 <div
                   className="trust-badges mb-4 mt-4"
                   data-aos="fade-right"
@@ -66,7 +66,7 @@ export default function Home() {
                     <p>Medical Experts</p>
                   </div>
                 </div> */}
-                <div className="hero-stats mb-4">
+                <div className="hero-stats mb-41">
                   <div className="stat-item">
                     <h3>100K+</h3>
                     <p>Orders Delivered</p>

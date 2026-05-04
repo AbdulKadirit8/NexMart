@@ -104,7 +104,7 @@ export default function AdminCreateProductPage() {
             }))
 
             //Real backend
-             // let formData = new FormData()
+            // let formData = new FormData()
             // formData.append("name",data.name)
             // formData.append("maincategory", data.maincategory || maincategoryStateData[0].id)
             // formData.append("subcategory", data.subcategory || subcategoryStateData[0].id)
@@ -161,20 +161,17 @@ export default function AdminCreateProductPage() {
                         <div className="col-md-9">
                             <div data-aos="fade-left" data-aos-delay="100">
                                 <h4 className='bg-primary text-light text-center p-2 rounded'>Create Product <Link to='/admin/product' title='Back'><i className='bi bi-arrow-left text-light float-end'></i></Link></h4>
-
-
-
                                 <form onSubmit={postData}>
                                     <div className="row">
                                         <div className="col-12 mb-3">
                                             <label className='ps-2'>Name<span className='text-danger'>*</span></label>
-                                            <input type="text" name="name" value={data.name} onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.name ? 'border-danger' : 'border-primary'}`} placeholder='Product Name' />
+                                            <input type="text" name="name" onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.name ? 'border-danger' : 'border-primary'}`} placeholder='Product Name' />
                                             {showError && errorMessage.name ? <p className='text-danger'>{errorMessage.name}</p> : null}
                                         </div>
 
                                         <div className="col-lg-3 mb-3">
                                             <label className='ps-2'>Maincategory<span className='text-danger'>*</span></label>
-                                            <select name='maincategory' className='form-select border-primary'>
+                                            <select name='maincategory' onChange={getInputData} className='form-select border-primary'>
                                                 {maincategoryStateData.filter(x => x.status).map(item => {
                                                     return <option key={item.id}>{item.name}</option>
 
@@ -183,10 +180,19 @@ export default function AdminCreateProductPage() {
                                                 })}
                                             </select>
                                         </div>
+                                        {/* <div className="col-lg-3 mb-3">
+                                            <label className='ps-2'>Maincategory <span className='text-danger'>*</span></label>
+                                            <select name="maincategory" onChange={getInputData} className='form-select border-primary'>
+                                                {maincategoryStateData.filter(x => x.status).map(item => {
+                                                    return <option key={item.id}>{item.name}</option>
+                                                    // return <option key={item.id} value={item.id}>{item.name}</option>
+                                                })}
+                                            </select>
+                                        </div> */}
 
                                         <div className="col-lg-3 mb-3">
                                             <label className='ps-2'>Subcategory<span className='text-danger'>*</span></label>
-                                            <select name='subcategory' className='form-select border-primary'>
+                                            <select name='subcategory' onChange={getInputData} className='form-select border-primary'>
                                                 {subcategoryStateData.filter(x => x.status).map(item => {
                                                     return <option key={item.id}>{item.name}</option>
 
@@ -198,7 +204,7 @@ export default function AdminCreateProductPage() {
 
                                         <div className="col-lg-3 mb-3">
                                             <label className='ps-2'>Brand<span className='text-danger'>*</span></label>
-                                            <select name='brand' className='form-select border-primary'>
+                                            <select name='brand' onChange={getInputData} className='form-select border-primary'>
                                                 {brandStateData.filter(x => x.status).map(item => {
                                                     return <option key={item.id}>{item.name}</option>
 

@@ -57,8 +57,8 @@ export default function Navbar() {
 
                     <div className="container position-relative d-flex align-items-center justify-content-between">
                         <NavLink to="/" className="logo d-flex align-items-center">
-                            <img src="assets/img/nexmartlogo2.png" alt="" style={{ maxHeight: "30px", width: "auto" }}></img>
-                            {/* <img src="/assets/img/favicon.png" alt="a" className='mb-3' style={{ width: '50px' }} /><h1 className="sitename fs-2">NexMart</h1> */}
+                            {/* <img src="assets/img/nexmartlogo2.png" alt="" style={{ maxHeight: "30px", width: "auto" }}></img> */}
+                            <img src="/assets/img/favicon.png" alt="a" className='mb-3' style={{ width: '50px' }} /><h1 className="sitename sitename-logo fs-2">NexMart</h1>
                         </NavLink>
 
                         <nav id="navmenu" className="navmenu">

@@ -180,16 +180,7 @@ export default function AdminCreateProductPage() {
                                                 })}
                                             </select>
                                         </div>
-                                        {/* <div className="col-lg-3 mb-3">
-                                            <label className='ps-2'>Maincategory <span className='text-danger'>*</span></label>
-                                            <select name="maincategory" onChange={getInputData} className='form-select border-primary'>
-                                                {maincategoryStateData.filter(x => x.status).map(item => {
-                                                    return <option key={item.id}>{item.name}</option>
-                                                    // return <option key={item.id} value={item.id}>{item.name}</option>
-                                                })}
-                                            </select>
-                                        </div> */}
-
+                                        
                                         <div className="col-lg-3 mb-3">
                                             <label className='ps-2'>Subcategory<span className='text-danger'>*</span></label>
                                             <select name='subcategory' onChange={getInputData} className='form-select border-primary'>
@@ -265,7 +256,7 @@ export default function AdminCreateProductPage() {
                                         </div>
 
                                         <div className="col-12">
-                                            <label className='ps-2'>Pic<span className='text-danger'>*</span></label>
+                                            <label className='ps-2'>Description<span className='text-danger'>*</span></label>
                                             <div ref={refdivDescription} className='border border-primary rounder mb-3'></div>
                                         </div>
 

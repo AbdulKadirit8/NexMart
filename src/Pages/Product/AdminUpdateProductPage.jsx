@@ -167,14 +167,14 @@ export default function AdminUpdateProductPage() {
                             <div data-aos="fade-right" data-aos-delay="100">
                                 <AdminSlider />
                             </div>
-
                         </div>
+
                         <div className="col-md-9">
                             <div data-aos="fade-left" data-aos-delay="100">
                                 <h4 className='bg-primary text-light text-center p-2 rounded'>Update Product <Link to='/admin/product' title='Back'><i className='bi bi-arrow-left text-light float-end'></i></Link></h4>
 
                                 <form onSubmit={postData}>
-                                    <div className="row">
+                                   <div className="row">
                                         <div className="col-12 mb-3">
                                             <label className='ps-2'>Name<span className='text-danger'>*</span></label>
                                             <input type="text" name="name" value={data.name} onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.name ? 'border-danger' : 'border-primary'}`} placeholder='Product Name' />
@@ -192,10 +192,10 @@ export default function AdminUpdateProductPage() {
                                                 })}
                                             </select>
                                         </div>
-
+                                        
                                         <div className="col-lg-3 mb-3">
                                             <label className='ps-2'>Subcategory<span className='text-danger'>*</span></label>
-                                            <select name='subcategory'  value={data.subcategory} onChange={getInputData} className='form-select border-primary'>
+                                            <select name='subcategory' value={data.subcategory} onChange={getInputData} className='form-select border-primary'>
                                                 {subcategoryStateData.filter(x => x.status).map(item => {
                                                     return <option key={item.id}>{item.name}</option>
 
@@ -219,7 +219,7 @@ export default function AdminUpdateProductPage() {
 
                                         <div className="col-lg-3 mb-3">
                                             <label className='ps-2'>Stock<span className='text-danger'>*</span></label>
-                                            <select name="stock" value={data.stock} onChange={getInputData} className='form-select border-primary'>
+                                            <select name="stock" value={data.stock ? "1" : "0"} onChange={getInputData} className='form-select border-primary'>
                                                 <option value="1">In Stock</option>
                                                 <option value="0">Out Of Stock</option>
                                             </select>
@@ -227,7 +227,7 @@ export default function AdminUpdateProductPage() {
 
                                         <div className="col-lg-6 mb-3">
                                             <label className='ps-2'>Base Price<span className='text-danger'>*</span></label>
-                                            <input type="number" value={data.basePrice} name="basePrice" onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.basePrice ? 'border-danger' : 'border-primary'}`} placeholder='Product Base Price' />
+                                            <input type="number" name="basePrice" value={data.basePrice} onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.basePrice ? 'border-danger' : 'border-primary'}`} placeholder='Product Base Price' />
                                             {showError && errorMessage.basePrice ? <p className='text-danger'>{errorMessage.basePrice}</p> : null}
                                         </div>
 
@@ -243,7 +243,7 @@ export default function AdminUpdateProductPage() {
                                                 <div className="row p-2">
                                                     {colors.map((item, index) => {
                                                         return <div className='col-xl-2 col-lg-3 col-4' key={index}>
-                                                            <input type="checkbox" checked={data.color?.includes(item)} onChange={() => getinputCheckbox("color", item)} id={item} />
+                                                            <input type="checkbox" checked={data.color.includes(item)} onChange={() => getinputCheckbox("color", item)} id={item} />
                                                             <label className='ps-2' htmlFor={item}>{item}</label>
                                                         </div>
                                                     })}
@@ -258,7 +258,7 @@ export default function AdminUpdateProductPage() {
                                                 <div className="row p-2">
                                                     {size.map((item, index) => {
                                                         return <div className='col-xl-2 col-lg-3 col-4' key={index}>
-                                                            <input type="checkbox" checked={data.size?.includes(item)} onChange={() => getinputCheckbox("size", item)} id={item} />
+                                                            <input type="checkbox" checked={data.size.includes(item)} onChange={() => getinputCheckbox("size", item)} id={item} />
                                                             <label className='ps-2' htmlFor={item}>{item}</label>
                                                         </div>
                                                     })}
@@ -268,13 +268,13 @@ export default function AdminUpdateProductPage() {
                                         </div>
 
                                         <div className="col-12">
-                                            <label className='ps-2'>Pic<span className='text-danger'>*</span></label>
+                                            <label className='ps-2'>Description<span className='text-danger'>*</span></label>
                                             <div ref={refdivDescription} className='border border-primary rounder mb-3'></div>
                                         </div>
 
                                         <div className="col-lg-4 mb-3">
                                             <label className='ps-2'>Stock Quantity<span className='text-danger'>*</span></label>
-                                            <input type="number" name="stockQuantity"  value={data.stockQuantity} onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.stockQuantity ? 'border-danger' : 'border-primary'}`} placeholder='Product Base Price' />
+                                            <input type="number" name="stockQuantity" value={data.stockQuantity} onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.stockQuantity ? 'border-danger' : 'border-primary'}`} placeholder='Product Base Price' />
                                             {showError && errorMessage.stockQuantity ? <p className='text-danger'>{errorMessage.stockQuantity}</p> : null}
                                         </div>
 
@@ -300,7 +300,6 @@ export default function AdminUpdateProductPage() {
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>

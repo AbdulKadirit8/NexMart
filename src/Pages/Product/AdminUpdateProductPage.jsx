@@ -48,6 +48,8 @@ export default function AdminUpdateProductPage() {
         pic: ''
     })
     let [showError, setShowError] = useState(false)
+    let [falge, setFlage]=useState(false)
+
     let navigate = useNavigate()
 
     let productStateData = useSelector(state => state.productStateData)
@@ -61,7 +63,7 @@ export default function AdminUpdateProductPage() {
         let name = e.target.name
 
         // Demmy Backend
-        let value = name === "pic" ? Array.from(e.target.files).map(x => "product/" + x.name) : e.target.value
+        let value = name === "pic" ? data.pic.concat(Array.from(e.target.files).map(x => "product/" + x.name)) : e.target.value
 
         // Rael Backend
         // let value = name === "pic" ? e.target.files.name : e.target.value
@@ -87,6 +89,10 @@ export default function AdminUpdateProductPage() {
         let error = Object.values(errorMessage).find(x => x !== "")
         if (error)
             setShowError(true)
+        else if(data.pic.length===0){
+            setShowError(true)
+            setErrorMessage({...errorMessage, pic:"Please upload atleast one image"})
+        }
         else {
             let bs = parseInt(data.basePrice)
             let d = parseInt(data.discount)
@@ -271,22 +277,34 @@ export default function AdminUpdateProductPage() {
                                             <label className='ps-2'>Description<span className='text-danger'>*</span></label>
                                             <div ref={refdivDescription} className='border border-primary rounder mb-3'></div>
                                         </div>
-
-                                        <div className="col-lg-4 mb-3">
-                                            <label className='ps-2'>Stock Quantity<span className='text-danger'>*</span></label>
-                                            <input type="number" name="stockQuantity" value={data.stockQuantity} onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.stockQuantity ? 'border-danger' : 'border-primary'}`} placeholder='Product Base Price' />
-                                            {showError && errorMessage.stockQuantity ? <p className='text-danger'>{errorMessage.stockQuantity}</p> : null}
-                                        </div>
-
-                                        <div className="col-lg-4 mb-3">
+                                        
+                                        <div className="col-lg-6 mb-3">
                                             <label className='ps-2'>Pic<span className='text-danger'>*</span></label>
                                             <input type="file" name="pic" multiple onChange={getInputData} className={`form-control ${showError && errorMessage.pic ? 'border-danger' : 'border-primary'}`} />
                                             {showError && errorMessage.pic ? errorMessage.pic?.split("|").map((item, index) => {
                                                 return <p className='text-danger' key={index}>{item}</p>
                                             }) : null}
                                         </div>
+                                        
+                                        <div className="col-lg-6 mb-3">
+                                            <label className='ps-2'>Old Pic(Click on pic to remove)<span className='text-danger'>*</span></label>
+                                            <div  className="d-flex flex-wrap align-items-end border border-primary">
+                                                {data.pic.map((item, index)=>{
+                                                return <img onClick={()=>{
+                                                    data.pic.splice(index, 1)
+                                                    setFlage(!falge)
+                                                }} multiple src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item}`} className='m-1 border' alt="Old product image" width={80} />
+                                            })}
+                                            </div>
+                                        </div>
 
-                                        <div className="col-lg-4 mb-3">
+                                        <div className="col-lg-6 mb-3">
+                                            <label className='ps-2'>Stock Quantity<span className='text-danger'>*</span></label>
+                                            <input type="number" name="stockQuantity" value={data.stockQuantity} onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.stockQuantity ? 'border-danger' : 'border-primary'}`} placeholder='Product Base Price' />
+                                            {showError && errorMessage.stockQuantity ? <p className='text-danger'>{errorMessage.stockQuantity}</p> : null}
+                                        </div>
+
+                                        <div className="col-lg-6 mb-3">
                                             <label className='ps-2'>Status<span className='text-danger'>*</span></label>
                                             <select name="status" value={data.status ? "1" : "0"} onChange={getInputData} className='form-select'>
                                                 <option value="1">Active</option>
@@ -295,7 +313,7 @@ export default function AdminUpdateProductPage() {
                                         </div>
 
                                         <div className="col-12 mb-3">
-                                            <button type='submit' className='btn btn-primary w-100'>Create</button>
+                                            <button type='submit' className='btn btn-primary w-100'>Update</button>
                                         </div>
                                     </div>
                                 </form>

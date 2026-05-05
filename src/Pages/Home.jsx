@@ -1,16 +1,15 @@
-import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import About from '../Components/About'
 import Feature from '../Components/Feature'
 import CustumerSupport from '../Components/CustumerSupport'
 import Products from '../Components/Products'
 import Testimonial from '../Components/Testimonial'
+import useSetting from '../hooks/useSetting'
+
 
 export default function Home() {
-  let [settingData, setSettingData] = useState({
-    phone: import.meta.env.VITE_APP_PHONE
-  })
-
+  const settingData=useSetting()
+  
   return (
     <>
       {/* Hero Section  */}
@@ -41,12 +40,12 @@ export default function Home() {
                 </div>
 
                 <h1 data-aos="fade-right" data-aos-delay="300" className='fs-1'>
-                  NexMart <span className="highlight">Smart Shopping</span> Starts Here, You Can Trust at <img src="/assets/img/favicon.png" alt="a" className='mb-3' style={{ width: '50px' }} /> Nexmart
+                  {settingData.siteName} <span className="highlight">Smart Shopping</span> Starts Here, You Can Trust at <img src="/assets/img/favicon.png" alt="a" className='mb-3' style={{ width: '50px' }} /> {settingData.siteName}
 
                 </h1>
 
                 <p className="hero-description" data-aos="fade-right" data-aos-delay="400">
-                  From everyday essentials to premium products, NexMart brings everything together in one convenient destination. Shop with confidence, save more, and enjoy hassle-free delivery right to your doorstep.
+                  From everyday essentials to premium products, {settingData.siteName} brings everything together in one convenient destination. Shop with confidence, save more, and enjoy hassle-free delivery right to your doorstep.
                 </p>
 
                 {/* <div className="hero-stats mb-4" data-aos="fade-right" data-aos-delay="500">
@@ -91,7 +90,7 @@ export default function Home() {
                   </NavLink>
                 </div> */}
 
-                <div className="hero-actions" data-aos="fade-right" data-aos-delay="600">
+                <div className="hero-actions mt-2" data-aos="fade-right" data-aos-delay="600">
                   <NavLink to="/shop" className="btn btn-primary me-2">
                     Explore Products
                   </NavLink>
@@ -108,8 +107,8 @@ export default function Home() {
                     <Link to={`tel:${settingData.phone}`}><i className="bi bi-telephone-fill text-light"></i></Link>
                   </div>
                   <div className="emergency-info">
-                    <small>Emergency Hotline</small>
-                    <strong>{settingData.phone}</strong>
+                    <strong>Costumer Support - </strong>
+                    <strong className='text-primary'>{settingData.phone}</strong>
                   </div>
                 </div>
               </div>
@@ -119,7 +118,7 @@ export default function Home() {
               <div className="hero-visual" data-aos="fade-left" data-aos-delay="400">
                 <div className="main-image">
                   <img src="assets/images/mixeproductmain.png" alt="Modern Healthcare Facility" className="img-fluid" />
-                  
+
                   <div className="floating-card rating-card">
                     <div className="card-content">
                       <div className="rating-stars">

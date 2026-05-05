@@ -1,11 +1,14 @@
-import React from 'react'
+
 import Breadcrum from '../Components/Breadcrum'
 import { NavLink } from 'react-router-dom'
+import useSetting from '../hooks/useSetting'
 
 export default function TermPage() {
+     const settingData=useSetting()
+    
     return (
         <>
-            <Breadcrum pageTitle={"Term and Conditions"} pageDescription={"By using NexMart, you agree to our terms and conditions designed to ensure a safe, fair, and reliable shopping experience. Please review our policies, user responsibilities, and service guidelines carefully."} />
+            <Breadcrum pageTitle={"Term and Conditions"} pageDescription={`By using ${settingData.siteName}, you agree to our terms and conditions designed to ensure a safe, fair, and reliable shopping experience. Please review our policies, user responsibilities, and service guidelines carefully.`} />
 
             <section id="terms-of-service" className="terms-of-service section">
 
@@ -21,7 +24,7 @@ export default function TermPage() {
 
                         <div id="agreement" className="content-section">
                             <h3>1. Agreement to Terms</h3>
-                            <p>By accessing the NexMart website and using our services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any part of these terms, you must not use our services.
+                            <p>By accessing the {settingData.siteName} website and using our services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any part of these terms, you must not use our services.
                             </p>
                             <div className="info-box">
                                 <i className="bi bi-info-circle"></i>
@@ -31,7 +34,7 @@ export default function TermPage() {
 
                         <div id="intellectual-property" className="content-section">
                             <h3>2. Intellectual Property Rights</h3>
-                            <p>All content, branding, logos, text, graphics, designs, features, and functionality available on NexMart are owned by us and protected by copyright, trademark, and other intellectual property laws.</p>
+                            <p>All content, branding, logos, text, graphics, designs, features, and functionality available on {settingData.siteName} are owned by us and protected by copyright, trademark, and other intellectual property laws.</p>
                             <ul className="list-items">
                                 <li>All website content is our exclusive property</li>
                                 <li>You may not copy, reproduce, or modify any content</li>
@@ -42,7 +45,7 @@ export default function TermPage() {
 
                         <div id="user-accounts" className="content-section">
                             <h3>3. User Accounts</h3>
-                            <p>When creating an account on NexMart, you must provide accurate, complete, and updated information. Providing false or misleading details may result in suspension or termination of your account.</p>
+                            <p>When creating an account on {settingData.siteName}, you must provide accurate, complete, and updated information. Providing false or misleading details may result in suspension or termination of your account.</p>
                             <div className="alert-box">
                                 <i className="bi bi-exclamation-triangle"></i>
                                 <div className="alert-content">
@@ -54,7 +57,7 @@ export default function TermPage() {
 
                         <div id="prohibited" className="content-section">
                             <h3>4. Prohibited Activities</h3>
-                            <p>You may not use NexMart for any unlawful or unauthorized purpose.</p>
+                            <p>You may not use {settingData.siteName} for any unlawful or unauthorized purpose.</p>
                             <div className="prohibited-list">
                                 <div className="prohibited-item">
                                     <i className="bi bi-x-circle"></i>
@@ -77,7 +80,7 @@ export default function TermPage() {
 
                         <div id="disclaimer" className="content-section">
                             <h3>5. Disclaimers</h3>
-                            <p>Your use of NexMart is at your own risk. All services are provided "AS IS" and "AS AVAILABLE" without warranties of any kind.</p>
+                            <p>Your use of {settingData.siteName} is at your own risk. All services are provided "AS IS" and "AS AVAILABLE" without warranties of any kind.</p>
                             <div className="disclaimer-box">
                                 <p>We do not guarantee that:</p>
                                 <ul>
@@ -91,12 +94,12 @@ export default function TermPage() {
 
                         <div id="limitation" className="content-section">
                             <h3>6. Limitation of Liability</h3>
-                            <p>NexMart shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of our website, products, or services.</p>
+                            <p>{settingData.siteName} shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of our website, products, or services.</p>
                         </div>
 
                         <div id="indemnification" className="content-section">
                             <h3>7. Indemnification</h3>
-                            <p>You agree to defend, indemnify, and hold NexMart harmless from any claims, damages, losses, liabilities, and expenses arising from your misuse of the platform or violation of these Terms.</p>
+                            <p>You agree to defend, indemnify, and hold {settingData.siteName} harmless from any claims, damages, losses, liabilities, and expenses arising from your misuse of the platform or violation of these Terms.</p>
                         </div>
 
                         <div id="termination" className="content-section">

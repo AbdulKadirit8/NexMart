@@ -1,6 +1,7 @@
-import React from 'react'
+
 
 export default function CUstumerSupport() {
+    
     return (
         <>
             <section id="featured-departments" className="featured-departments section pt-0 pb-0">

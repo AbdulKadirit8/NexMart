@@ -1,20 +1,13 @@
-import { useState } from "react"
 import { Link, NavLink } from "react-router-dom"
+import useSetting from "../hooks/useSetting"
 
 export default function Footer() {
+ const settingData=useSetting()
   function stopReload(e){
     e.preventDefault()
     e.target.form.reset()
   }
-  let [settingData, setSettingData] = useState({
-    siteName: import.meta.env.VITE_APP_SITENAME,
-    phone: import.meta.env.VITE_APP_PHONE,
-    whatsapp: import.meta.env.VITE_APP_WHATSAPP,
-    email: import.meta.env.VITE_APP_EMAIL,
-    address: import.meta.env.VITE_APP_ADDRESS,
-    fullAddress: import.meta.env.VITE_APP_FULLADDRESS,
-    map: import.meta.env.VITE_APP_MAP
-  })
+  
   return (
     <>
       <footer id="footer" className="footer-16 footer position-relative bg-dark">
@@ -29,33 +22,32 @@ export default function Footer() {
                   <Link to="/" className="logo d-flex align-items-center mb-4">
                     <span className="sitename">{settingData.siteName}</span>
                   </Link>
-                  <p className="text-light">NexMart is your trusted online shopping destination offering quality products, affordable prices, and a smooth shopping experience. We focus on customer satisfaction, secure payments, fast delivery, and reliable service. Our goal is to make everyday shopping simple, smart, and convenient for everyone.
-2</p>
+                  <p className="text-light">{settingData.siteName} is your trusted online shopping destination offering quality products, affordable prices, and a smooth shopping experience. We focus on customer satisfaction, secure payments, fast delivery, and reliable service. Our goal is to make everyday shopping simple, smart, and convenient for everyone.</p>
 
                   <div className="contact-info mt-3">
                     <div className="contact-item">
-                      <Link to={settingData.map} target="_blank">
-                        <i className="bi bi-geo-alt"></i>
-                        <span>{settingData.fullAddress}</span>
-                      </Link>
+                      <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(settingData.address)}`} target="_blank">
+                        <i className="text-light bi bi-globe-central-south-asia"></i>
+                        <span>{settingData.address}</span>
+                      </a>
                     </div>
                     <div className="contact-item">
-                      <Link to={`tel:${settingData.phone}`} target="_blank">
-                        <i className="bi bi-geo-alt"></i>
+                      <a href={`tel:${settingData.phone}`} target="_blank">
+                        <i className="text-light bi bi-telephone"></i>
                         <span>{settingData.phone}</span>
-                      </Link>
+                      </a>
                     </div>
                     <div className="contact-item">
-                      <Link to={`mailto:${settingData.email}`} target="_blank">
-                        <i className="bi bi-geo-alt"></i>
+                      <a href={`mailto:${settingData.email}?subject=Inquiry&body=Hello ${settingData.siteName}`} target="_blank">
+                        <i className="text-light bi bi-envelope"></i>
                         <span>{settingData.email}</span>
-                      </Link>
+                      </a>
                     </div>
                     <div className="contact-item">
-                      <Link to={`http://wa.me/${settingData.whatsapp}`} target="_blank">
-                        <i className="bi bi-whatsapp"></i>
+                      <a href={`https://wa.me/91${settingData.whatsapp}?text=Hello%20${settingData.siteName}%20I%20am%20interested`} target="_blank">
+                        <i className="text-light bi bi-whatsapp"></i>
                         <span>{settingData.whatsapp}</span>
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -94,7 +86,7 @@ export default function Footer() {
                     <div className="col-md-6 col-12">
                       <div className="nav-column">
                         <h6 className="text-light">Subscribe Our Newslatter Service</h6>
-                        <p className="mt-3">Subscribe to the NexMart newsletter for the latest product updates, exclusive offers, special discounts, and shopping tips. Be the first to know about new arrivals and exciting deals delivered directly to your inbox.</p>
+                        <p className="mt-3">Subscribe to the {settingData.siteName} newsletter for the latest product updates, exclusive offers, special discounts, and shopping tips. Be the first to know about new arrivals and exciting deals delivered directly to your inbox.</p>
                         <div>
                           <form action="">
                             <div className="btn-group w-100">
@@ -107,12 +99,11 @@ export default function Footer() {
                         <div className="mt-4">
                           <div className="social-links  d-flex align-items-center justify-content-center">
 
-                            <NavLink to={settingData.email} target='_blank' className="text-light ms-4"><i className="social-icon twitter bi bi-twitter"></i></NavLink>
-                            <NavLink to={settingData.email} target='_blank' className="text-light ms-4"><i className="social-icon facebook bi bi-facebook"></i></NavLink>
-                            <NavLink to={settingData.email} target='_blank' className="text-light ms-4"><i className="social-icon instagram bi bi-instagram"></i></NavLink>
-                            <NavLink to={settingData.email} target='_blank' className="text-light ms-4"><i className="social-icon linkedin bi bi-linkedin"></i></NavLink>
-
-                            <NavLink to={settingData.email} target='_blank' className="text-light ms-4"><i className="social-icon youtube bi bi-youtube"></i></NavLink>
+                            <NavLink to={settingData.twitter} target='_blank' className="text-light ms-4"><i className="social-icon twitter bi bi-twitter"></i></NavLink>
+                            <NavLink to={settingData.facebook} target='_blank' className="text-light ms-4"><i className="social-icon facebook bi bi-facebook"></i></NavLink>
+                            <NavLink to={settingData.instagram} target='_blank' className="text-light ms-4"><i className="social-icon instagram bi bi-instagram"></i></NavLink>
+                            <NavLink to={settingData.linkedin} target='_blank' className="text-light ms-4"><i className="social-icon linkedin bi bi-linkedin"></i></NavLink>
+                            <NavLink to={settingData.youtube} target='_blank' className="text-light ms-4"><i className="social-icon youtube bi bi-youtube"></i></NavLink>
                           </div>
                         </div>
                       </div>
@@ -128,12 +119,12 @@ export default function Footer() {
 
         <div className="footer-bottom border-top" style={{marginTop:-80}}>
           <div className="container">
-            <div className="bottom-content" data-aos="fade-up" data-aos-delay="300">
+            <div className="bottom-content" data-aos="fade-up" data-aos-delay="30">
               <div className="row align-items-center">
 
                 <div className="col-lg-4">
                   <div className="copyright">
-                    <p>© <span className="sitename">NexMart</span>. All rights reserved.</p>
+                    <p>© <span className="sitename">{settingData.siteName}</span>. All rights reserved.</p>
                   </div>
                 </div>
 
@@ -149,12 +140,10 @@ export default function Footer() {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
-
       </footer>
     </>
   )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import useSetting from '../hooks/useSetting'
 
@@ -14,7 +14,7 @@ export default function Navbar() {
                 <div className="topbar d-flex align-items-center dark-background">
                     <div className="container d-flex justify-content-center justify-content-md-between justify-content-around">
                         <div className="contact-info d-flex align-items-center">
-                            <NavLink to={`http://wa.me/${settingData.whatsapp}`} target='_blank' className="text-light d-flex">
+                            <NavLink to={`https://wa.me/91${settingData.whatsapp}?text=Hello%20${settingData.siteName}%20I%20am%20interested`} target='_blank' className="text-light d-flex">
                                 <i className="bi bi-whatsapp me-2 ms-2"></i>
                                 <span className='text-light d-none d-lg-block me-2'>{settingData.whatsapp}</span>
                             </NavLink>
@@ -53,7 +53,7 @@ export default function Navbar() {
                     <div className="container position-relative d-flex align-items-center justify-content-between">
                         <NavLink to="/" className="logo d-flex align-items-center">
                             {/* <img src="assets/img/nexmartlogo2.png" alt="" style={{ maxHeight: "30px", width: "auto" }}></img> */}
-                            <img src="/assets/img/favicon.png" alt="a" className='mb-3' style={{ width: '50px' }} /><h1 className="sitename sitename-logo fs-2">{settingData.siteName}</h1>
+                            <img src="/assets/img/favicon.png" alt="a" className='mb-3' style={{ height: '40px' }} /><h1 className="sitename sitename-logo fs-2">{settingData.siteName}</h1>
                         </NavLink>
 
                         <nav id="navmenu" className="navmenu">

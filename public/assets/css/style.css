@@ -81,6 +81,10 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* MY Custom Classes */
 .text-justify{
   text-align: justify !important;
+}
+.fs-8{
+  font-size: 15px;
 }

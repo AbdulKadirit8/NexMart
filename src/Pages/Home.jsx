@@ -143,10 +143,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <Products />
       <About />
       <Feature />
       <CustumerSupport />
-      <Products />
       <Testimonial />
     </>
   )

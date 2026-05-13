@@ -6,7 +6,7 @@ export default function PicValidater(e) {
   }
   else if (e.target.files.length === 1) {
     let file=e.target.files[0]
-    if(!(["image/jpeg","image/webp","image/jpg","image/gif","image/png"].includes(file.type))){
+    if(!(["image/jpeg","image/webp","image/jpg","image/gif","image/png", "image/jfif"].includes(file.type))){
       return "Invalid image type, Please upload png, jpg, jpeg, webp, gif types"
     } 
     else if(file.size>1048576){

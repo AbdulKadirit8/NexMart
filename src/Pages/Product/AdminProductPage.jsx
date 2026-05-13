@@ -54,6 +54,7 @@ export default function AdminProductPage() {
         })()
         return () => clearTimeout(time)
     }, [productStateData.length])
+    // console.log(data.maincategory)
     return (
         <>
             <section id="hero" className="hero section pb-0">
@@ -81,7 +82,7 @@ export default function AdminProductPage() {
                                                 <th>SUBCATEGORY</th>
                                                 <th>BRAND</th>
                                                 <th>COLOR</th>
-                                                <th>SIZE</th>
+                                                <th>SIZE / VOLUME / WEIGHT</th>
                                                 <th>BASE PRICE</th>
                                                 <th>DISCOUNT</th>
                                                 <th>FINAL PRICE</th>
@@ -102,19 +103,28 @@ export default function AdminProductPage() {
                                                     <td>{item.subcategory}</td>
                                                     <td>{item.brand}</td>
                                                     <td>{item.color?.join(", ")}</td>
-                                                    <td>{item.size?.join(", ")}</td>
+                                                    {/* <td>{item.size?.join(", ")}</td> */}
+                                                    <td>
+                                                        {
+                                                            item.volume?.length > 0
+                                                                ? item.volume.join(", ")
+                                                                : item.weight?.length > 0
+                                                                    ? item.weight.join(", ")
+                                                                    : item.size?.join(", ")
+                                                        }
+                                                    </td>
                                                     <td>&#8377;{item.basePrice}</td>
                                                     <td>{item.discount}% Off</td>
                                                     <td>&#8377;{item.finalPrice}</td>
                                                     <td>{item.stock ? "In Stock" : 'Out Of Stock'}</td>
                                                     <td>{item.stockQuantity}</td>
                                                     <td>
-                                                        <div style={{width:270}}>
-                                                            {item.pic?.map((p) => {
-                                                            return <Link to={`${import.meta.env.VITE_APP_IMAGE_SERVER}${p}`} target='_blank'>
-                                                                <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${p}`} className='m-1 border border-primary p-1' width={80} alt="" />
-                                                            </Link>
-                                                        })}
+                                                        <div style={{ width: 270 }}>
+                                                            {item.pic?.map((p, index) => {
+                                                                return <Link to={`${import.meta.env.VITE_APP_IMAGE_SERVER}${p}`} target='_blank' key={index}>
+                                                                    <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${p}`} className='m-1 border border-primary p-1' width={80} alt="" />
+                                                                </Link>
+                                                            })}
                                                         </div>
                                                     </td>
                                                     <td className="align-middle">{item.status ? "Active" : "Inactive"}</td>

@@ -1,13 +1,36 @@
-
+import SingleProduct from './SingleProduct';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination, Scrollbar } from 'swiper/modules';
 export default function Testimonial() {
+    let option = {
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            autoplay: {
+                delay: 1500,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                440: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                },
+                992: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },  
+            },
+            modules: [Autoplay],
+            loop:true
+        }
     return (
         <>
             <section id="featured-testimonials" className="featured-testimonials section pt-0">
                 <div className="container" data-aos="fade-up" data-aos-delay="100">
                     <div className="testimonials-14 swiper init-swiper">
-                        <div className="swiper-wrapper">
+                        <Swiper className="mySwiper" {...option}>
 
-                            <div className="swiper-slide">
+                            <SwiperSlide>
                                 <div className="testimonial-item">
                                     <div className="stars">
                                         <i className="bi bi-star-fill"></i>
@@ -26,8 +49,8 @@ export default function Testimonial() {
                                             </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="swiper-slide">
+                            </SwiperSlide>
+                            <SwiperSlide>
                                 <div className="testimonial-item">
                                     <div className="stars">
                                         <i className="bi bi-star-fill"></i>
@@ -46,8 +69,8 @@ export default function Testimonial() {
                                             </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="swiper-slide">
+                            </SwiperSlide>
+                            <SwiperSlide>
                                 <div className="testimonial-item">
                                     <div className="stars">
                                         <i className="bi bi-star-fill"></i>
@@ -66,8 +89,8 @@ export default function Testimonial() {
                                             </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="swiper-slide">
+                            </SwiperSlide>
+                            <SwiperSlide>
                                 <div className="testimonial-item">
                                     <div className="stars">
                                         <i className="bi bi-star-fill"></i>
@@ -86,8 +109,8 @@ export default function Testimonial() {
                                             </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="swiper-slide">
+                            </SwiperSlide>
+                            <SwiperSlide>
                                 <div className="testimonial-item">
                                     <div className="stars">
                                         <i className="bi bi-star-fill"></i>
@@ -106,8 +129,8 @@ export default function Testimonial() {
                                             </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="swiper-slide">
+                            </SwiperSlide>
+                            <SwiperSlide>
                                 <div className="testimonial-item">
                                     <div className="stars">
                                         <i className="bi bi-star-fill"></i>
@@ -126,8 +149,8 @@ export default function Testimonial() {
                                             </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </SwiperSlide>
+                        </Swiper>
                         <div className="swiper-pagination"></div>
                     </div>
                 </div>

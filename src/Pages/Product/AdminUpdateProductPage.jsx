@@ -9,11 +9,20 @@ import { getMaincategory } from '../../Redux/ActionCreaters/MaincategoryActionCr
 import { getSubcategory } from '../../Redux/ActionCreaters/SubcategoryActionCreaters'
 import { getBrand } from '../../Redux/ActionCreaters/BrandActionCreaters'
 
-// Color Array
-const colors = ["Black", "White", "Red", "Blue", "Green", "Yellow", "Pink", "Purple", "Orange", "Grey", "Brown", "Navy", "Sky Blue", "Maroon", "Olive", "Beige", "Teal", "Lavender", "Mustard", "Coral", "N/A"];
+// // Color Array
+// const colors = ["Black", "White", "Red", "Blue", "Green", "Yellow", "Pink", "Purple", "Orange", "Grey", "Brown", "Navy", "Sky Blue", "Maroon", "Olive", "Beige", "Teal", "Lavender", "Mustard", "Coral", "N/A"];
 
-// Size Array
-const size = ["NB", "XS", "S", "M", "L", "XL", "XXL", "XXXL", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "Free Size", "One Size", "N/A"];
+// // Size Array
+// const size = ["NB", "XS", "S", "M", "L", "XL", "XXL", "XXXL", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "Free Size", "One Size", "N/A"];
+
+// // Volume Array
+// const volume = ["20ml", "30ml", "50ml", "75ml", "100ml", "150ml", "200ml", "500ml", "1000ml"]
+
+// // Volume Array
+// const weight = ["1kg", "2kg", "3kg", "5kg", "7.5kg", "10kg", "12.5kg", "15kg", "17.5kg", "20kg", "25kg", "30kg", "35kg", "40kg", "45kg", "50kg"]
+
+import { colors, size, volume, weight } from '../../Helpers/productOptions'
+import getFieldType from '../../Helpers/getFieldType'
 
 var rteDescription
 
@@ -34,6 +43,8 @@ export default function AdminUpdateProductPage() {
         stockQuantity: '',
         color: [],
         size: [],
+        volume: [],
+        weight: [],
         pic: [],
         status: true
     })
@@ -42,13 +53,15 @@ export default function AdminUpdateProductPage() {
         name: '',
         color: '',
         size: '',
+        volume: '',
+        weight: '',
         basePrice: '',
         discount: '',
         stockQuantity: '',
         pic: ''
     })
     let [showError, setShowError] = useState(false)
-    let [falge, setFlage]=useState(false)
+    let [falge, setFlage] = useState(false)
 
     let navigate = useNavigate()
 
@@ -59,29 +72,87 @@ export default function AdminUpdateProductPage() {
     let dispatch = useDispatch()
 
 
+    // function getInputData(e) {
+        // let name = e.target.name
+
+        // // Demmy Backend
+        // let value = name === "pic" ? data.pic.concat(Array.from(e.target.files).map(x => "product/" + x.name)) : e.target.value
+
+
+        // // Rael Backend
+        // // let value = name === "pic" ? e.target.files.name : e.target.value
+
+        // setData({ ...data, [name]: name === "status" || name === "stock" ? (value === "1" ? true : false) : value })
+        // // setData({ ...data, [name]: name === "status" || name === "stock" ? (value === "1" ? true : false) : value })
+        // setErrorMessage({ ...errorMessage, [name]: name == "pic" ? PicValidater(e) : TextValidater(e) })
+    // }
+
     function getInputData(e) {
         let name = e.target.name
 
-        // Demmy Backend
-        let value = name === "pic" ? data.pic.concat(Array.from(e.target.files).map(x => "product/" + x.name)) : e.target.value
+        let value =
+            name === "pic"
+                ? data.pic.concat(
+                    Array.from(e.target.files).map(x => "product/" + x.name)
+                )
+                : e.target.value
 
-        // Rael Backend
-        // let value = name === "pic" ? e.target.files.name : e.target.value
+        if (name === "maincategory") {
 
-        setData({ ...data, [name]: name === "status" || name === "stock" ? (value === "1" ? true : false) : value })
-        // setData({ ...data, [name]: name === "status" || name === "stock" ? (value === "1" ? true : false) : value })
-        setErrorMessage({ ...errorMessage, [name]: name == "pic" ? PicValidater(e) : TextValidater(e) })
+            setData({
+                ...data,
+                maincategory: value,
+                size: [],
+                volume: [],
+                weight: []
+            })
+        }
+        else {
+
+            setData({
+                ...data,
+                [name]:
+                    name === "status" || name === "stock"
+                        ? (value === "1" ? true : false)
+                        : value
+            })
+        }
+
+        setErrorMessage({
+            ...errorMessage,
+            [name]: name === "pic"
+                ? PicValidater(e)
+                : TextValidater(e)
+        })
     }
 
     function getinputCheckbox(key, value) {
-        let arr = key === "color" ? data.color : data.size
+        let arr = [...(data[key] || [])]
+
         if (arr.includes(value))
-            arr = arr.filter(x => x != value)
+            arr = arr.filter(x => x !== value)
         else
             arr.push(value)
+
         setData({ ...data, [key]: arr })
-        setErrorMessage({ ...errorMessage, [key]: arr.length === 0 ? `Please select atleast one ${key}` : '' })
+
+        setErrorMessage({
+            ...errorMessage,
+            [key]: arr.length === 0
+                ? `Please select atleast one ${key}`
+                : ''
+        })
     }
+
+    // function getinputCheckbox(key, value) {
+    //     let arr = key === "color" ? data.color : data.size
+    //     if (arr.includes(value))
+    //         arr = arr.filter(x => x != value)
+    //     else
+    //         arr.push(value)
+    //     setData({ ...data, [key]: arr })
+    //     setErrorMessage({ ...errorMessage, [key]: arr.length === 0 ? `Please select atleast one ${key}` : '' })
+    // }
 
     function postData(e) {
         e.preventDefault()
@@ -89,9 +160,9 @@ export default function AdminUpdateProductPage() {
         let error = Object.values(errorMessage).find(x => x !== "")
         if (error)
             setShowError(true)
-        else if(data.pic.length===0){
+        else if (data.pic.length === 0) {
             setShowError(true)
-            setErrorMessage({...errorMessage, pic:"Please upload atleast one image"})
+            setErrorMessage({ ...errorMessage, pic: "Please upload atleast one image" })
         }
         else {
             let bs = parseInt(data.basePrice)
@@ -164,6 +235,18 @@ export default function AdminUpdateProductPage() {
     useEffect(() => {
         (() => dispatch(getBrand()))()
     }, [brandStateData.length])
+
+  
+
+    const fieldType = getFieldType(data.maincategory)
+    const filterArray =
+        fieldType === "volume"
+            ? volume
+            : fieldType === "weight"
+                ? weight
+                : size;
+
+
     return (
         <>
             <section id="hero" className="hero section pb-0">
@@ -180,7 +263,7 @@ export default function AdminUpdateProductPage() {
                                 <h4 className='bg-primary text-light text-center p-2 rounded'>Update Product <Link to='/admin/product' title='Back'><i className='bi bi-arrow-left text-light float-end'></i></Link></h4>
 
                                 <form onSubmit={postData}>
-                                   <div className="row">
+                                    <div className="row">
                                         <div className="col-12 mb-3">
                                             <label className='ps-2'>Name<span className='text-danger'>*</span></label>
                                             <input type="text" name="name" value={data.name} onChange={getInputData} className={`form-control border-2 ${showError && errorMessage.name ? 'border-danger' : 'border-primary'}`} placeholder='Product Name' />
@@ -198,7 +281,7 @@ export default function AdminUpdateProductPage() {
                                                 })}
                                             </select>
                                         </div>
-                                        
+
                                         <div className="col-lg-3 mb-3">
                                             <label className='ps-2'>Subcategory<span className='text-danger'>*</span></label>
                                             <select name='subcategory' value={data.subcategory} onChange={getInputData} className='form-select border-primary'>
@@ -259,25 +342,41 @@ export default function AdminUpdateProductPage() {
                                         </div>
 
                                         <div className="col-12 mb-3">
-                                            <label className='ps-2'>Size<span className='text-danger'>*</span></label>
+                                            <label className='ps-2'>{fieldType}<span className='text-danger'>*</span></label>
                                             <div className="border border-primary rounded">
                                                 <div className="row p-2">
-                                                    {size.map((item, index) => {
+                                                    {/* {size.map((item, index) => {
                                                         return <div className='col-xl-2 col-lg-3 col-4' key={index}>
                                                             <input type="checkbox" checked={data.size.includes(item)} onChange={() => getinputCheckbox("size", item)} id={item} />
                                                             <label className='ps-2' htmlFor={item}>{item}</label>
                                                         </div>
+                                                    })} */}
+                                                    {filterArray.map((item, index) => {
+                                                        return (
+                                                            <div className='col-xl-2 col-lg-3 col-4' key={index}>
+                                                                <input
+                                                                    type="checkbox"
+                                                                    checked={data[fieldType].includes(item)}
+                                                                    onChange={() => getinputCheckbox(fieldType, item)}
+                                                                    id={`${fieldType}-${item}`}
+                                                                    className={``}
+                                                                />
+                                                                <label className='ps-2' htmlFor={`${fieldType}-${item}`}>
+                                                                    {item}
+                                                                </label>
+                                                            </div>
+                                                        )
                                                     })}
                                                 </div>
                                             </div>
-                                            {showError && errorMessage.size ? <p className='text-danger'>{errorMessage.size}</p> : null}
+                                            {showError && errorMessage[fieldType] ? <p className='text-danger'>{errorMessage[fieldType]}</p> : null}
                                         </div>
 
                                         <div className="col-12">
                                             <label className='ps-2'>Description<span className='text-danger'>*</span></label>
                                             <div ref={refdivDescription} className='border border-primary rounder mb-3'></div>
                                         </div>
-                                        
+
                                         <div className="col-lg-6 mb-3">
                                             <label className='ps-2'>Pic<span className='text-danger'>*</span></label>
                                             <input type="file" name="pic" multiple onChange={getInputData} className={`form-control ${showError && errorMessage.pic ? 'border-danger' : 'border-primary'}`} />
@@ -285,16 +384,16 @@ export default function AdminUpdateProductPage() {
                                                 return <p className='text-danger' key={index}>{item}</p>
                                             }) : null}
                                         </div>
-                                        
+
                                         <div className="col-lg-6 mb-3">
                                             <label className='ps-2'>Old Pic(Click on pic to remove)<span className='text-danger'>*</span></label>
-                                            <div  className="d-flex flex-wrap align-items-end border border-primary">
-                                                {data.pic.map((item, index)=>{
-                                                return <img onClick={()=>{
-                                                    data.pic.splice(index, 1)
-                                                    setFlage(!falge)
-                                                }} multiple src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item}`} className='m-1 border' alt="Old product image" width={80} />
-                                            })}
+                                            <div className="d-flex flex-wrap align-items-end border border-primary">
+                                                {data.pic.map((item, index) => {
+                                                    return <img key={index} onClick={() => {
+                                                        data.pic.splice(index, 1)
+                                                        setFlage(!falge)
+                                                    }} multiple src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item}`} className='m-1 border' alt="Old product image" width={80} />
+                                                })}
                                             </div>
                                         </div>
 

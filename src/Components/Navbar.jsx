@@ -77,7 +77,7 @@ export default function Navbar() {
                                         <li><Link to="/terms">Terms</Link></li>
                                         <li><Link to="/privacy-policy">Privacy</Link></li>
 
-                                        <li><i className='bi bi-power ms-3 text-danger'></i><button className='btn text-danger'>Logout</button></li>
+                                        <li><button className=' ms-1 btn text-danger'><i className='bi bi-power pe-1 text-danger'></i>Logout</button></li>
 
                                         {/* <li><NavLink to="/404">404</NavLink></li> */}
                                     </ul>

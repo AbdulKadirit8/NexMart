@@ -1,15 +1,33 @@
-import { Link, NavLink } from 'react-router-dom'
 import About from '../Components/About'
 import Feature from '../Components/Feature'
 import CustumerSupport from '../Components/CustumerSupport'
 import Products from '../Components/Products'
 import Testimonial from '../Components/Testimonial'
 import useSetting from '../hooks/useSetting'
+import ProductSlider from '../Components/ProductSlider'
+
+import { Link, NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMaincategory } from '../Redux/ActionCreaters/MaincategoryActionCreaters'
+import { getProduct } from '../Redux/ActionCreaters/ProductActionCreaters'
+import { useEffect } from 'react'
 
 
 export default function Home() {
-  const settingData=useSetting()
-  
+  const settingData = useSetting()
+
+  let maincategoryStateData = useSelector(state => state.maincategoryStateData)
+  let productStateData = useSelector(state => state.productStateData)
+  let dispatch = useDispatch()
+
+  useEffect(() => {
+    (() => dispatch(getProduct()))()
+  }, [productStateData.length])
+
+  useEffect(() => {
+    (() => dispatch(getMaincategory()))()
+  }, [maincategoryStateData.length])
+
   return (
     <>
       {/* Hero Section  */}
@@ -147,6 +165,14 @@ export default function Home() {
       <About />
       <Feature />
       <CustumerSupport />
+      {
+        maincategoryStateData.filter(x => x.status).map((item, index) => {
+          let data = productStateData.filter(x => x.status && x.maincategory === item.name)
+          if (data.length) {
+            return <ProductSlider key={index} maincategory={item.name} data={data} />
+          }
+        })
+      }
       <Testimonial />
     </>
   )

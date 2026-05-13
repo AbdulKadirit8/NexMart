@@ -53,6 +53,8 @@ import AdminUpdateFaqPage from "./Pages/Faq/AdminUpdateFaqPage";
 
 //Admin Setting
 import AdminSettingPage from "./Pages/Setting/AdminSettingPage";
+import ProductDetails from "./Pages/ProductDetails";
+
 
 
 export default function App() {
@@ -67,6 +69,7 @@ export default function App() {
           <Route path='' element={<Home />}></Route>
           <Route path='/about' element={<AboutPage />}></Route>
           <Route path='/shop' element={<ShopPage />}></Route>
+          <Route path='/productDetails/:id' element={<ProductDetails />}></Route>
           <Route path='/feature' element={<FeaturePage />}></Route>
           <Route path='/faq' element={<FAQPage />}></Route>
           <Route path='/contactus' element={<ContactUsPage />}></Route>

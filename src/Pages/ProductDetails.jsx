@@ -79,7 +79,7 @@ export default function ProductDetails() {
                             {
                                 data.pic?.map((item, index) => {
                                     return <SwiperSlide key={index}>
-                                        <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item}`} style={{ width: "100%" }} />
+                                        <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item}`} target='_blank' style={{ width: "100%" }} />
                                     </SwiperSlide>
                                 })
                             }

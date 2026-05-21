@@ -5,7 +5,7 @@ export default function Breadcrum({ pageTitle, pageDescription }) {
     return (
         <>
             <div className="page-title">
-                <div className="heading">
+                <div className="m-4">
                     <div className="container">
                         <div className="row d-flex justify-content-center text-center">
                             <div className="col-lg-8">

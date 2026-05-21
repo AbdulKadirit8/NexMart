@@ -54,6 +54,8 @@ import AdminUpdateFaqPage from "./Pages/Faq/AdminUpdateFaqPage";
 //Admin Setting
 import AdminSettingPage from "./Pages/Setting/AdminSettingPage";
 import ProductDetails from "./Pages/ProductDetails";
+import SignupPage from "./Pages/User/SignupPage";
+import LoginPage from "./Pages/User/LoginPage";
 
 
 
@@ -76,6 +78,12 @@ export default function App() {
           <Route path='/privacy-policy' element={<PrivacyPage />}></Route>
           <Route path='/terms' element={<TermPage />}></Route>
           <Route path='/testomonials' element={<TestimonialPage />}></Route>
+
+          <Route path='/login' element={<LoginPage />}></Route>
+          <Route path='/signup' element={<SignupPage />}></Route>
+
+
+          {/* User Routes */}
 
 
           {/* Admin Routes */}

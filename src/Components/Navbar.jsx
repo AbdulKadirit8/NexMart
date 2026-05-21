@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import useSetting from '../hooks/useSetting'
 
 export default function Navbar() {
-    const settingData=useSetting()
+    const settingData = useSetting()
 
     let [showMenu, setShowMenu] = useState(false)
-   
+    let navigate = useNavigate()
+
+    function logout() {
+        localStorage.clear()
+        navigate('/login')
+    }
+
     return (
         <>
             <header id="header" className={`header fixed-top ${showMenu ? 'mobile-nav-active' : ''}`}>
@@ -66,22 +72,27 @@ export default function Navbar() {
                                 <li><NavLink to="faq" onClick={() => setShowMenu(!showMenu)}>Faq</NavLink></li>
                                 <li><NavLink to="/testomonials" onClick={() => setShowMenu(!showMenu)}>Tesmonials</NavLink></li>
                                 <li><NavLink to="/contactus" onClick={() => setShowMenu(!showMenu)}>ContactUs</NavLink></li>
-                                <li className="dropdown"><Link to="#"><span>Abdul Kadir</span> <i className="bi bi-chevron-down toggle-dropdown"></i></Link>
-                                    <ul>
-                                        <li><Link to="profile?option=Profile">Profile</Link></li>
-                                        <li><Link to="profile?option=Wishlist">Wishlist</Link></li>
-                                        <li><Link to="profile?option=Orders">Orders</Link></li>
-                                        <li><Link to="profile?option=Address">Address</Link></li>
-                                        <li><Link to="/cart">Cart</Link></li>
-                                        <li><Link to="/checkout">Checkout</Link></li>
-                                        <li><Link to="/terms">Terms</Link></li>
-                                        <li><Link to="/privacy-policy">Privacy</Link></li>
+                                {
+                                    localStorage.getItem("login") ?
+                                        <li className="dropdown"><Link to="#"><span>{localStorage.getItem("name")}</span> <i className="bi bi-chevron-down toggle-dropdown"></i></Link>
+                                            <ul>
+                                                <li><Link to="profile?option=Profile">Profile</Link></li>
+                                                <li><Link to="profile?option=Wishlist">Wishlist</Link></li>
+                                                <li><Link to="profile?option=Orders">Orders</Link></li>
+                                                <li><Link to="profile?option=Address">Address</Link></li>
+                                                <li><Link to="/cart">Cart</Link></li>
+                                                <li><Link to="/checkout">Checkout</Link></li>
+                                                <li><Link to="/terms">Terms</Link></li>
+                                                <li><Link to="/privacy-policy">Privacy</Link></li>
 
-                                        <li><button className=' ms-1 btn text-danger'><i className='bi bi-power pe-1 text-danger'></i>Logout</button></li>
+                                                <li><button onClick={logout} className=' ms-1 btn text-danger'><i className='bi bi-power pe-1 text-danger'></i>Logout</button></li>
 
-                                        {/* <li><NavLink to="/404">404</NavLink></li> */}
-                                    </ul>
-                                </li>
+                                                {/* <li><NavLink to="/404">404</NavLink></li> */}
+                                            </ul>
+                                        </li>:
+                                        <li><NavLink to="/login" onClick={() => setShowMenu(!showMenu)}>Login</NavLink></li>
+
+                                }
                             </ul>
                             <i className={`mobile-nav-toggle d-xl-none bi ${showMenu ? 'bi-x-square' : 'bi-view-list'}`} onClick={() => setShowMenu(!showMenu)}></i>
                         </nav>

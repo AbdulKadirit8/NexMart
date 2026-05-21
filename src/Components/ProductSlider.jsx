@@ -10,7 +10,7 @@ export default function ProductSlider({ maincategory, data }) {
         slidesPerView: 'auto',
         spaceBetween: 30,
         autoplay: {
-            delay: 1500,
+            delay: 1000,
             disableOnInteraction: false,
         },
         breakpoints: {
@@ -23,7 +23,7 @@ export default function ProductSlider({ maincategory, data }) {
                 spaceBetween: 20,
             },
             1200: {
-                slidesPerView: 3,
+                slidesPerView: 4,
                 spaceBetween: 30,
             },
         },
@@ -41,7 +41,7 @@ export default function ProductSlider({ maincategory, data }) {
                 <Swiper className="mySwiper" {...option}>
                     {
                         data.map((item, index) => {
-                            return <SwiperSlide key={index}>
+                            return <SwiperSlide key={index} >
                                 <SingleProduct item={item} />
                             </SwiperSlide>
                         })

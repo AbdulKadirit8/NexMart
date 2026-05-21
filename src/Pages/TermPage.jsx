@@ -8,9 +8,9 @@ export default function TermPage() {
     
     return (
         <>
-            <Breadcrum pageTitle={"Term and Conditions"} pageDescription={`By using ${settingData.siteName}, you agree to our terms and conditions designed to ensure a safe, fair, and reliable shopping experience. Please review our policies, user responsibilities, and service guidelines carefully.`} />
+            {/* <Breadcrum pageTitle={"Term and Conditions"} pageDescription={`By using ${settingData.siteName}, you agree to our terms and conditions designed to ensure a safe, fair, and reliable shopping experience. Please review our policies, user responsibilities, and service guidelines carefully.`} /> */}
 
-            <section id="terms-of-service" className="terms-of-service section">
+            <section id="terms-of-service" className="terms-of-service section mt-5">
 
                 <div className="container" data-aos="fade-up">
 

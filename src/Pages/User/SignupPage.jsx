@@ -105,8 +105,8 @@ export default function SignupPage() {
                                                 <i className="bi text-primary">@</i>
                                             </span>
                                             <input type="text" name="username" onChange={getInputData} placeholder='User Name' className={`form-control ${show && errorMessage.username ? 'border-danger' : 'border-primary'}`} />
-                                            {show && errorMessage.username ? <p className='text-danger'>{errorMessage.username}</p> : null}
                                         </div>
+                                        {show && errorMessage.username ? <p className='text-danger'>{errorMessage.username}</p> : null}
                                     </div>
                                     <div className={`col-lg-6 ${show && errorMessage.email ? '' : 'mb-3'}`}>
                                         <label className='ps-2'>Email*</label>

@@ -28,7 +28,7 @@ export default function AdminMainCategoryPage() {
             setData(data.filter(x => x.id !== id))
         }
     }
-   
+
     useEffect(() => {
         let time = (() => {
             //without redux
@@ -62,16 +62,21 @@ export default function AdminMainCategoryPage() {
 
                     <div className="row ">
 
-                        <div className="col-md-3">
+                        <div className="col-lg-3">
                             <div data-aos="fade-right" data-aos-delay="100">
                                 <AdminSlider />
                             </div>
 
                         </div>
-                        <div className="col-md-9">
-                            <div data-aos="fade-left" data-aos-delay="100">
-                                <h4 className='bg-primary text-light text-center p-2 rounded'>Maincategory <Link to='/admin/maincategory/create' title='Create'><i className='bi bi-plus text-light float-end'></i></Link></h4>
-                                <div className="table-responsive">
+                        <div className="col-lg-9">
+                            <h4 className='bg-primary text-light text-center p-2 rounded'>
+                                <div data-aos="fade-left" data-aos-delay="100">
+                                Maincategory
+                                <Link to='/admin/maincategory/create' title='Create'><i className='bi bi-plus text-light float-end'></i></Link>
+                                </div>
+                                </h4>
+                            <div className="table-responsive">
+                                <div data-aos="fade-left" data-aos-delay="100">
                                     <table className='table table-bordered' id='myTable'>
                                         <thead>
                                             <tr>

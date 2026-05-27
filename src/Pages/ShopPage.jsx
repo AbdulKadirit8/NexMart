@@ -250,6 +250,7 @@ export default function ShopPage() {
               </div>
             </section>
           </div>
+
           <div className="col-lg-9">
             <section id="services" className="services section">
               <div className="row mb-5">
@@ -273,12 +274,16 @@ export default function ShopPage() {
                 </div>
               </div>
               <div className="row gy-4">
+
                 {data?.map((item => {
                   return <div key={item.id} className="col-lg-4 col-sm-6 col-12">
-                    <SingleProduct item={item} />
+                    <div className="container" data-aos="fade-up" data-aos-delay="50">
+                      <SingleProduct item={item} />
+                    </div>
                   </div>
                 }))}
               </div>
+
             </section>
           </div>
         </div>

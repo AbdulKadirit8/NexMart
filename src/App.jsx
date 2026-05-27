@@ -56,6 +56,7 @@ import AdminSettingPage from "./Pages/Setting/AdminSettingPage";
 import ProductDetails from "./Pages/ProductDetails";
 import SignupPage from "./Pages/User/SignupPage";
 import LoginPage from "./Pages/User/LoginPage";
+import ProfilePage from "./Pages/User/ProfilePage";
 
 
 
@@ -84,7 +85,7 @@ export default function App() {
 
 
           {/* User Routes */}
-
+          <Route path='/profile' element={<ProfilePage />}></Route>
 
           {/* Admin Routes */}
           <Route path='/admin' element={<AdminHomePage />}></Route>

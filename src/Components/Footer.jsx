@@ -136,7 +136,7 @@ export default function Footer() {
                       <Link to="/privacy-policy">Privacy and Policy</Link>
                     <div className="credits">
 
-                      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Distributed by @<Link to="https://themewagon.com" target="_blank" className="text-primary">Abdul Kadir</Link>
+                      © 2026 {settingData.siteName}. Designed & Developed by <Link to="https://themewagon.com" target="_blank" className="text-primary">Abdul Kadir</Link>
                     </div>
                   </div>
                 </div>

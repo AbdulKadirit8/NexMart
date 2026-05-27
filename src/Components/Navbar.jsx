@@ -90,7 +90,14 @@ export default function Navbar() {
                                                 {/* <li><NavLink to="/404">404</NavLink></li> */}
                                             </ul>
                                         </li>:
-                                        <li><NavLink to="/login" onClick={() => setShowMenu(!showMenu)}>Login</NavLink></li>
+                                        // <li><NavLink to="/login" onClick={() => setShowMenu(!showMenu)}>Login</NavLink></li>
+
+                                        <li className="dropdown"><Link to="#"><span>{localStorage.getItem("name")}</span><i className='bi bi-person-circle fs-5 pe-2'></i>Login<i className="bi bi-chevron-down toggle-dropdown"></i></Link>
+                                            <ul>
+                                                <li><NavLink to="/login" onClick={() => setShowMenu(!showMenu)}>Login</NavLink></li>
+                                                <li><NavLink to="/signup" onClick={() => setShowMenu(!showMenu)}>Signup</NavLink></li>
+                                            </ul>
+                                        </li>
 
                                 }
                             </ul>

@@ -77,13 +77,13 @@ export default function AdminUpdateFaqPage() {
 
                     <div className="row ">
 
-                        <div className="col-md-3">
+                        <div className="col-lg-3">
                             <div data-aos="fade-right" data-aos-delay="100">
                                 <AdminSlider />
                             </div>
 
                         </div>
-                        <div className="col-md-9">
+                        <div className="col-lg-9">
                             <div data-aos="fade-left" data-aos-delay="100">
                                 <h4 className='bg-primary text-light text-center p-2 rounded'>Update Faq <Link to='/admin/faq' title='Back'><i className='bi bi-arrow-left text-light float-end'></i></Link></h4>
 

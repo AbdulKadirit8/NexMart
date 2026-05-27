@@ -10,7 +10,7 @@ export default function Breadcrum({ pageTitle, pageDescription }) {
                         <div className="row d-flex justify-content-center text-center">
                             <div className="col-lg-8">
                                 <h1 className="heading-title">{pageTitle}</h1>
-                                <p className="mb-0">
+                                <p className="mb-0 text-justify">
                                     {pageDescription}
                                 </p>
                             </div>

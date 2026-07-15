@@ -25,13 +25,7 @@ export default function AdminCreateMainCategoryPage() {
 
     function getInputData(e) {
         let name = e.target.name
-
-        // Demmy Backend
-        let value = name === "pic" ? "maincategory/" + e.target.files[0].name : e.target.value
-
-        // Rael Backend
-        // let value = name === "pic" ? e.target.files[0].name : e.target.value
-
+        let value = name === "pic" ? e.target.files[0] : e.target.value
         setData({ ...data, [name]: name === "status" ? (value === "1" ? true : false) : value })
         setErrorMessage({ ...errorMessage, [name]: name == "pic" ? PicValidater(e) : TextValidater(e) })
     }
@@ -49,22 +43,21 @@ export default function AdminCreateMainCategoryPage() {
                 return
             }
             //Domy Backend
-            dispatch(createMaincategory({ ...data }))
+            // dispatch(createMaincategory({ ...data }))
 
             //Real backend
-            // let formData=new FormData()
-            // formData.append('name', data.name)
-            // formData.append('pic', data.pic)
-            // formData.append('status', data.status)
-            // dispatch(createMaincategory(formData))
-
+            let formData = new FormData()
+            formData.append('name', data.name)
+            formData.append('pic', data.pic)
+            formData.append('status', data.status)
+            dispatch(createMaincategory(formData))
             navigate("/admin/maincategory")
         }
     }
     useEffect(() => {
-            (() => dispatch(getMaincategory()))()
-        }, [maincategoryStateData.length])
-    
+        (() => dispatch(getMaincategory()))()
+    }, [maincategoryStateData.length])
+
     return (
         <>
             <section id="hero" className="hero section pb-0">

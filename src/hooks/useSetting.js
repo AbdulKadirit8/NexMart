@@ -8,6 +8,7 @@ export default function useSetting() {
 
   let [settingData, setSettingData] = useState({
     siteName: import.meta.env.VITE_APP_SITENAME,
+    logoIcon: import.meta.env.VITE_APP_LOGOICON,
     phone: import.meta.env.VITE_APP_PHONE,
     whatsapp: import.meta.env.VITE_APP_WHATSAPP,
     email: import.meta.env.VITE_APP_EMAIL,

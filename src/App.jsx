@@ -57,6 +57,9 @@ import ProductDetails from "./Pages/ProductDetails";
 import SignupPage from "./Pages/User/SignupPage";
 import LoginPage from "./Pages/User/LoginPage";
 import ProfilePage from "./Pages/User/ProfilePage";
+import CartPage from "./Pages/User/CartPage";
+import CheckOutPage from "./Pages/User/CheckOutPage";
+import OrderConformationPage from "./Pages/User/OrderConformationPage";
 
 
 
@@ -86,6 +89,9 @@ export default function App() {
 
           {/* User Routes */}
           <Route path='/profile' element={<ProfilePage />}></Route>
+          <Route path='/cart' element={<CartPage />}></Route>
+          <Route path='/checkout' element={<CheckOutPage />}></Route>
+          <Route path='/orderconformation' element={<OrderConformationPage />}></Route>
 
           {/* Admin Routes */}
           <Route path='/admin' element={<AdminHomePage />}></Route>

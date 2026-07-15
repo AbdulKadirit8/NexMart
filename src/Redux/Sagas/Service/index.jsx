@@ -1,44 +1,107 @@
 //Create record function to call API when record has only text data
-export async function createRecord(collection, payload){
-    try{
-        let response =await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/${collection}`,{
-            method:'POST',
-            header:{
-                'content-type':'application/json'
-            },
-            body: JSON.stringify(payload)
-        })
-        response=await response.json()
-        return response
-    } catch(error){
-        console.log(error)
-        return[]
+// export async function createRecord(collection, payload){
+//     try{
+//         let response =await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/${collection}`,{
+//             method:'POST',
+//             headers:{
+//                 'content-type':'application/json'
+//             },
+//             body: JSON.stringify(payload)
+//         })
+//         response=await response.json()
+//         return response
+//     } catch(error){
+//         console.log(error)
+//         return[]
+//     }
+// }
+// export async function createRecord(collection, payload) {
+//     try {
+
+//         let formData = new FormData();
+
+//         formData.append("name", payload.name);
+//         formData.append("pic", payload.pic);
+//         formData.append("status", payload.status);
+
+//         let response = await fetch(
+//             `${import.meta.env.VITE_APP_BACKEND_SERVER}/${collection}`,
+//             {
+//                 method: "POST",
+//                 body: formData
+//             }
+//         );
+
+//         response = await response.json();
+
+//         return response;
+
+//     } catch (error) {
+//         console.log(error);
+//         return [];
+//     }
+// }
+//Create record function to call API when record has only Form data i.e file field
+// export async function createMultipartRecord(collection, payload){
+//     try{
+//         let response =await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/${collection}`,{
+//             method:'POST',
+//             headers:{
+//             },
+//             body: payload
+//         })
+//         response=await response.json()
+//         return response
+//     } catch(error){
+//         console.log(error)
+//         return[]
+//     }
+// }
+export async function createRecord(collection, payload) {
+    try {
+
+        let response = await fetch(
+            `${import.meta.env.VITE_APP_BACKEND_SERVER}/${collection}`,
+            {
+                method: "POST",
+                body: payload
+            }
+        );
+
+        return await response.json();
+
+    } catch (error) {
+        console.log(error);
+        return [];
     }
 }
-
-//Create record function to call API when record has only Form data i.e file field
 export async function createMultipartRecord(collection, payload){
     try{
-        let response =await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/${collection}`,{
-            method:'POST',
-            header:{
-            },
-            body: payload
-        })
-        response=await response.json()
+        console.log("API Call Chali");
+        console.log(collection);
+        console.log(payload);
+
+        let response = await fetch(
+            `${import.meta.env.VITE_APP_BACKEND_SERVER}/${collection}`,
+            {
+                method:'POST',
+                body: payload
+            }
+        )
+
+        response = await response.json()
         return response
     } catch(error){
         console.log(error)
-        return[]
+        return []
     }
 }
-
 //get record function to call API 
-export async function getRecord(collection, payload){
+export async function getRecord(collection){
     try{
         let response =await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/${collection}`,{
             method:'GET',
-            header:{
+            headers:{
                 'content-type':'application/json'
             }            
         })
@@ -51,29 +114,46 @@ export async function getRecord(collection, payload){
 }
 
 //Update record function to call API when record has only text data
-export async function updateRecord(collection, payload){
-    try{
-        let response =await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/${collection}/${payload.id}`,{
-            method:'PUT',
-            header:{
-                'content-type':'application/json'
-            },
-            body: JSON.stringify(payload)
-        })
-        response=await response.json()
+// export async function updateRecord(collection, payload){
+//     try{
+//         let response =await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/${collection}/${payload.id}`,{
+//             method:'PUT',
+//             headers:{
+//                 'content-type':'application/json'
+//             },
+//             body: JSON.stringify(payload)
+//         })
+//         response=await response.json()
+//         return response
+//     } catch(error){
+//         console.log(error)
+//         return[]
+//     }
+// }
+export async function updateRecord(collection, payload) {
+    try {
+        let response = await fetch(
+            `${import.meta.env.VITE_APP_BACKEND_SERVER}/${collection}/${payload.get("id")}`,
+            {
+                method: 'PUT',
+                body: payload
+            }
+        )
+
+        response = await response.json()
         return response
-    } catch(error){
+    }
+    catch (error) {
         console.log(error)
-        return[]
+        return []
     }
 }
-
 //Update record function to call API when record has only Form data
 export async function updateMultipartRecord(collection, payload){
     try{
         let response =await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/${collection}/${payload.get('id')}`,{
             method:'PUT',
-            header:{
+            headers:{
             },
             body: payload
         })
@@ -90,7 +170,7 @@ export async function deleteRecord(collection, payload){
     try{
         let response =await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/${collection}/${payload.id}`,{
             method:'DELETE',
-            header:{
+            headers:{
                 'content-type':'application/json'
             }
         })

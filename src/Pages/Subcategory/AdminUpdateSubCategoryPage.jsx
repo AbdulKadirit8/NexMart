@@ -31,10 +31,10 @@ export default function AdminUpdateSubCategoryPage() {
         let name = e.target.name
 
         // Demmy Backend
-        let value = name === "pic" ? "subcategory/" + e.target.files[0].name : e.target.value
+        // let value = name === "pic" ? "subcategory/" + e.target.files[0].name : e.target.value
 
         // Rael Backend
-        // let value = name === "pic" ? e.target.files[0].name : e.target.value
+        let value = name === "pic" ? e.target.files[0] : e.target.value
 
         setData({ ...data, [name]: name === "status" ? (value === "1" ? true : false) : value })
         setErrorMessage({ ...errorMessage, [name]: name == "pic" ? PicValidater(e) : TextValidater(e) })
@@ -53,15 +53,15 @@ export default function AdminUpdateSubCategoryPage() {
                 return
             }
             //Domy Backend
-            dispatch(updateSubcategory({ ...data }))
+            // dispatch(updateSubcategory({ ...data }))
 
             //Real backend
-            // let formData=new FormData()
-            // formData.append('id', data.id)
-            // formData.append('name', data.name)
-            // formData.append('pic', data.pic)
-            // formData.append('status', data.status)
-            // dispatch(updateSubcategory(formData))
+            let formData=new FormData()
+            formData.append('id', data.id)
+            formData.append('name', data.name)
+            formData.append('pic', data.pic)
+            formData.append('status', data.status)
+            dispatch(updateSubcategory(formData))
 
             navigate("/admin/subcategory")
 

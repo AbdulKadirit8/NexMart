@@ -27,10 +27,10 @@ export default function AdminCreateSubCategoryPage() {
         let name = e.target.name
 
         // Demmy Backend
-        let value = name === "pic" ? "subcategory/" + e.target.files[0].name : e.target.value
+        // let value = name === "pic" ? "subcategory/" + e.target.files[0].name : e.target.value
 
         // Rael Backend
-        // let value = name === "pic" ? e.target.files[0].name : e.target.value
+        let value = name === "pic" ? e.target.files[0] : e.target.value
 
         setData({ ...data, [name]: name === "status" ? (value === "1" ? true : false) : value })
         setErrorMessage({ ...errorMessage, [name]: name == "pic" ? PicValidater(e) : TextValidater(e) })
@@ -49,14 +49,14 @@ export default function AdminCreateSubCategoryPage() {
                 return
             }
             //Domy Backend
-            dispatch(createSubcategory({ ...data }))
+            // dispatch(createSubcategory({ ...data }))
 
             //Real backend
-            // let formData=new FormData()
-            // formData.append('name', data.name)
-            // formData.append('pic', data.pic)
-            // formData.append('status', data.status)
-            // dispatch(createSubcategory(formData))
+            let formData=new FormData()
+            formData.append('name', data.name)
+            formData.append('pic', data.pic)
+            formData.append('status', data.status)
+            dispatch(createSubcategory(formData))
 
             navigate("/admin/subcategory")
         }

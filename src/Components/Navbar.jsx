@@ -59,7 +59,7 @@ export default function Navbar() {
                     <div className="container position-relative d-flex align-items-center justify-content-between">
                         <NavLink to="/" className="logo d-flex align-items-center">
                             {/* <img src="assets/img/nexmartlogo2.png" alt="" style={{ maxHeight: "30px", width: "auto" }}></img> */}
-                            <img src="/assets/img/favicon.png" alt="a" className='mb-3' style={{ height: '40px' }} /><h1 className="sitename sitename-logo fs-2">{settingData.siteName}</h1>
+                            <img src={settingData.logoIcon} alt="LogoIcon" className='mb-1 rounded' style={{ height: '40px' }} /><h1 className="sitename sitename-logo fs-2 fw-bold">{settingData.siteName}</h1>
                         </NavLink>
 
                         <nav id="navmenu" className="navmenu">
@@ -89,7 +89,7 @@ export default function Navbar() {
 
                                                 {/* <li><NavLink to="/404">404</NavLink></li> */}
                                             </ul>
-                                        </li>:
+                                        </li> :
                                         // <li><NavLink to="/login" onClick={() => setShowMenu(!showMenu)}>Login</NavLink></li>
 
                                         <li className="dropdown"><Link to="#"><span>{localStorage.getItem("name")}</span><i className='bi bi-person-circle fs-5 pe-2'></i>Login<i className="bi bi-chevron-down toggle-dropdown"></i></Link>
@@ -98,7 +98,6 @@ export default function Navbar() {
                                                 <li><NavLink to="/signup" onClick={() => setShowMenu(!showMenu)}>Signup</NavLink></li>
                                             </ul>
                                         </li>
-
                                 }
                             </ul>
                             <i className={`mobile-nav-toggle d-xl-none bi ${showMenu ? 'bi-x-square' : 'bi-view-list'}`} onClick={() => setShowMenu(!showMenu)}></i>

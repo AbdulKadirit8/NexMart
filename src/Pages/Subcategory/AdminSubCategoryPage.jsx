@@ -22,7 +22,6 @@ export default function AdminMainCategoryPage() {
     // Delete function
     function deleteRecord(id) {
         if (window.confirm("Are you sure to Delete this record")) {
-            //with redux
             dispatch(deleteSubcategory({ id: id }))
             setData(data.filter(x => x.id !== id))
         }
@@ -30,18 +29,6 @@ export default function AdminMainCategoryPage() {
 
     useEffect(() => {
         let time = (() => {
-            //without redux
-            // let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/subcategory`, {
-            //     method: "GET",
-            //     headers: {
-            //         'content-type': 'application/json'
-            //     },
-
-            // })
-            // response = await response.json()
-            // setMainCategoryStateData(response)
-
-            //Using Redux
             dispatch(getSubcategory())
             if (subcategoryStateData.length) {
                 setData(subcategoryStateData)
@@ -84,11 +71,12 @@ export default function AdminMainCategoryPage() {
                                         </thead>
                                         <tbody>
                                             {data.map((item) => {
+                                                console.log(item);
                                                 return <tr key={item.id}>
                                                     <td  className="align-middle">{item.id}</td>
                                                     <td  className="align-middle">{item.name}</td>
-                                                    <td><Link to={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.pic}`} target='_blank'>
-                                                        <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.pic}`}  width={80} alt="" />
+                                                    <td><Link to={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.image}`} target='_blank'>
+                                                        <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.image}`}  width={80} alt="" />
                                                     </Link></td>
                                                     <td  className="align-middle">{item.status ? "Active" : "Inactive"}</td>
                                                     <td className="text-center align-middle"><Link to={`/admin/subcategory/update/${item.id}`}><i className='bi bi-pencil btn btn-primary'></i></Link></td>

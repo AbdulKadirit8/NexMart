@@ -9,22 +9,13 @@ import { getBrand } from '../../Redux/ActionCreaters/BrandActionCreaters'
 import AdminSlider from '../../Components/Admin/AdminSlider'
 import TextValidater from '../../FormValidaters/Textvalidater'
 import PicValidater from '../../FormValidaters/PicValidater'
-import getFieldType from '../../Helpers/getFieldType'
 
-// // Color Array
-// const colors = ["Black", "White", "Red", "Blue", "Green", "Yellow", "Pink", "Purple", "Orange", "Grey", "Brown", "Navy", "Sky Blue", "Maroon", "Olive", "Beige", "Teal", "Lavender", "Mustard", "Coral", "N/A"];
+// Color Array
+const colors = ["Black", "White", "Red", "Blue", "Green", "Yellow", "Pink", "Purple", "Orange", "Grey", "Brown", "Navy", "Sky Blue", "Maroon", "Olive", "Beige", "Teal", "Lavender", "Mustard", "Coral", "N/A"];
 
-// // Size Array
-// const size = ["NB", "XS", "S", "M", "L", "XL", "XXL", "XXXL", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "Free Size", "One Size", "N/A"];
-
-// // Volume Array
-// const volume = ["20ml", "30ml", "50ml", "75ml", "100ml", "150ml", "200ml", "500ml", "1000ml"]
-
-// // Volume Array
-// const weight = ["1kg", "2kg", "3kg", "5kg", "7.5kg", "10kg", "12.5kg", "15kg", "17.5kg", "20kg", "25kg", "30kg", "35kg", "40kg", "45kg", "50kg"]
-import { colors, size, volume, weight } from '../../Helpers/productOptions'
 var rteDescription
 export default function AdminCreateProductPage() {
+
     var refdivDescription = useRef(null)
     let [data, setData] = useState({
         name: '',
@@ -38,31 +29,18 @@ export default function AdminCreateProductPage() {
         stockQuantity: '',
         color: [],
         size: [],
-        volume: [],
-        weight: [],
         pic: [],
         status: true
     })
 
     let [errorMessage, setErrorMessage] = useState({
-        // name: 'Name field is Mendatory',
-        // color: 'Color field is Mendatory',
-        // size: 'Size field is Mendatory',
-        // volume: 'Volume field is Mendatory',
-        // weight: 'Weight field is Mendatory',
-        // basePrice: 'BasePrice field is Mendatory',
-        // discount: 'Discount field is Mendatory',
-        // stockQuantity: 'StockQuantity field is Mendatory',
-        // pic: 'Pic field is Mendatory'
-        name: '',
-        color: '',
-        size: '',
-        volume: '',
-        weight: '',
-        basePrice: '',
-        discount: '',
-        stockQuantity: '',
-        pic: ''
+        name: 'Name field is Mendatory',
+        color: 'Color field is Mendatory',
+        size: 'Size field is Mendatory',
+        basePrice: 'BasePrice field is Mendatory',
+        discount: 'Discount field is Mendatory',
+        stockQuantity: 'StockQuantity field is Mendatory',
+        pic: 'Pic field is Mendatory'
     })
     let [showError, setShowError] = useState(false)
 
@@ -80,10 +58,9 @@ export default function AdminCreateProductPage() {
         let value = name === "pic" ? Array.from(e.target.files).map(x => "product/" + x.name) : e.target.value
 
         // Rael Backend
-        // let value = name === "pic" ? e.target.files.name : e.target.value
+        // let value = name === "pic" ? e.target.files : e.target.value
 
         setData({ ...data, [name]: name === "status" || name === "stock" ? (value === "1" ? true : false) : value })
-        // setData({ ...data, [name]: name === "status" || name === "stock" ? (value === "1" ? true : false) : value })
         setErrorMessage({ ...errorMessage, [name]: name == "pic" ? PicValidater(e) : TextValidater(e) })
     }
 
@@ -104,35 +81,9 @@ export default function AdminCreateProductPage() {
     function postData(e) {
         e.preventDefault()
 
-        let newError = {}
-
-        if (!data.name)
-            newError.name = "Name field is Mandatory"
-
-        if (data.color.length === 0)
-            newError.color = "Color field is Mandatory"
-
-        if (data[fieldType].length === 0)
-            newError[fieldType] = `${fieldType} field is Mandatory`
-
-        if (!data.basePrice)
-            newError.basePrice = "BasePrice field is Mandatory"
-
-        if (!data.discount)
-            newError.discount = "Discount field is Mandatory"
-
-        if (!data.stockQuantity)
-            newError.stockQuantity = "StockQuantity field is Mandatory"
-
-        if (data.pic.length === 0)
-            newError.pic = "Pic field is Mandatory"
-
-        setErrorMessage(newError)
-
-        if (Object.keys(newError).length > 0) {
+        let error = Object.values(errorMessage).find(x => x !== "")
+        if (error)
             setShowError(true)
-            return
-        }
 
         else {
             let bs = parseInt(data.basePrice)
@@ -193,24 +144,6 @@ export default function AdminCreateProductPage() {
             rteDescription.setHTMLCode("");
         })()
     }, [])
-
-    // const volumeCategories = ["perfume", "oil", "atar"];
-    // const weightCategories = ["gym product"];
-
-    // const fieldType =
-    //     volumeCategories.includes(data.maincategory.toLowerCase())
-    //         ? "volume"
-    //         : weightCategories.includes(data.maincategory.toLowerCase())
-    //             ? "weight"
-    //             : "size";
-
-    const fieldType = getFieldType(data.maincategory)
-    const filterArray =
-        fieldType === "volume"
-            ? volume
-            : fieldType === "weight"
-                ? weight
-                : size;
 
     return (
         <>
@@ -295,7 +228,7 @@ export default function AdminCreateProductPage() {
 
                                         <div className="col-12 mb-3">
                                             <label className='ps-2'>Colors<span className='text-danger'>*</span></label>
-                                            <div className={`border ${showError && errorMessage[fieldType] ? 'border-danger' : 'border-primary'} rounded`}>
+                                            <div className={`border ${showError && errorMessage.color ? 'border-danger' : 'border-primary'} rounded`}>
                                                 <div className="row p-2">
                                                     {colors.map((item, index) => {
                                                         return <div className='col-xl-2 col-lg-3 col-4' key={index}>
@@ -309,51 +242,27 @@ export default function AdminCreateProductPage() {
                                         </div>
 
                                         <div className="col-12 mb-3">
-                                            <label className='ps-2'>{fieldType}<span className='text-danger'>*</span></label>
-                                            <div className={`border ${showError && errorMessage[fieldType] ? 'border-danger' : 'border-primary'} rounded`}>
-                                                <div className="row p-2">
-                                                    {/* {size.map((item, index) => {
-                                                        return <div className='col-xl-2 col-lg-3 col-4' key={index}>
-                                                            <input type="checkbox" onChange={() => getinputCheckbox("size", item)} id={`size-${item}`} />
-                                                            <label className='ps-2' htmlFor={`size-${item}`}>{item}</label>
-                                                        </div>
-                                                    })} */}
-                                                    {filterArray.map((item, index) => {
-                                                        return (
-                                                            <div className='col-xl-2 col-lg-3 col-4' key={index}>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    onChange={() => getinputCheckbox(fieldType, item)}
-                                                                    id={`${fieldType}-${item}`}
-                                                                    className={``}
-                                                                />
-                                                                <label className='ps-2' htmlFor={`${fieldType}-${item}`}>
-                                                                    {item}
-                                                                </label>
-                                                            </div>
-                                                        )
-                                                    })}
-                                                </div>
-                                            </div>
-                                            {showError && errorMessage[fieldType] ? (<p className='text-danger'> {errorMessage[fieldType]}</p>) : null}
-                                        </div>
-
-
-                                        {/* <div className="col-12 mb-3">
                                             <label className='ps-2'>Size<span className='text-danger'>*</span></label>
-                                            <div className="border border-primary rounded">
+                                            <div className={`border ${showError && errorMessage.size ? 'border-danger' : 'border-primary'} rounded`}>
                                                 <div className="row p-2">
-                                                    {size.map((item, index) => {
-                                                        return <div className='col-xl-2 col-lg-3 col-4' key={index}>
-                                                            <input type="checkbox" onChange={() => getinputCheckbox("size", item)} id={`size-${item}`} />
-                                                            <label className='ps-2' htmlFor={`size-${item}`}>{item}</label>
-                                                        </div>
-                                                    })}
+                                                    <div className="col-12 mb-3">
+                                                        <label className='ps-2'>Measurement<span className='text-danger'>*</span></label>
+                                                        <input type="text" className="form-control border-primary" placeholder="S,M,L,XL OR 20ml,50ml OR 2kg,5kg"
+                                                            onChange={(e) => {
+                                                                let arr = e.target.value
+                                                                    .split(",")
+                                                                    .map(item => item.trim())
+                                                                    .filter(item => item)
+
+                                                                setData({ ...data, size: arr })
+                                                                setErrorMessage({ ...errorMessage, size: arr.length ? "" : "Size field is Mendatory" })
+                                                            }}
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
-                                            {showError && errorMessage.size ? <p className='text-danger'>{errorMessage.size}</p> : null}
-                                        </div> */}
-
+                                            {showError && errorMessage.size ? (<p className='text-danger'> {errorMessage.size}</p>) : null}
+                                        </div>
                                         <div className="col-12">
                                             <label className='ps-2'>Description<span className='text-danger'>*</span></label>
                                             <div ref={refdivDescription} className='border border-primary rounder mb-3'></div>

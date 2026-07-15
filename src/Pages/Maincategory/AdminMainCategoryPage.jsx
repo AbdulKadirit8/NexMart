@@ -15,6 +15,7 @@ import 'datatables.net-dt/css/dataTables.dataTables.min.css'
 
 
 export default function AdminMainCategoryPage() {
+    
     // let [mainCategoryStateData, setMainCategoryStateData] = useState([])
     let [data, setData] = useState([])
     let maincategoryStateData = useSelector(state => state.maincategoryStateData)
@@ -31,18 +32,6 @@ export default function AdminMainCategoryPage() {
 
     useEffect(() => {
         let time = (() => {
-            //without redux
-            // let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/maincategory`, {
-            //     method: "GET",
-            //     headers: {
-            //         'content-type': 'application/json'
-            //     },
-
-            // })
-            // response = await response.json()
-            // setMainCategoryStateData(response)
-
-            //Using Redux
             dispatch(getMaincategory())
             if (maincategoryStateData.length) {
                 setData(maincategoryStateData)
@@ -54,6 +43,7 @@ export default function AdminMainCategoryPage() {
         })()
         return () => clearTimeout(time)
     }, [maincategoryStateData.length])
+
     return (
         <>
             <section id="hero" className="hero section pb-0">
@@ -71,10 +61,10 @@ export default function AdminMainCategoryPage() {
                         <div className="col-lg-9">
                             <h4 className='bg-primary text-light text-center p-2 rounded'>
                                 <div data-aos="fade-left" data-aos-delay="100">
-                                Maincategory
-                                <Link to='/admin/maincategory/create' title='Create'><i className='bi bi-plus text-light float-end'></i></Link>
+                                    Maincategory
+                                    <Link to='/admin/maincategory/create' title='Create'><i className='bi bi-plus text-light float-end'></i></Link>
                                 </div>
-                                </h4>
+                            </h4>
                             <div className="table-responsive">
                                 <div data-aos="fade-left" data-aos-delay="100">
                                     <table className='table table-bordered' id='myTable'>
@@ -93,9 +83,9 @@ export default function AdminMainCategoryPage() {
                                                 return <tr key={item.id}>
                                                     <td className="align-middle">{item.id}</td>
                                                     <td className="align-middle">{item.name}</td>
-                                                    <td><Link to={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.pic}`} target='_blank'>
-                                                        <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.pic}`} width={80} alt="" />
-                                                    </Link></td>
+                                                    <td><Link to={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.image}`} target='_blank'>
+                                                        <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.image}`} width={80} alt="" />
+                                                    </Link></td>{console.log(import.meta.env.VITE_APP_IMAGE_SERVER + item.image)}
                                                     <td className="align-middle">{item.status ? "Active" : "Inactive"}</td>
                                                     <td className="text-center align-middle"><Link to={`/admin/maincategory/update/${item.id}`}><i className='bi bi-pencil btn btn-primary'></i></Link></td>
                                                     <td className="text-center align-middle"><button onClick={() => deleteRecord(item.id)} className='btn btn-danger'><i className='bi bi-trash'></i></button></td>

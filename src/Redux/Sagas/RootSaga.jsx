@@ -6,7 +6,13 @@ import { ProductSagas } from "./ProductSagas";
 import { FeatureSagas } from "./FeatureSagas";
 import { FaqSagas } from "./FaqSagas";
 import { SettingSagas } from "./SettingSagas";
-
+import { CartSagas } from "./CartSagas";
+import { WishlistSagas } from "./WishlistSagas";
+import { CheckoutSagas } from "./CheckoutSagas";
+import { NewslatterSagas } from "./NewslatterSagas";
+import { TestimonialSagas } from "./TestimonialSagas";
+import { ContactUsSagas } from "./ContactUsSagas";
+import { UserSagas } from "./UserSagas";
 
 export function* RootSaga(){
     yield all([
@@ -17,5 +23,12 @@ export function* RootSaga(){
         FeatureSagas(),
         FaqSagas(),
         SettingSagas(),
+        CartSagas(),
+        WishlistSagas(),
+        CheckoutSagas(),
+        NewslatterSagas(),
+        TestimonialSagas(),
+        ContactUsSagas(),
+        UserSagas(),
     ])
 }

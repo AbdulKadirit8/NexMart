@@ -31,10 +31,10 @@ export default function AdminUpdateMainCategoryPage() {
         let name = e.target.name
 
         // Demmy Backend
-        let value = name === "pic" ? "maincategory/" + e.target.files[0].name : e.target.value
+        // let value = name === "pic" ? "maincategory/" + e.target.files[0].name : e.target.value
 
         // Rael Backend
-        // let value = name === "pic" ? e.target.files[0].name : e.target.value
+        let value = name === "pic" ? e.target.files[0] : e.target.value
 
         setData({ ...data, [name]: name === "status" ? (value === "1" ? true : false) : value })
         setErrorMessage({ ...errorMessage, [name]: name == "pic" ? PicValidater(e) : TextValidater(e) })
@@ -46,14 +46,14 @@ export default function AdminUpdateMainCategoryPage() {
         if (error)
             setShowError(true)
         else {
-            let item = maincategoryStateData.find(x => x.id !== id && x.name?.toLocaleLowerCase() === data.name?.toLocaleLowerCase())
+            let item = maincategoryStateData.find(x => x.id !== Number(id) && x.name?.toLocaleLowerCase() === data.name?.toLocaleLowerCase())
             if (item) {
                 setShowError(true)
                 setErrorMessage({ ...errorMessage, 'name': "Maincategory with this name id already Exist" })
                 return
             }
             //Domy Backend
-            dispatch(updateMaincategory({ ...data }))
+            // dispatch(updateMaincategory({ ...data }))
 
             //Real backend
             // let formData=new FormData()
@@ -61,7 +61,18 @@ export default function AdminUpdateMainCategoryPage() {
             // formData.append('name', data.name)
             // formData.append('pic', data.pic)
             // formData.append('status', data.status)
-            // dispatch(updateMaincategory(formData))
+
+            let formData = new FormData()
+
+            formData.append("id", data.id)
+            formData.append("name", data.name)
+            formData.append("status", data.status)
+
+            if (data.pic instanceof File) {
+                formData.append("pic", data.pic)
+            }
+
+            dispatch(updateMaincategory(formData))
 
             navigate("/admin/maincategory")
 

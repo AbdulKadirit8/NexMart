@@ -82,7 +82,7 @@ export default function AdminProductPage() {
                                                 <th>SUBCATEGORY</th>
                                                 <th>BRAND</th>
                                                 <th>COLOR</th>
-                                                <th>SIZE / VOLUME / WEIGHT</th>
+                                                <th>MEASUREMENT</th>
                                                 <th>BASE PRICE</th>
                                                 <th>DISCOUNT</th>
                                                 <th>FINAL PRICE</th>
@@ -98,20 +98,31 @@ export default function AdminProductPage() {
                                             {data.map((item) => {
                                                 return <tr key={item.id}>
                                                     <td>{item.id}</td>
-                                                    <td>{item.name}</td>
+                                                    <td>
+                                                        <div style={{ width: 100 }}>
+                                                            {item.name}
+                                                        </div>
+                                                    </td>
                                                     <td>{item.maincategory}</td>
                                                     <td>{item.subcategory}</td>
                                                     <td>{item.brand}</td>
-                                                    <td>{item.color?.join(", ")}</td>
+                                                    <td>
+                                                        <div style={{ width: 150 }}>
+                                                            {item.color?.join(", ")}
+                                                        </div>
+                                                    </td>
                                                     {/* <td>{item.size?.join(", ")}</td> */}
                                                     <td>
-                                                        {
-                                                            item.volume?.length > 0
-                                                                ? item.volume.join(", ")
-                                                                : item.weight?.length > 0
-                                                                    ? item.weight.join(", ")
-                                                                    : item.size?.join(", ")
-                                                        }
+                                                        <div style={{ width: 100 }}>
+                                                            {item.size?.join(", ")}
+                                                            {/* {
+                                                                item.volume?.length > 0
+                                                                    ? item.volume.join(", ")
+                                                                    : item.weight?.length > 0
+                                                                        ? item.weight.join(", ")
+                                                                        : item.size?.join(", ")
+                                                            } */}
+                                                        </div>
                                                     </td>
                                                     <td>&#8377;{item.basePrice}</td>
                                                     <td>{item.discount}% Off</td>

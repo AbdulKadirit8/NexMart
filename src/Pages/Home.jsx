@@ -58,7 +58,7 @@ export default function Home() {
                 </div>
 
                 <h1 data-aos="fade-right" data-aos-delay="300" className='fs-1'>
-                  {settingData.siteName} <span className="highlight">Smart Shopping</span> Starts Here, You Can Trust at <img src="/assets/img/favicon.png" alt="a" className='mb-3' style={{ width: '50px' }} /> {settingData.siteName}
+                  {settingData.siteName} <span className="highlight">Smart Shopping</span> Starts Here, You Can Trust at <img src={settingData.logoIcon} alt="LogoIcon" className='mb-3 mt-2' style={{ width: '40px' }} /> {settingData.siteName}
 
                 </h1>
 

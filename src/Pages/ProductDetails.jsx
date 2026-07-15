@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { getProduct } from '../Redux/ActionCreaters/ProductActionCreaters'
+import { useNavigate, useParams } from 'react-router-dom'
+
 import Breadcrum from '../Components/Breadcrum'
 import ProductSlider from '../Components/ProductSlider'
 
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-
-// import required modules
 import { EffectCards, EffectCube, Pagination } from 'swiper/modules';
 
-import getFieldType from '../Helpers/getFieldType'
+import { getProduct } from '../Redux/ActionCreaters/ProductActionCreaters'
+import { getCart, createCart, updateCart } from '../Redux/ActionCreaters/CartActionCreaters'
+import { getWishlist, createWishlist } from '../Redux/ActionCreaters/WishlistActionCreaters'
+
 
 
 export default function ProductDetails() {
+
     let { id } = useParams()
     let [data, setData] = useState({})
     let [relatedData, setRelatedData] = useState([])
+    let navigate = useNavigate()
     let [selected, setSelected] = useState({
         quantity: 1,
         color: "",
@@ -26,35 +27,69 @@ export default function ProductDetails() {
     })
 
     let productStateData = useSelector(state => state.productStateData)
+    let cartStateData = useSelector(state => state.cartStateData)
+    let wishlistStateData = useSelector(state => state.wishlistStateData)
     let dispatch = useDispatch()
 
-    useEffect(() => {
-        (() => {
-            dispatch(getProduct())
-            if (productStateData.length) {
-                let item = productStateData.find(x => x.id === id)
-                if (item) {
-                    setData(item)
-                    setSelected({
-                        ...selected,
-                        color: item?.color[0],
-                        option: item?.[getFieldType(item.maincategory)]?.[0]
-                    })
-                    setRelatedData(productStateData.filter(x => x.maincategory === item.maincategory))
+    let cartItem = cartStateData.find(x => x.user === localStorage.getItem("userid") && x.product === id)
+    function addToCart() {
+        if (cartItem) {
+            dispatch(updateCart({
+                ...cartItem,
+                quantity: selected.quantity,
+                totalPrice: data.finalPrice * selected.quantity,
+                color: selected.color,
+                size: selected.option,
+            }))
+            navigate('/cart')
+            return
+        }
+        dispatch(createCart({
+            user: localStorage.getItem("userid"),
+            product: id,
+            quantity: selected.quantity,
+            totalPrice: data.finalPrice * selected.quantity,
+            color: selected.color,
+            size: selected.option,
 
-                }
-                else
-                    window.history.back()
-            }
+            // Remove following lines in case of real backend
+            name: data.name,
+            brand: data.brand,
+            finalPrice: data.finalPrice,
+            stockQuantity: data.stockQuantity,
+            pic: data.pic[0],
+        }))
+        navigate('/cart')
+    }
+    
+    let wishlistItem = wishlistStateData.find(x => x.user === localStorage.getItem("userid") && x.product === id)
+    function addToWishlist() {
+        if (wishlistItem) {
+            navigate('/profile?option=Wishlist')
+            return
+        }
+        dispatch(createWishlist({
+            user: localStorage.getItem("userid"),
+            product: id,
 
-        })()
-    }, [productStateData])
 
-    const fieldType = getFieldType(data.maincategory)
+            // Remove following lines in case of real backend
+            name: data.name,
+            color: data.color,
+            size: data.size,
+            brand: data.brand,
+            finalPrice: data.finalPrice,
+            stockQuantity: data.stockQuantity,
+            pic: data.pic[0],
+        }))
+        navigate('/profile?option=Wishlist')
+    }
+
+    
     let swiperOption = {
         effect: 'cube',
         grabCursor: true,
-        loop:true,
+        loop: true,
         cubeEffect: {
             shadow: true,
             slideShadows: true,
@@ -65,6 +100,42 @@ export default function ProductDetails() {
         modules: [EffectCube, Pagination]
     }
 
+
+    useEffect(() => {
+        (() => {
+            dispatch(getProduct())
+            if (productStateData.length) {
+                let item = productStateData.find(x => x.id === id)
+                if (item) {
+                    setData(item)
+                    if (!selected.color) {
+
+                        setSelected({
+                            ...selected,
+                            color: item?.color[0],
+                            size: item?.size?.[0]
+                        })
+                    }
+                    setRelatedData(productStateData.filter(x => x.maincategory === item.maincategory))
+
+                }
+                else
+                    window.history.back()
+            }
+
+        })()
+    }, [productStateData])
+
+    useEffect(() => {
+        (() => dispatch(getCart()))()
+    }, [cartStateData.length])
+
+    useEffect(() => {
+        (() => dispatch(getWishlist()))()
+    }, [wishlistStateData.length])
+
+
+
     return (
         <>
             <Breadcrum pageTitle={data.name} pageDescription={`${data.maincategory} > ${data.subcategory} > ${data.brand}`} />
@@ -73,7 +144,7 @@ export default function ProductDetails() {
                 <div className="row mt-4">
                     <div className="col-lg-6 col-12 mb-4">
                         <Swiper {...swiperOption}
-                            
+
                             className="mySwiper"
                         >
                             {
@@ -122,10 +193,10 @@ export default function ProductDetails() {
                                     </td>
                                 </tr> */}
                                 <tr>
-                                    <th>{fieldType.charAt(0).toUpperCase() + fieldType.slice(1)}</th>
+                                    <th>Measurment</th>
 
                                     <td>
-                                        {data[fieldType]?.map((item, index) => {
+                                        {data.size?.map((item, index) => {
                                             return (
                                                 <button
                                                     key={index}
@@ -144,26 +215,31 @@ export default function ProductDetails() {
                                 </tr>
                                 <tr>
                                     <th>Stock</th>
-                                    <td>{data.name ? `${data.stockQuantity} Left in stock` : `Out of stock`}</td>
+                                    <td>{data.stockQuantity ? `${data.stockQuantity} Left in stock` : `Out of stock`}</td>
                                 </tr>
                                 <tr>
                                     <th colSpan={2}>
-                                        <div className="row">
-                                            <div className="col-4">
-                                                <div className="btn-group w-100">
-                                                    <button onClick={() => setSelected({ ...selected, quantity: selected.quantity > 1 ? selected.quantity - 1 : selected.quantity })} className='btn btn-primary ms-3' ><i className='bi bi-dash'></i></button>
-                                                    <h4 className='w-50 text-center'>{selected.quantity}</h4>
-                                                    <button onClick={() => setSelected({ ...selected, quantity: selected.quantity < data.stockQuantity ? selected.quantity + 1 : selected.quantity })} className='btn btn-primary me-3' ><i className='bi bi-plus'></i></button>
+                                        {
+                                            data.stockQuantity ?
+                                                <div className="row">
+                                                    <div className="col-4">
+                                                        <div className="btn-group w-100">
+                                                            <button onClick={() => setSelected({ ...selected, quantity: selected.quantity > 1 ? selected.quantity - 1 : selected.quantity })} className='btn btn-primary ms-3' ><i className='bi bi-dash'></i></button>
+                                                            <h4 className='w-50 text-center'>{selected.quantity}</h4>
+                                                            <button onClick={() => setSelected({ ...selected, quantity: selected.quantity < data.stockQuantity ? selected.quantity + 1 : selected.quantity })} className='btn btn-primary me-3' ><i className='bi bi-plus'></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-8">
+                                                        <div className="btn-group">
+                                                            <button className='btn btn-primary' onClick={addToCart}><i className={`pe-3 bi ${cartItem ? 'bi-cart-check' : 'bi-cart-plus'} `}></i>Add to cart</button>
+                                                            <button className='btn btn-secondary' onClick={addToWishlist}><i className={`pe-3 bi-heart-fill ${wishlistItem ? 'text-danger' : 'text-light'}`}></i>Add to wishlist</button>
+                                                        </div>
+                                                    </div>
+                                                </div> :
+                                                <div className="text-center">
+                                                    <button className='btn btn-secondary' onClick={addToWishlist}><i className={`pe-3 bi-heart-fill ${wishlistItem ? 'text-danger' : 'text-light'}`}></i>Add to wishlist</button>
                                                 </div>
-                                            </div>
-                                            <div className="col-8">
-                                                <div className="btn-group">
-                                                    <button className='btn btn-primary'><i className='pe-3 bi bi-cart-plus'></i>Add to cart</button>
-                                                    <button className='btn btn-success'><i className='pe-3 bi bi-heart'></i>Add to wishlist</button>
-
-                                                </div>
-                                            </div>
-                                        </div>
+                                        }
                                     </th>
                                 </tr>
                                 <tr>

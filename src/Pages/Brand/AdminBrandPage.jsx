@@ -31,18 +31,7 @@ export default function AdminBrandPage() {
    
     useEffect(() => {
         let time = (() => {
-            //without redux
-            // let response = await fetch(`${import.meta.env.VITE_APP_BACKEND_SERVER}/brand`, {
-            //     method: "GET",
-            //     headers: {
-            //         'content-type': 'application/json'
-            //     },
-
-            // })
-            // response = await response.json()
-            // setBrandStateData(response)
-
-            //Using Redux
+            
             dispatch(getBrand())
             if (brandStateData.length) {
                 setData(brandStateData)
@@ -62,13 +51,13 @@ export default function AdminBrandPage() {
 
                     <div className="row ">
 
-                        <div className="col-ld-3">
+                        <div className="col-lg-3">
                             <div data-aos="fade-right" data-aos-delay="100">
                                 <AdminSlider />
                             </div>
 
                         </div>
-                        <div className="col-ld-9">
+                        <div className="col-lg-9">
                             <div data-aos="fade-left" data-aos-delay="100">
                                 <h4 className='bg-primary text-light text-center p-2 rounded'>Brand <Link to='/admin/brand/create' title='Create'><i className='bi bi-plus text-light float-end'></i></Link></h4>
                                 <div className="table-responsive">
@@ -88,8 +77,8 @@ export default function AdminBrandPage() {
                                                 return <tr key={item.id}>
                                                     <td className="align-middle">{item.id}</td>
                                                     <td className="align-middle">{item.name}</td>
-                                                    <td><Link to={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.pic}`} target='_blank'>
-                                                        <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.pic}`} width={80} alt="" />
+                                                    <td><Link to={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.image}`} target='_blank'>
+                                                        <img src={`${import.meta.env.VITE_APP_IMAGE_SERVER}${item.image}`} width={80} alt="" />
                                                     </Link></td>
                                                     <td className="align-middle">{item.status ? "Active" : "Inactive"}</td>
                                                     <td className="text-center align-middle"><Link to={`/admin/brand/update/${item.id}`}><i className='bi bi-pencil btn btn-primary'></i></Link></td>

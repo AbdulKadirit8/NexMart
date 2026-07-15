@@ -1,33 +1,23 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import React, { useEffect, useState, useRef } from 'react'
+
 import AdminSlider from '../../Components/Admin/AdminSlider'
 import TextValidater from '../../FormValidaters/TextValidater'
 import PicValidater from '../../FormValidaters/PicValidater'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { getProduct, updateProduct } from '../../Redux/ActionCreaters/ProductActionCreaters'
 import { getMaincategory } from '../../Redux/ActionCreaters/MaincategoryActionCreaters'
 import { getSubcategory } from '../../Redux/ActionCreaters/SubcategoryActionCreaters'
 import { getBrand } from '../../Redux/ActionCreaters/BrandActionCreaters'
 
-// // Color Array
-// const colors = ["Black", "White", "Red", "Blue", "Green", "Yellow", "Pink", "Purple", "Orange", "Grey", "Brown", "Navy", "Sky Blue", "Maroon", "Olive", "Beige", "Teal", "Lavender", "Mustard", "Coral", "N/A"];
-
-// // Size Array
-// const size = ["NB", "XS", "S", "M", "L", "XL", "XXL", "XXXL", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "Free Size", "One Size", "N/A"];
-
-// // Volume Array
-// const volume = ["20ml", "30ml", "50ml", "75ml", "100ml", "150ml", "200ml", "500ml", "1000ml"]
-
-// // Volume Array
-// const weight = ["1kg", "2kg", "3kg", "5kg", "7.5kg", "10kg", "12.5kg", "15kg", "17.5kg", "20kg", "25kg", "30kg", "35kg", "40kg", "45kg", "50kg"]
-
-import { colors, size, volume, weight } from '../../Helpers/productOptions'
-import getFieldType from '../../Helpers/getFieldType'
+// Color Array
+const colors = ["Black", "White", "Red", "Blue", "Green", "Yellow", "Pink", "Purple", "Orange", "Grey", "Brown", "Navy", "Sky Blue", "Maroon", "Olive", "Beige", "Teal", "Lavender", "Mustard", "Coral", "N/A"];
 
 var rteDescription
 
 export default function AdminUpdateProductPage() {
-
+const [sizeInput, setSizeInput] = useState("");
     let { id } = useParams()
 
     var refdivDescription = useRef(null)
@@ -43,8 +33,6 @@ export default function AdminUpdateProductPage() {
         stockQuantity: '',
         color: [],
         size: [],
-        volume: [],
-        weight: [],
         pic: [],
         status: true
     })
@@ -53,8 +41,6 @@ export default function AdminUpdateProductPage() {
         name: '',
         color: '',
         size: '',
-        volume: '',
-        weight: '',
         basePrice: '',
         discount: '',
         stockQuantity: '',
@@ -73,18 +59,18 @@ export default function AdminUpdateProductPage() {
 
 
     // function getInputData(e) {
-        // let name = e.target.name
+    // let name = e.target.name
 
-        // // Demmy Backend
-        // let value = name === "pic" ? data.pic.concat(Array.from(e.target.files).map(x => "product/" + x.name)) : e.target.value
+    // // Demmy Backend
+    // let value = name === "pic" ? data.pic.concat(Array.from(e.target.files).map(x => "product/" + x.name)) : e.target.value
 
 
-        // // Rael Backend
-        // // let value = name === "pic" ? e.target.files.name : e.target.value
+    // // Rael Backend
+    // // let value = name === "pic" ? e.target.files.name : e.target.value
 
-        // setData({ ...data, [name]: name === "status" || name === "stock" ? (value === "1" ? true : false) : value })
-        // // setData({ ...data, [name]: name === "status" || name === "stock" ? (value === "1" ? true : false) : value })
-        // setErrorMessage({ ...errorMessage, [name]: name == "pic" ? PicValidater(e) : TextValidater(e) })
+    // setData({ ...data, [name]: name === "status" || name === "stock" ? (value === "1" ? true : false) : value })
+    // // setData({ ...data, [name]: name === "status" || name === "stock" ? (value === "1" ? true : false) : value })
+    // setErrorMessage({ ...errorMessage, [name]: name == "pic" ? PicValidater(e) : TextValidater(e) })
     // }
 
     function getInputData(e) {
@@ -97,26 +83,27 @@ export default function AdminUpdateProductPage() {
                 )
                 : e.target.value
 
-        if (name === "maincategory") {
+        // if (name === "maincategory") {
 
-            setData({
-                ...data,
-                maincategory: value,
-                size: [],
-                volume: [],
-                weight: []
-            })
-        }
-        else {
+        //     setData({
+        //         ...data,
+        //         maincategory: value,
+        //         size: [],
+        //         volume: [],
+        //         weight: []
+        //     })
+        // }
+        // else {
 
-            setData({
-                ...data,
-                [name]:
-                    name === "status" || name === "stock"
-                        ? (value === "1" ? true : false)
-                        : value
-            })
-        }
+        //     setData({
+        //         ...data,
+        //         [name]:
+        //             name === "status" || name === "stock"
+        //                 ? (value === "1" ? true : false)
+        //                 : value
+        //     })
+        // }
+        setData({ ...data, [name]: name === "status" || name === "stock" ? (value === "1" ? true : false) : value })
 
         setErrorMessage({
             ...errorMessage,
@@ -215,6 +202,7 @@ export default function AdminUpdateProductPage() {
                 let item = productStateData.find(x => x.id == id)
                 if (item) {
                     setData({ ...data, ...item })
+                    setSizeInput(item.size.join(","))
                     rteDescription.setHTMLCode(item.description);
                 }
                 else {
@@ -236,15 +224,15 @@ export default function AdminUpdateProductPage() {
         (() => dispatch(getBrand()))()
     }, [brandStateData.length])
 
-  
 
-    const fieldType = getFieldType(data.maincategory)
-    const filterArray =
-        fieldType === "volume"
-            ? volume
-            : fieldType === "weight"
-                ? weight
-                : size;
+
+    // const fieldType = getFieldType(data.maincategory)
+    // const filterArray =
+    //     fieldType === "volume"
+    //         ? volume
+    //         : fieldType === "weight"
+    //             ? weight
+    //             : size;
 
 
     return (
@@ -342,34 +330,38 @@ export default function AdminUpdateProductPage() {
                                         </div>
 
                                         <div className="col-12 mb-3">
-                                            <label className='ps-2'>{fieldType}<span className='text-danger'>*</span></label>
+                                            <label className='ps-2'>Size<span className='text-danger'>*</span></label>
                                             <div className="border border-primary rounded">
                                                 <div className="row p-2">
-                                                    {/* {size.map((item, index) => {
-                                                        return <div className='col-xl-2 col-lg-3 col-4' key={index}>
-                                                            <input type="checkbox" checked={data.size.includes(item)} onChange={() => getinputCheckbox("size", item)} id={item} />
-                                                            <label className='ps-2' htmlFor={item}>{item}</label>
-                                                        </div>
-                                                    })} */}
-                                                    {filterArray.map((item, index) => {
-                                                        return (
-                                                            <div className='col-xl-2 col-lg-3 col-4' key={index}>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    checked={data[fieldType].includes(item)}
-                                                                    onChange={() => getinputCheckbox(fieldType, item)}
-                                                                    id={`${fieldType}-${item}`}
-                                                                    className={``}
-                                                                />
-                                                                <label className='ps-2' htmlFor={`${fieldType}-${item}`}>
-                                                                    {item}
-                                                                </label>
-                                                            </div>
-                                                        )
-                                                    })}
+                                                   <div className="col-12 mb-3">
+                                                        <label className='ps-2'>Measurement<span className='text-danger'>*</span></label>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control border-primary"
+                                                            value={sizeInput}
+                                                            placeholder="S,M,L,XL OR 20ml,50ml OR 2kg,5kg"
+                                                            onChange={(e) => {
+                                                                setSizeInput(e.target.value);
+                                                                let arr = e.target.value
+                                                                    .split(",")
+                                                                    .map(item => item.trim())
+                                                                    .filter(item => item)
+
+                                                                setData({
+                                                                    ...data,
+                                                                    size: arr
+                                                                })
+
+                                                                setErrorMessage({
+                                                                    ...errorMessage,
+                                                                    size: arr.length ? "" : "Size field is Mendatory"
+                                                                })
+                                                            }}
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
-                                            {showError && errorMessage[fieldType] ? <p className='text-danger'>{errorMessage[fieldType]}</p> : null}
+                                            {showError && errorMessage.size ? <p className='text-danger'>{errorMessage.size}</p> : null}
                                         </div>
 
                                         <div className="col-12">

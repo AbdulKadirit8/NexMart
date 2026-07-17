@@ -12,9 +12,6 @@ import DataTable from 'datatables.net-dt'
 // Data Tables css 
 import 'datatables.net-dt/css/dataTables.dataTables.min.css'
 
-
-
-
 export default function AdminFeaturePage() {
   
     let [data, setData] = useState([])

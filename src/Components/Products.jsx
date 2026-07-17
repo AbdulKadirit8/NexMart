@@ -16,6 +16,8 @@ export default function Products() {
     useEffect(() => {
         (() => {
             dispatch(getProduct())
+            console.log(productStateData);
+            console.log(Array.isArray(productStateData));
             setData(productStateData.filter(x => x.status))
         })()
     }, [productStateData.length])
@@ -31,14 +33,14 @@ export default function Products() {
                         <div className="m-auto">
                             <div className="btn-group w-100">
                                 <button onClick={() => setSelected('')} className={`w-100 btn ${selected === '' ? 'btn-primary' : ''}`}>All</button>
-                                {maincategoryStateData.filter(x => x.status && productStateData.filter(p=>p.maincategory===x.name).length).map((item, index) => {
+                                {maincategoryStateData.filter(x => x.status && productStateData.filter(p => p.maincategory === x.name).length).map((item, index) => {
                                     return <button onClick={() => setSelected(item.name)} className={`w-100 btn ${selected === item.name ? 'btn-primary' : 'btn-light'}`} key={index}>{item.name}</button>
                                 })}
                             </div>
                         </div>
                     </div>
                     <div className="row gy-4">
-                        {data.filter(x=>selected===''||selected===x.maincategory).slice(0, 24).map((item => {
+                        {data.filter(x => selected === '' || selected === x.maincategory).slice(0, 24).map((item => {
                             return <div key={item.id} className="col-lg-4 col-sm-6 col-12" data-aos="fade-up" data-aos-delay="200">
                                 <SingleProduct item={item} />
                             </div>

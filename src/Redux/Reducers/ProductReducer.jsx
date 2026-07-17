@@ -8,7 +8,10 @@ export default function ProductReducer(state = [], action) {
             return [...state, action.payload]
 
         case GET_PRODUCT_RED:
-            return action.payload
+            // return action.payload
+            return Array.isArray(action.payload)
+                ? action.payload
+                : [];
 
         case UPDATE_PRODUCT_RED:
             index = state.findIndex(x => x.id === action.payload)

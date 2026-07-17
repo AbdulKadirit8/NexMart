@@ -111,7 +111,6 @@ export default function AdminCreateFeaturePage() {
                         </div>
                     </div>
                 </div>
-
             </section>
         </>
     )

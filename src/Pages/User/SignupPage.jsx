@@ -85,7 +85,7 @@ export default function SignupPage() {
     }
     return (
         <>
-            <Breadcrum pageDescription={`Join ${settingData.siteName} today and create your free account to enjoy a seamless shopping experience. Discover premium products, save your favorite items, track orders easily, and get access to exclusive offers and deals. Sign up now to shop faster, smarter, and more securely with ${settingData.siteName} anytime, anywhere.`} pageTitle={'fdgfdg'} />
+            <Breadcrum pageDescription={`Join ${settingData.siteName} today and create your free account to enjoy a seamless shopping experience. Discover premium products, save your favorite items, track orders easily, and get access to exclusive offers and deals. Sign up now to shop faster, smarter, and more securely with ${settingData.siteName} anytime, anywhere.`} pageTitle={'Sign Up'} />
             <div className="container">
                 <div className="row">
                     <div className="col-xl-8 col-lg-10 col-md-11 m-auto">
